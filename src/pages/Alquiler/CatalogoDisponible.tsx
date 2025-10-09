@@ -18,7 +18,9 @@ const CatalogoDisponible = () => {
   useEffect(() => {
     const fetchCatalogo = async () => {
       try {
-        const response = await axios.get("https://render-hhyo.onrender.com/api/elemento");
+        const response = await axios.get(
+          "https://render-hhyo.onrender.com/api/elemento"
+        );
         setCatalogo(response.data);
       } catch (error) {
         console.error("Error al cargar catálogo:", error);
@@ -70,7 +72,7 @@ const CatalogoDisponible = () => {
             </span>
             <img
               src={`https://render-hhyo.onrender.com/qrcodes/${qrActivo.IdElemento}.png`}
-              alt={QR de ${qrActivo.Nombre}}
+              alt={`QR de ${qrActivo.Nombre}`}
               className="qr-grande"
             />
           </div>

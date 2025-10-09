@@ -1,0 +1,43 @@
+.contacto-item-apoyo {
+  background: var(--color-card);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.contacto-item-apoyo:hover {
+  background: var(--color-card-hover);
+  transform: translateY(-3px);
+}
+.contacto-item-apoyo {
+    animation: fadeInUp 0.6s ease-out;
+}
+.contacto-icon-apoyo {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+
+@media (max-width: 480px) {
+    .contacto-item-apoyo {
+      align-items: center;
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+  }
+}
+
+
+.contacto-link-apoyo {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contacto-link-apoyo:hover {
+  color: var(--color-primary-dark);
+}

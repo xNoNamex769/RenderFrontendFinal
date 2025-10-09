@@ -1,0 +1,30 @@
+
+.requisito-item-apoyo {
+  background: var(--color-card);
+  border-radius: var(--border-radius);
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 50px;
+  transition: all 0.3s ease;
+}
+
+.requisito-item-apoyo:hover {
+  background: var(--color-card-hover);
+  transform: translateX(5px);
+}
+
+.requisito-item-apoyo::before {
+  content: "✓";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.requisito-item-apoyo {
+    animation: fadeInUp 0.6s ease-out;
+}

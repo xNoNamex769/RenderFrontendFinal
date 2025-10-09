@@ -1,0 +1,119 @@
+.anuncio-card-home {
+  background-color: var(--white-home);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px #5eb319;
+  transition: var(--transition-home);
+  height: 100%;
+}
+
+.anuncio-card-home:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px #5eb319;
+}
+
+.anuncio-icon-home {
+  width: 70px;
+  height: 70px;
+  background-color: var(--light-bg-home);
+  color: var(--secondary-color-home);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.anuncio-card-home h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: var(--text-color-home);
+}
+
+.anuncio-card-home p {
+  margin-bottom: 20px;
+  color: var(--text-light-home);
+}
+
+.anuncio-link-home {
+  color: var(--secondary-color-home);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: var(--transition-home);
+}
+
+.anuncio-link-home i {
+  margin-left: 5px;
+  transition: var(--transition-home);
+}
+
+.anuncio-link-home:hover {
+  color: var(--primary-color-home);
+}
+
+.anuncio-link-home:hover i {
+  transform: translateX(5px);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .anuncio-card-home {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .anuncio-card-home {
+    padding: 20px;
+  }
+
+  .anuncio-icon-home {
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+  }
+
+  .anuncio-card-home h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .anuncio-card-home {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .anuncio-icon-home {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin: 0 auto 15px;
+  }
+
+  .anuncio-card-home h3 {
+    font-size: 18px;
+  }
+
+  .anuncio-link-home {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .anuncio-card-home {
+    padding: 15px;
+  }
+
+  .anuncio-card-home h3 {
+    font-size: 16px;
+  }
+
+  .anuncio-icon-home {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+}

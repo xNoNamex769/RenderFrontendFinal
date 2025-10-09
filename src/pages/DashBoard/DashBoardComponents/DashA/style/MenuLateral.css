@@ -1,0 +1,245 @@
+/* Sidebar */
+.barradash {
+  width: 260px;
+  min-height: 100vh;
+  background-color: #2c3e50;
+  padding: 24px 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1000;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.barradash.ocultar {
+  display: none; /* Ya no usamos toggle con hamburguesa */
+}
+
+
+
+.UserHeaderInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.avatardash {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nombredash {
+  font-weight: 600;
+  color: #ecf0f1;
+  font-size: 1rem;
+}
+
+/* Dropdown perfil */
+.menudesplegabledash {
+  margin-top: 8px;
+  background-color: #34495e;
+  border-radius: 10px;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+.menudesplegabledash ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.opcionesm {
+  padding: 10px 15px;
+  border-bottom: 1px solid #2c3e50;
+  cursor: pointer;
+  color: #ecf0f1;
+  font-size: 0.95rem;
+}
+
+.opcionesm:hover {
+  background-color: #a03d16;
+}
+
+/* Botones menú */
+.menudash {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grupo-menu {
+  margin-bottom: 25px;
+}
+
+.tituloseccion {
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.tituloseccion:hover {
+  color: #3dda16;
+}
+
+.opciondash {
+  background-color: #34495e;
+  border: none;
+  color: #ecf0f1;
+  padding: 10px 15px;
+  margin: 3px 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  font-size: 0.94rem;
+  transition: background-color 0.3s ease;
+}
+
+.opciondash:hover {
+  background-color: #16a085;
+}
+
+.iconodash {
+  font-size: 1rem;
+}
+
+/* Logo al final */
+.menudash img {
+  margin-top: auto;
+  width: 100px;
+  align-self: center;
+  opacity: 0.8;
+}
+
+.btn-cerrar-sesion {
+  margin-top: auto;               
+  width: 100%;                   
+  padding: 12px 15px;
+  background-color: #5eb319;      
+  color: rgb(245, 243, 243);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: #417a12;      /* rojo más brillante al pasar el mouse */
+  transform: translateY(-2px);
+}
+
+.icono-cerrar {
+  font-size: 1.1rem;
+  color: rgb(255, 255, 255);
+
+}
+
+
+/* Animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-dashboard-general{
+height: 100px;
+
+
+}
+input[type="text"]::placeholder {
+  color: #888;
+}
+
+.animar-campana {
+  animation: campana 0.5s ease;
+}
+
+@keyframes campana {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Contenedor principal de la búsqueda */
+.contenedor-busqueda {
+  position: relative;
+  
+  margin-right: 1rem;
+}
+
+/* Estilo del campo de búsqueda */
+.input-busqueda {
+  width: 300px;
+         margin-right: 560px;  
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+/* Efecto al hacer foco (click dentro del input) */
+.input-busqueda:focus {
+  border-color: #007bff;      /* Color azul suave */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+/* Resultados desplegables */
+.lista-resultados {
+  position: absolute;
+  top: 45px;                  /* justo debajo del input */
+  left: 0;
+     
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 5px 0;
+  z-index: 999;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Cada ítem del resultado */
+.lista-resultados li {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Efecto hover */
+.lista-resultados li:hover {
+  background-color: #f1f5ff;
+}

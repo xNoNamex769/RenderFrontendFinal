@@ -1,0 +1,17 @@
+.asistentes-evento {
+  background: #f9f9f9;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+.lista-asistentes {
+  list-style: none;
+  padding: 0;
+}
+
+.asistente-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+}

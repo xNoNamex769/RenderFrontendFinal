@@ -1,0 +1,106 @@
+.contact-form-home {
+  background-color: var(--white-home);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-group-home {
+  margin-bottom: 20px;
+}
+
+.form-group-home label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--text-color-home);
+}
+
+.form-control-home {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color-home);
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  transition: var(--transition-home);
+  background-color: var(--light-bg-home);
+}
+
+.form-control-home:focus {
+  border-color: var(--primary-color-home);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(122, 193, 67, 0.2);
+}
+
+textarea.form-control-home {
+  height: 150px;
+  resize: vertical;
+}
+
+.btn-submit-home {
+  background-color: var(--secondary-color-home);
+  color: var(--white-home);
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-home);
+  width: 100%;
+}
+
+.btn-submit-home:hover {
+  background-color: var(--primary-color-home);
+  transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .contact-form-home {
+    padding: 25px;
+  }
+
+  .form-control-home {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .form-group-home {
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-form-home {
+    padding: 20px;
+  }
+
+  .form-control-home {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .btn-submit-home {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .form-group-home {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-home {
+    padding: 15px;
+  }
+
+  .form-group-home label {
+    font-size: 14px;
+  }
+
+  textarea.form-control-home {
+    height: 120px;
+  }
+}

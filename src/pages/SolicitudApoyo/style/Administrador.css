@@ -1,0 +1,159 @@
+.admin-panel {
+  padding: 20px;
+  background-color: #f0f2f5;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-busqueda input {
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.admin-resumen {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+.admin-resumen h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.admin-resumen ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-resumen li {
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.admin-grafico {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.admin-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.admin-filtros label {
+  font-weight: bold;
+}
+
+.admin-filtros select {
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+.admin-solicitud {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.admin-estado-label {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-left: 10px;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.admin-estado-label.pendiente {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.admin-estado-label.enproceso {
+  background-color: #3399ff;
+  color: #fff;
+}
+
+.admin-estado-label.atendido {
+  background-color: #33cc33;
+  color: #fff;
+}
+
+.admin-estado-label.finalizado {
+  background-color: #999999;
+  color: #fff;
+}
+
+.admin-historial-container {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.admin-historial-card {
+  padding: 10px;
+  border-left: 4px solid #ccc;
+  background: #fff;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.admin-historial-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.admin-historial-fecha {
+  font-size: 0.9em;
+  color: #666;
+}
+.admin-estado-label.pendiente {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.admin-estado-label.enproceso {
+  background-color: #3399ff;
+  color: #fff;
+}
+
+.admin-estado-label.atendido {
+  background-color: #5eb319;
+  color: #fff;
+}
+
+.admin-estado-label.finalizado {
+  background-color: #999999;
+  color: #fff;
+}
+
+.btn-historiales {
+  margin-top: 0.8rem;
+  padding: 0.5rem 1rem;
+  background-color: #5eb319;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}

@@ -1,0 +1,117 @@
+/* Contenedor principal */
+.mis-actividades-container {
+  padding: 2rem;
+  max-width: 1100px;
+  margin: auto;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+}
+
+/* Tarjetas de actividades */
+.actividad-card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.actividad-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Contenedor de los códigos QR */
+.qrs-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.qrs-container img {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  padding: 4px;
+  background-color: #fff;
+}
+
+/* Botones de asistencia */
+.boton-asistencia,
+.btn-ver-asistencia {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-asistencia:hover,
+.btn-ver-asistencia:hover {
+  background-color: #388e3c;
+  transform: scale(1.03);
+}
+
+/* Tabla de asistencia */
+.tabla-asistencia {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+  overflow-x: auto;
+}
+
+.tabla-asistencia h4 {
+  color: #2e7d32;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  border-left: 4px solid #81c784;
+  padding-left: 1rem;
+}
+
+/* Tabla */
+.tabla-asistencia table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.tabla-asistencia th {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+  padding: 0.75rem;
+  border: 1px solid #a5d6a7;
+}
+
+.tabla-asistencia td {
+  background-color: #f1f8e9;
+  border: 1px solid #c5e1a5;
+  padding: 0.65rem;
+  font-size: 0.93rem;
+}
+
+/* Estados de asistencia */
+.estado-completo {
+  color: #2e7d32;
+  font-weight: 700;
+}
+
+.estado-incompleto {
+  color: #f57c00;
+  font-weight: 700;
+}
+
+.estado-nulo {
+  color: #c62828;
+  font-weight: 700;
+}

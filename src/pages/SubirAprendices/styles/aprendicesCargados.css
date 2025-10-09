@@ -1,0 +1,219 @@
+:root {
+  --apc-bg: #f7f9fc;
+  --apc-card: #fff;
+  --apc-primary: #34bd19;
+  --apc-border: #e5e7eb;
+  --apc-text: #1f2937;
+  --apc-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  --apc-radius: 8px;
+  --apc-hover: #4338ca;
+}
+
+.apc-contenedor {
+  max-width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--apc-card);
+  border-radius: var(--apc-radius);
+  box-shadow: var(--apc-shadow);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--apc-text);
+}
+
+.apc-header h2 {
+  font-size: 1.9rem;
+  margin-bottom: 0.5rem;
+  color: var(--apc-primary);
+}
+
+.apc-intro {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.apc-contador {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.apc-busqueda input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--apc-border);
+  border-radius: var(--apc-radius);
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.apc-busqueda input:focus {
+  border-color: var(--apc-primary);
+  outline: none;
+}
+
+.apc-tabla-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  box-shadow: var(--apc-shadow);
+  border-radius: var(--apc-radius);
+}
+
+.apc-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.apc-tabla th,
+.apc-tabla td {
+  border: 1px solid var(--apc-border);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+}
+
+.apc-tabla th {
+  background-color: var(--apc-bg);
+  font-weight: 600;
+}
+
+.apc-tabla tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.apc-tabla tbody tr:hover {
+  background-color: #eef2ff;
+}
+
+.apc-loading,
+.apc-error,
+.apc-no-data {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.apc-error {
+  color: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .apc-contenedor {
+    padding: 1rem;
+  }
+
+  .apc-tabla th,
+  .apc-tabla td {
+    font-size: 0.85rem;
+  }
+
+  .apc-contador {
+    flex-direction: column;
+  }
+}
+/* Wrapper de la tabla ocupa todo el ancho disponible */
+.apc-tabla-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Scroll solo si hace falta */
+  margin-top: 1rem;
+  box-shadow: var(--apc-shadow);
+  border-radius: var(--apc-radius);
+}
+
+/* Tabla ocupa 100% del ancho del wrapper */
+.apc-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  table-layout: auto; /* Ajusta columnas automáticamente */
+  min-width: 700px; /* Evita que sea demasiado estrecha */
+}
+
+/* Celdas */
+.apc-tabla th,
+.apc-tabla td {
+  border: 1px solid var(--apc-border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  white-space: nowrap; /* Evita que el contenido se quiebre */
+}
+
+/* Encabezado */
+.apc-tabla th {
+  background-color: var(--apc-bg);
+  font-weight: 600;
+}
+
+/* Filas alternadas y hover */
+.apc-tabla tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.apc-tabla tbody tr:hover {
+  background-color: #eef2ff;
+}
+
+/* Scroll vertical opcional si hay muchas filas */
+.apc-tabla-wrapper {
+  max-height: 600px; /* Ajusta según necesidad */
+  overflow-y: auto;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1024px) {
+  .apc-tabla th,
+  .apc-tabla td {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .apc-tabla-wrapper {
+    max-height: 400px;
+  }
+
+  .apc-tabla th,
+  .apc-tabla td {
+    font-size: 0.85rem;
+  }
+}
+.apc-contador {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.apc-tarjeta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #f5f6fa;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.apc-tarjeta:hover {
+  transform: translateY(-3px);
+}
+
+.apc-icono {
+  font-size: 2rem;
+  color: #080808;
+  margin-right: 0.75rem;
+}
+
+.apc-titulo {
+  font-size: 0.85rem;
+  color: #636e72;
+  margin: 0;
+}
+
+.apc-numero {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}

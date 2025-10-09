@@ -1,0 +1,158 @@
+@import "./global.css";
+
+/* 💻 Pantallas estándar (1366px - 1920px) */
+@media screen and (max-width: 1920px) {
+  .barradash {
+    width: 250px;
+  }
+
+  .contenidodash {
+    padding: 20px;
+  }
+
+  .busquedadash {
+    width: 280px;
+  }
+
+  .activbotdash {
+    font-size: 26px;
+    padding: 18px;
+  }
+
+  .encabezadodash {
+    width: 100%;
+    height: 60px;
+    background-color: rebeccapurple;
+  }
+}
+
+/* 📺 Laptops pequeñas (1024px - 1366px) */
+@media screen and (max-width: 1366px) {
+  .encabezadodash {
+    background-color: red;
+  }
+
+  .barradash {
+    width: 200px;
+  }
+
+  .titulodash {
+    font-size: 20px;
+  }
+
+  .contenidodash {
+    padding: 15px;
+  }
+
+  .busquedadash {
+    width: 60%;
+  }
+
+  .activbotdash {
+    font-size: 24px;
+    padding: 16px;
+  }
+}
+
+/* 📱 Teléfonos compactos (hasta 480px) */
+@media screen and (max-width: 480px) {
+  .barradash {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .menudash {
+    flex-direction: column;
+  }
+
+  .busquedadash {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .activbotdash {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .encabezadodash {
+    background-color: black;
+    width: 300%;
+  }
+}
+
+.barradash {
+  width: 250px;
+  background: #dbdada;
+  height: 100vh;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 📏 Ajustes para tablets y pantallas medianas */
+@media (max-width: 1024px) {
+  .encabezadodash {
+    background-color: black;
+    width: 95vw !important;
+  }
+
+  .barradash {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease-in-out;
+  }
+
+  .barradash.ocultar {
+    left: 0;
+  }
+
+  .menudash-btn {
+    display: block;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .contenidodash {
+    margin-left: 0;
+  }
+}
+
+/* 📱 Ajustes adicionales para móviles */
+@media (max-width: 768px) {
+  .barradash {
+    width: 200px;
+  }
+
+  .busquedadash {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .barradash {
+    width: 180px;
+  }
+
+  .menudash {
+    flex-direction: column;
+  }
+
+  .usuariodash .nombredash {
+    display: none;
+  }
+
+  .accionesdash {
+    gap: 10px;
+  }
+
+  .menudash-btn {
+    font-size: 18px;
+  }
+}
+

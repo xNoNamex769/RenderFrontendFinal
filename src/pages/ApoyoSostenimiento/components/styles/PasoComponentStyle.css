@@ -1,0 +1,110 @@
+
+.btn-info-apoyo {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-info-apoyo:hover {
+  background: var(--color-primary);
+  color: var(--color-dark);
+}
+
+
+.pasos-apoyo {
+  padding: 100px 0;
+  background: var(--color-background-alt);
+  transition: background-color 0.3s ease;
+}
+
+.pasos-grid-apoyo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.paso-card-apoyo {
+  background: var(--color-card);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.paso-card-apoyo:hover {
+  background: var(--color-card-hover);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.paso-number-apoyo {
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  background: var(--color-primary);
+  color: var(--color-dark);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.paso-title-apoyo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  margin-top: 10px;
+  color: var(--color-text);
+  transition: color 0.3s ease;
+}
+
+.paso-description-apoyo {
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.paso-actions-apoyo {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-link-apoyo {
+  background: var(--color-primary);
+  color: var(--color-dark);
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-link-apoyo:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .btn-link-apoyo,
+    .btn-info-apoyo {
+        width: 100%;
+        text-align: center;
+    }
+}
+

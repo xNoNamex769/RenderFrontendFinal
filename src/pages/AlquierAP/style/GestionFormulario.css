@@ -1,0 +1,295 @@
+.gestion-catalogo {
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.lista-elementos {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.item-catalogo {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+.gestion-catalogo {
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #eaf6f6, #f4f4f4);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+}
+
+.lista-elementos {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.item-catalogo {
+  background: #ffffff;
+  border: none;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-catalogo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.item-catalogo img {
+  width: 100%;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.item-catalogo h4 {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.item-catalogo p {
+  font-size: 0.95rem;
+  color: #7f8c8d;
+}
+.gestion-catalogo {
+  padding: 40px 20px;
+  background: #f9fbfc;
+  border-radius: 16px;
+  max-width: 1200px;
+  margin: 40px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.gestion-catalogo h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+.gestion-catalogo p {
+  text-align: center;
+  color: #2980b9;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.lista-elementos {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.item-catalogo {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.item-catalogo:hover {
+  transform: translateY(-5px);
+}
+
+.item-catalogo img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.item-catalogo p {
+  margin: 10px 0;
+  color: #2c3e50;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.item-catalogo input[type="file"] {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  background-color: #f1f1f1;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.item-catalogo input[type="file"]:hover {
+  background-color: #e7f9f7;
+}
+
+.item-catalogo button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.item-catalogo button:first-of-type {
+  background-color: #16a085;
+  color: white;
+}
+
+.item-catalogo button:first-of-type:hover {
+  background-color: #149174;
+}
+
+.item-catalogo button:last-of-type {
+  background-color: #fbeaea;
+  color: #e74c3c;
+}
+
+.item-catalogo button:last-of-type:hover {
+  background-color: #fddddd;
+}
+/* 🎨 Estilo general del contenedor */
+.gestion-catalogo {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  background: linear-gradient(to bottom, #ffffff, #f6f9fc);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* 🧭 Título y subtítulo centrado */
+.gestion-catalogo h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+.gestion-catalogo p {
+  text-align: center;
+  font-size: 1rem;
+  color: #3498db;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+/* 📦 Lista de elementos tipo grid */
+.lista-elementos {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* 🧱 Estilo de cada item */
+.item-catalogo {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.item-catalogo:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+/* 🖼️ Imagen principal del ítem */
+.item-catalogo img {
+    width: auto;           /* que el ancho se ajuste automáticamente */
+    max-width: 50%;        /* la mitad del contenedor */
+    height: auto;          /* mantiene proporción */
+    max-height: 160px;     /* altura máxima */
+    object-fit: cover;     /* recorta si excede */
+    border-radius: 12px;
+    margin: 0 auto 14px;   /* centrado horizontal */
+    display: block;        /* necesario para centrar con margin auto */
+}
+
+/* 🧾 Texto descriptivo */
+.item-catalogo h4 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.item-catalogo p {
+  font-size: 1rem;
+  color: #34495e;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+/* 📁 Input para subir archivo */
+.item-catalogo input[type="file"] {
+  display: block;
+  margin: 12px auto;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border: 2px dashed #bbb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.item-catalogo input[type="file"]:hover {
+  background-color: #eafaf9;
+}
+
+/* 🔘 Botones de acción */
+.item-catalogo button {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* ✅ Botón principal */
+.item-catalogo button:first-of-type {
+  background-color: #5eb319;
+  color: white;
+}
+
+.item-catalogo button:first-of-type:hover {
+  background-color: #4b990b;
+}
+
+/*  Botón de eliminar o cancelar */
+.item-catalogo button:last-of-type {
+  background-color: #fef0f0;
+  color: #e74c3c;
+}
+
+.item-catalogo button:last-of-type:hover {
+  background-color: #fde2e2;
+}

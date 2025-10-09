@@ -1,0 +1,107 @@
+.vista-admin {
+  padding: 20px;
+  background: #fdfdfd;
+}
+
+.vista-admin h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.tabla-interes {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.tabla-interes th,
+.tabla-interes td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.barra-admin {
+  width: 100px;
+  height: 12px;
+  background-color: #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.relleno-admin {
+  height: 100%;
+  background: linear-gradient(90deg, #28a745, #20c997);
+  transition: width 0.4s ease-in-out;
+}
+.vista-admin {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.tabla-interes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla-interes th, .tabla-interes td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.barra-admin {
+  width: 100px;
+  height: 15px;
+  background: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.relleno-admin {
+  height: 100%;
+  background: #4caf50;
+  transition: width 0.3s ease;
+  border-radius: 8px 0 0 8px;
+}
+.vista-admin {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tabla-interes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.tabla-interes th, .tabla-interes td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.btn-toggle-grafico {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.btn-toggle-grafico:hover {
+  background-color: #45a049;
+}
+
+.grafico-container {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,165 @@
+.admin-constancias {
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-constancias h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #1a202c;
+}
+
+.admin-constancias table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.admin-constancias th,
+.admin-constancias td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-constancias th {
+  background-color: #f7fafc;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.admin-constancias tr:hover {
+  background-color: #f0f4f8;
+}
+
+.admin-constancias button {
+  padding: 0.5rem 1rem;
+  background-color: #38a169;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-constancias button:hover {
+  background-color: #2f855a;
+}
+
+.admin-constancias p {
+  font-size: 1.1rem;
+  color: #4a5568;
+}
+/* AdminConstancias.css */
+
+.admin-constancias {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-constancias h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.admin-constancias table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+.admin-constancias thead {
+  background-color: #0d6efd; /* Bootstrap blue */
+  color: white;
+}
+
+.admin-constancias th,
+.admin-constancias td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.admin-constancias tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.admin-constancias button {
+  padding: 8px 12px;
+  background-color: #198754; /* Bootstrap green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+.admin-constancias button:disabled {
+  background-color: #6c757d; /* Bootstrap gray */
+  cursor: not-allowed;
+}
+
+.admin-constancias button:hover:not(:disabled) {
+  background-color: #145c32; /* Darker green */
+}
+
+.admin-constancias p {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .admin-constancias table,
+  .admin-constancias thead,
+  .admin-constancias tbody,
+  .admin-constancias th,
+  .admin-constancias td,
+  .admin-constancias tr {
+    display: block;
+  }
+
+  .admin-constancias thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .admin-constancias tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  .admin-constancias td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  .admin-constancias td::before {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: 600;
+    text-align: left;
+    content: attr(data-label);
+  }
+}

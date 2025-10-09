@@ -1,0 +1,282 @@
+/* ======================== Contenedor general ======================== */
+.ludicas-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  background: #ffffff;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ======================== Header ======================== */
+.ludicas-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ludicas-title {
+  font-size: 2.5rem;
+  color: #080808;
+  margin-bottom: 0.5rem;
+}
+
+.ludicas-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/* ======================== Barra de búsqueda ======================== */
+.search-barr {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-barr input {
+  width: 880px;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+
+.search-barr input:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0 0 8px rgba(30, 58, 138, 0.3);
+}
+
+
+
+/* ======================== Filtro de categorías ======================== */
+.categorias-filter {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.categoria-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #171718;
+  background-color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.categoria-btn.active,
+.categoria-btn:hover {
+  background-color: #2fa318;
+  color: #fff;
+  border-color: #171718;
+}
+
+/* ======================== Grid de tarjetas ======================== */
+.ludicas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ======================== Tarjeta individual ======================== */
+.ludicas-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ludicas-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* ======================== Imagen ======================== */
+.card-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ludicas-card-image {
+  width: 500px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.ludicas-card:hover .ludicas-card-image {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(30,58,138,0.2), rgba(0,0,0,0.2));
+}
+
+/* ======================== Contenido tarjeta ======================== */
+.ludicas-card-content {
+  padding: 1rem;
+}
+
+.categoria-badge {
+  display: inline-block;
+  background-color: #2db12d;
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-info {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.schedule-section {
+  margin-top: 0.5rem;
+}
+
+.schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ======================== Botones ======================== */
+.ludicas-btn,
+.interesado-btn {
+  width: 200px;
+  padding: 0.6rem 0;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.ludicas-btn {
+  background-color: #f3f4f6;
+  color: #1e3a8a;
+}
+
+.ludicas-btn:hover {
+  background-color: #e0e7ff;
+}
+
+.interesado-btn {
+  background-color: #fff1f2;
+  color: #dc2626;
+}
+
+.interesado-btn.active {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.interesado-btn.animating {
+  transform: scale(1.1);
+}
+
+/* ======================== Paginación ======================== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #1e8a35;
+  background-color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #1e8a23;
+  color: #fff;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ======================== Modal ======================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 100%;
+  padding: 1.5rem;
+  position: relative;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+
+@keyframes modalFadeIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ======================== Footer ======================== */
+.ludicas-footer {
+  height: 50px;
+}

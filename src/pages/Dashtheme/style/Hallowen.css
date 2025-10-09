@@ -1,0 +1,661 @@
+
+.theme-halloween {
+  background: url("/img/hallowen1.jpg") no-repeat center center fixed !important;
+  background-size: cover !important;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  color: #fef6ec;
+}
+.theme-halloween .contenidodash {
+  background-color: transparent !important;
+}
+
+.theme-halloween .contenidodash::before {
+  display: none !important;
+}
+.theme-halloween::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); /* sombra leve */
+  z-index: -1;
+}
+.theme-halloween .nube-humo-sidebar {
+  position: fixed;
+  bottom: 0 !important;
+  top: auto !important;
+  left: 0;
+  width: 300%;
+  height: 100px;
+  background: url("/img/humo.png") repeat-x center/contain !important;
+  animation: moverHumo 60s linear infinite;
+  opacity: 0.5; /* Más densa */
+  pointer-events: none;
+  z-index: 1; /* Asegura que esté encima del fondo */
+  mix-blend-mode: lighten; /* Realza la niebla en lugar de oscurecer */
+  filter: blur(2px) brightness(1.2); /* Le da realce y suavidad */
+}
+
+@keyframes moverHumo {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+/* 🌙 Corrige fondo blanco que tapa todo el dashboard */
+.theme-halloween .contenidodash {
+  background-color: transparent !important;
+  z-index: 1 !important;
+  position: relative;
+}
+
+/* ❌ Desactiva capa ::before si existe */
+.theme-halloween .contenidodash::before {
+  display: none !important;
+}
+.theme-halloween .barradash,
+.theme-halloween .encabezadodash,
+.theme-halloween .footer-dash {
+  z-index: 2 !important;
+}
+.theme-halloween .contenedor1dash {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  color: #fef6ec !important;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.theme-halloween .bienvenidadash,
+.theme-halloween .informaciondash,
+.theme-halloween .tarjetadash {
+  background-color: rgba(0, 0, 0, 0.45) !important;
+  color: #fef6ec !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 0 12px rgba(255, 136, 0, 0.2) !important;
+  backdrop-filter: blur(3px) !important;
+  transition: all 0.3s ease;
+}
+/* 🪟 Contenedor general con efecto glass oscuro */
+.theme-halloween .barradash,
+.theme-halloween .encabezadodash,
+.theme-halloween .footer-dash {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: #fef6ec !important;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 8px rgba(255, 136, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 2 !important;
+}
+.theme-halloween .encabezadodash {
+  border-bottom: 2px solid #0c0c0b;
+}
+.theme-halloween .barradash i,
+.theme-halloween .encabezadodash i,
+.theme-halloween .footer-dash i,
+.theme-halloween .barradash button,
+.theme-halloween .encabezadodash button {
+  transition: all 0.3s ease-in-out;
+}
+
+.theme-halloween .barradash i:hover,
+.theme-halloween .encabezadodash i:hover,
+.theme-halloween .footer-dash i:hover,
+.theme-halloween .barradash button:hover,
+.theme-halloween .encabezadodash button:hover {
+  color: #ffa500 !important;
+  text-shadow: 0 0 5px #ff8800, 0 0 10px #ff6600;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.theme-halloween .halloween-button {
+  background-color: #ff6600 !important;
+  color: #111 !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 8px !important;
+  font-weight: bold !important;
+  font-family: 'Poppins', sans-serif !important;
+  box-shadow: 0 0 12px rgba(255, 102, 0, 0.5) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.theme-halloween .halloween-button:hover {
+  background-color: #ff8800 !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 15px #ff5500, 0 0 25px #ffa500 !important;
+}
+.theme-halloween .halloween-toast {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffcc80;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255, 136, 0, 0.5);
+  font-family: 'Creepster', cursive;
+  z-index: 999;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+.theme-halloween .halloween-title {
+  color: #ff4500 !important;
+  font-size: 2.5rem !important;
+  font-family: 'Creepster', cursive !important;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px #000, 0 0 15px #ff6600;
+  letter-spacing: 1px;
+}
+.theme-halloween .halloween-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, #ff8800, #ff5500, #ff8800);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
+}
+.theme-halloween .halloween-container {
+  max-width: 500px;
+  margin: 60px auto 20px;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.55);
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 20px rgba(255, 136, 0, 0.3);
+  text-align: center;
+  color: #fef6ec;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 2;
+  position: relative;
+}
+.theme-halloween .halloween-title {
+  position: relative;
+}
+
+.theme-halloween .halloween-title::before {
+  content: "🕸️";
+  position: absolute;
+  left: -30px;
+  animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.theme-halloween .halloween-title-wrap {
+  position: relative; /* Pon esto en un contenedor envolvente */
+}
+
+.theme-halloween .halloween-title {
+  color: #ff4500 !important;
+  font-size: 2.5rem !important;
+  font-family: 'Creepster', cursive !important;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px #000, 0 0 15px #ff6600;
+  letter-spacing: 1px;
+}
+
+/* Línea decorativa debajo */
+.theme-halloween .halloween-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, #ff8800, #ff5500, #ff8800);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
+}
+
+/* Emoji flotante */
+.theme-halloween .halloween-title-wrap::before {
+  content: "🕸️";
+  position: absolute;
+  left: -30px;
+  top: 0;
+  animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.theme-halloween .nube-humo-sidebar {
+  position: fixed !important;
+  bottom: 0 !important;
+  top: auto !important;
+  left: 0 !important;
+  width: 300% !important;
+  height: 100px !important;
+  background: url("/img/humo.png") repeat-x center/contain !important;
+  animation: moverHumo 60s linear infinite !important;
+  opacity: 0.5 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  mix-blend-mode: lighten !important;
+  filter: blur(2px) brightness(1.2) !important;
+}
+.theme-halloween .murcielago {
+  position: fixed;
+  top: 15%;
+  left: -60px;
+  width: 40px;
+  height: 40px;
+  background: url("../../../../public/img/murcielago.webp") no-repeat center/contain;
+  animation: volarMurcielago 12s linear infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes volarMurcielago {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(120vw) rotate(360deg);
+  }
+}
+.theme-halloween .halloween-button {
+  background-color: #ff6a00;
+  color: black;
+  font-weight: bold;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 0 12px rgba(255, 136, 0, 0.8);
+  transition: 0.3s;
+}
+
+.theme-halloween .halloween-button:hover {
+  background-color: #ff8800;
+  box-shadow: 0 0 15px #ff6a00, 0 0 25px #ffaa00;
+  transform: scale(1.05);
+}
+/* Base común */
+.theme-halloween .murcielago {
+  position: fixed;
+  background: url("../../../../public/img/murcielago.webp") no-repeat center/contain;
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 4;
+  animation-timing-function: linear;
+}
+
+/* 🦇 Murciélago 1 */
+.theme-halloween .murcielago-1 {
+  top: 10%;
+  left: -60px;
+  animation: volarMurcielago1 18s infinite;
+  transform: scale(1);
+}
+
+/* 🦇 Murciélago 2 */
+.theme-halloween .murcielago-2 {
+  top: 25%;
+  left: -80px;
+  animation: volarMurcielago2 24s infinite;
+  transform: scale(0.8);
+  opacity: 0.5;
+}
+
+/* 🦇 Murciélago 3 */
+.theme-halloween .murcielago-3 {
+  top: 35%;
+  left: -100px;
+  animation: volarMurcielago3 20s infinite;
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+/* Animaciones distintas para simular vuelo realista */
+@keyframes volarMurcielago1 {
+  0% { transform: translateX(0) translateY(0) rotate(0); }
+  50% { transform: translateX(50vw) translateY(20px) rotate(10deg); }
+  100% { transform: translateX(120vw) translateY(-10px) rotate(360deg); }
+}
+
+@keyframes volarMurcielago2 {
+  0% { transform: translateX(0) translateY(0) rotate(0); }
+  50% { transform: translateX(60vw) translateY(-30px) rotate(-5deg); }
+  100% { transform: translateX(120vw) translateY(15px) rotate(360deg); }
+}
+
+@keyframes volarMurcielago3 {
+  0% { transform: translateX(0) translateY(0) rotate(0); }
+  50% { transform: translateX(70vw) translateY(25px) rotate(15deg); }
+  100% { transform: translateX(120vw) translateY(-20px) rotate(360deg); }
+}
+
+/* 🔮 Logo contenedor */
+.theme-halloween .Clogodash {
+  background: linear-gradient(90deg, #8a2be2, #ff6f00) !important;
+  box-shadow: 0 0 12px rgba(138, 43, 226, 0.3) !important;
+  border-radius: 20px !important;
+}
+.theme-halloween .fondo-header {
+  background: linear-gradient(90deg, #8a2be2, #ff6f00) !important;
+  box-shadow: 0 2px 12px rgba(138, 43, 226, 0.3) !important;
+  height: 80px !important;
+  z-index: 0 !important;
+  opacity: 0.85 !important;
+  backdrop-filter: blur(3px) !important;
+}
+/* 🔥 Niebla animada en el header */
+.theme-halloween .fondo-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 300%;
+  background: url("/img/humo.png") repeat-x center/contain;
+  animation: headerNiebla 60s linear infinite;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+  filter: blur(2px);
+}
+
+@keyframes headerNiebla {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.theme-halloween .luna-header-halloween {
+  position: absolute;
+  top: 80px;
+  left: 980px;
+  font-size: 45px;
+  z-index: 2;
+  animation: flotarLuna 4s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 200, 0.7);
+}
+
+@keyframes flotarLuna {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+/* 🔥 Fondo del sidebar Halloween */
+.theme-halloween .barradash {
+  background: linear-gradient(180deg, #1a001a, #330033) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.2) !important;
+}
+
+/* ✨ Opciones del menú con estilo Halloween */
+.theme-halloween .opciondash {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffcc00 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* 🟣 Hover estilo neon */
+.theme-halloween .opciondash:hover {
+  background-color: #6a00ff !important;
+  color: #fff700 !important;
+  box-shadow: 0 0 10px #ffcc00 !important;
+}
+
+/* 🟢 Iconos verdes fosforescentes */
+.theme-halloween .iconodash {
+  color: #00ff99 !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 0 10px #00ffcc !important;
+}
+
+/* 🌟 Opción activa destacada */
+.theme-halloween .opciondash.activa {
+  background: linear-gradient(90deg, #ff9900, #ffcc00) !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  box-shadow: 0 0 15px rgba(255, 187, 0, 0.6) !important;
+}
+/* 🔥 Fondo del sidebar Halloween */
+.theme-halloween .barradash {
+  background: linear-gradient(180deg, #1a001a, #330033) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.2) !important;
+}
+
+/* ✨ Opciones del menú con estilo Halloween */
+.theme-halloween .opciondash {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffcc00 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* 🟣 Hover estilo neon */
+.theme-halloween .opciondash:hover {
+  background-color: #6a00ff !important;
+  color: #fff700 !important;
+  box-shadow: 0 0 10px #ffcc00 !important;
+}
+
+/* 🟢 Iconos verdes fosforescentes */
+.theme-halloween .iconodash {
+  color: #00ff99 !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 0 10px #00ffcc !important;
+}
+
+/* 🌟 Opción activa destacada */
+.theme-halloween .opciondash.activa {
+  background: linear-gradient(90deg, #ff9900, #ffcc00) !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  box-shadow: 0 0 15px rgba(255, 187, 0, 0.6) !important;
+}
+.theme-halloween .menudash {
+  background-color: transparent !important;
+  background-image: linear-gradient(to bottom, rgba(30, 0, 40, 0.8), rgba(10, 0, 20, 0.6)) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.theme-halloween .menudash {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(4px);
+  border-right: 2px solid rgba(255, 136, 0, 0.2);
+  box-shadow: inset 0 0 10px rgba(255, 153, 0, 0.2);
+}
+.theme-halloween .encabezadodash {
+  background: linear-gradient(90deg, #4a148c, #ff6f00) !important;
+  color: #fef6ec !important;
+  box-shadow: 0 0 15px rgba(255, 111, 0, 0.4);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  text-shadow: 0 0 3px #000;
+  font-family: 'Creepster', cursive !important;
+}
+.dt-theme-panel {
+  background: linear-gradient(145deg, #1a1a1a, #292929);
+  border: 2px solid #ff7518;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(255, 117, 24, 0.4);
+  max-width: 500px;
+  margin: 3rem auto;
+  text-align: center;
+  color: #f8e7d0;
+  font-family: 'Creepster', cursive;
+  transition: all 0.3s ease-in-out;
+}
+
+.dt-header h2 {
+  font-size: 2.5rem;
+  color: #ff7518;
+  margin-bottom: 0.5rem;
+}
+
+.dt-subtitle {
+  font-size: 1.2rem;
+  color: #ffd6b8;
+  margin-bottom: 2rem;
+}
+
+.dt-toggle-btn {
+  font-size: 1.3rem;
+  padding: 0.8rem 2rem;
+  background: #ff7518;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Creepster', cursive;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #ff7518aa;
+}
+
+.dt-toggle-btn:hover {
+  background: #ff9944;
+  box-shadow: 0 0 15px #ff9944;
+  transform: scale(1.05);
+}
+
+.dt-toggle-btn.activo {
+  background: #1c1c1c;
+  color: #ff7518;
+  box-shadow: 0 0 15px #ff7518cc;
+}
+
+.dt-toast {
+  margin-top: 1.5rem;
+  background: #000000cc;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #ffddb3;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(255, 117, 24, 0.5);
+  animation: dt-fadeInOut 3s forwards;
+}
+
+@keyframes dt-fadeInOut {
+  0% { opacity: 0; transform: scale(0.9); }
+  10% { opacity: 1; transform: scale(1); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.1); }
+}
+
+/* Decoraciones */
+.dt-murcielago {
+  width: 40px;
+  height: 40px;
+  background: url('/img/bat.png') no-repeat center;
+  background-size: contain;
+  animation: dt-volar 2s infinite linear;
+  margin: 2rem auto;
+}
+
+.dt-luna {
+  font-size: 4rem;
+  margin-top: 1rem;
+}
+
+.dt-nube-humo {
+  width: 80%;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 2rem auto;
+  border-radius: 50px;
+  filter: blur(10px);
+  animation: dt-niebla 4s infinite alternate;
+}
+
+@keyframes dt-volar {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(10deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes dt-niebla {
+  0% { transform: translateX(0); opacity: 0.4; }
+  100% { transform: translateX(20px); opacity: 0.7; }
+}
+/* 🌙 Panel de Configuración de Tema Halloween (AISLADO) */
+.dash-themed-panel {
+  background: linear-gradient(145deg, #1a1a1a, #292929);
+  border: 2px solid #ff7518;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 117, 24, 0.4);
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: center;
+  color: #f8e7d0;
+  font-family: 'Creepster', cursive;
+  transition: all 0.3s ease-in-out;
+}
+
+.dash-themed-header h2,
+.dash-themed-title {
+  font-size: 2.2rem;
+  color: #ff7518;
+  margin-bottom: 0.5rem;
+}
+
+.dash-themed-sub {
+  font-size: 1.1rem;
+  color: #ffd6b8;
+  margin-bottom: 1.5rem;
+}
+
+.dash-themed-button {
+  font-size: 1.2rem;
+  padding: 0.8rem 2rem;
+  background: #ff7518;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Creepster', cursive;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #ff7518aa;
+}
+
+.dash-themed-button:hover {
+  background: #ff9944;
+  box-shadow: 0 0 15px #ff9944;
+  transform: scale(1.05);
+}
+
+.dash-themed-button.activo {
+  background: #1c1c1c;
+  color: #ff7518;
+  box-shadow: 0 0 15px #ff7518cc;
+}
+
+.dash-themed-toast {
+  margin-top: 1rem;
+  background: #000000cc;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #ffddb3;
+  font-weight: bold;
+  animation: dash-themed-toast-fade 3s forwards;
+}
+
+@keyframes dash-themed-toast-fade {
+  0% { opacity: 0; transform: scale(0.95); }
+  15% { opacity: 1; transform: scale(1); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.05); }
+}

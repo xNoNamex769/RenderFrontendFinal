@@ -1,0 +1,454 @@
+.planificar-evento-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgb(255, 253, 253);
+  font-family: "Segoe UI", sans-serif;
+}
+
+
+.planificar-evento-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #f6f7fc;
+  margin-bottom: 2rem;
+}
+
+
+.planificar-evento-form input,
+.planificar-evento-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+
+.planificar-evento-form input:focus,
+.planificar-evento-form textarea:focus {
+  border-color: #fdfeff;
+  outline: none;
+}
+
+
+.planificar-evento-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+
+.planificar-evento-actividades {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+
+.planificar-evento-actividades h3 {
+  font-size: 1.1rem;
+  color: #203ee6;
+  margin-bottom: 1rem;
+}
+
+
+.planificar-evento-checkbox {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+
+.planificar-evento-boton {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #15b31d;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  filter: drop-shadow(3px 3px 5px #7be843);
+}
+
+
+.planificar-evento-boton:hover {
+  background-color: #0a3ee9;
+  transform: scale(1.05);
+}
+.planificar-evento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+
+.planificar-evento-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background-color: #f1f5f9;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-weight: 500;
+}
+
+
+.planificar-evento-card:hover {
+  background-color: #e0e7ff;
+  transform: scale(1.02);
+}
+
+
+.planificar-evento-card input[type="checkbox"] {
+  transform: scale(1.2);
+}
+.pe-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+
+.pe-tab {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ddd;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.pe-tab-activa {
+  background-color: #4caf50;
+  color: white;
+}
+
+
+
+
+.planificar-evento-container {
+  max-width: 820px;
+  margin: 40px auto;
+  padding: 36px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1); /* Sombra mejorada */
+  font-family: "Segoe UI", sans-serif; /* Tipografía moderna */
+}
+
+
+.planificar-evento-title {
+  text-align: center;
+  font-size: 2.4rem;
+  color: #5eb319; /* Color verde principal */
+  font-weight: 700;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+
+.planificar-evento-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #5eb319; /* Línea decorativa en verde */
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+
+.planificar-evento-form input,
+.planificar-evento-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 1.4rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+
+.planificar-evento-form input:focus,
+.planificar-evento-form textarea:focus {
+  border-color: #5eb319; /* Verde en focus */
+  box-shadow: 0 0 0 3px rgba(94, 179, 25, 0.2); /* Efecto de enfoque mejorado */
+  background-color: #fff;
+  outline: none;
+}
+
+
+.planificar-evento-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+
+.planificar-evento-actividades {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+
+.planificar-evento-actividades h3 {
+  font-size: 1.25rem;
+  color: #5eb319; /* Título de sección con color verde */
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+
+.planificar-evento-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+
+.planificar-evento-checkbox input {
+  accent-color: #5eb319; /* Color de los checkboxes */
+  transform: scale(1.2); /* Tamaño aumentado para mejor usabilidad */
+}
+
+
+.planificar-evento-boton {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #5eb319, #4aa200); /* Degradado verde */
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 12px rgba(94, 179, 25, 0.3); /* Sombra suave en verde */
+  letter-spacing: 0.5px;
+  margin-top: 15px;
+  align-self: center;
+}
+
+
+.planificar-evento-boton:hover {
+  transform: translateY(-2px); /* Movimiento suave al hacer hover */
+  box-shadow: 0 8px 18px rgba(94, 179, 25, 0.35); /* Sombra aumentada */
+  background: linear-gradient(135deg, #4aa200, #5eb319); /* Inversión de degradado */
+}
+
+
+.planificar-evento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+
+.planificar-evento-card {
+  background-color: #f7fcf2; /* Fondo suave verde claro */
+  border: 1px solid #cbe69a; /* Borde en tono verde */
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;  
+  max-width: 130px;
+  max-height: 150px;
+  overflow-wrap: break-word; /* fuerza a que palabras largas se partan */
+  word-wrap: break-word;     /* para compatibilidad */
+  font-size: 13px
+}
+
+
+.planificar-evento-card:hover {
+  background-color: #e9fbd4; /* Hover con tono más claro */
+  transform: scale(1.03); /* Efecto sutil al pasar el mouse */
+  border-color: #bde077; /* Cambio de color de borde */
+}
+
+
+.planificar-evento-card input[type="checkbox"] {
+  transform: scale(1.25); /* Tamaño más accesible */
+  accent-color: #5eb319; /* Verde aplicado a checkbox */
+}
+
+
+.pe-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+
+.pe-tab {
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background-color: #e6f4d9; /* Fondo suave para pestañas */
+  color: #4d4d4d;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.pe-tab:hover {
+  background-color: #d8f29f; /* Hover más brillante */
+  color: #2b2b2b;
+}
+
+
+.pe-tab-activa {
+  background-color: #5eb319; /* Color verde principal */
+  color: #fff;
+  border-color: #4aa200; /* Borde en verde oscuro */
+}
+
+
+
+
+.planificar-evento-botonactividades {
+  width: 100%;
+  height: 60px;
+  font-size: 1.00rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #5eb319, #4aa200); /* Degradado verde */
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 12px rgba(94, 179, 25, 0.3); /* Sombra suave en verde */
+  letter-spacing: 0.5px;
+}
+
+
+styles.css
+.planificar-evento-container {
+max-width: 1000px;
+margin: 40px auto;
+padding: 32px;
+background: #ffffff;
+border-radius: 16px;
+box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
+font-family: "Segoe UI", sans-serif;
+}
+
+/* Título principal */
+.planificar-evento-title {
+text-align: left;
+font-size: 1.6rem;
+font-weight: 600;
+color: #222;
+margin-bottom: 1.8rem;
+}
+
+/* Formulario con dos columnas */
+.planificar-evento-form {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px 30px;
+}
+
+/* Etiquetas y campos */
+.planificar-evento-form label {
+font-weight: 600;
+color: #444;
+margin-bottom: 6px;
+display: block;
+}
+
+.planificar-evento-form input,
+.planificar-evento-form select,
+.planificar-evento-form textarea {
+width: 100%;
+padding: 12px 14px;
+border: 1px solid #dcdcdc;
+border-radius: 8px;
+background: #fafafa;
+font-size: 15px;
+transition: all 0.3s ease;
+}
+
+.planificar-evento-form input:focus,
+.planificar-evento-form select:focus,
+.planificar-evento-form textarea:focus {
+border-color: #2f7cf6;
+background-color: #fff;
+outline: none;
+box-shadow: 0 0 0 3px rgba(47, 124, 246, 0.15);
+}
+
+/* Checkbox de términos */
+.planificar-evento-checkbox {
+grid-column: 1 / -1;
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 0.95rem;
+color: #555;
+margin-top: 10px;
+}
+
+.planificar-evento-checkbox input {
+transform: scale(1.2);
+accent-color: #2f7cf6;
+}
+
+/* Botón principal */
+.planificar-evento-boton {
+grid-column: 1 / -1;
+margin-top: 1rem;
+width: 100%;
+padding: 14px;
+background-color: #5eb319;
+color: #fff;
+font-size: 1rem;
+font-weight: 600;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.planificar-evento-boton:hover {
+background-color: #1d64d8;
+transform: scale(1.03);
+}
+
+/* Rol y términos */
+.planificar-evento-form select {
+background-color: #fff;
+}
+
+.planificar-evento-terminos a {
+color: #2f7cf6;
+text-decoration: none;
+font-weight: 600;
+}
+
+.planificar-evento-terminos a:hover {
+text-decoration: underline;
+}
+

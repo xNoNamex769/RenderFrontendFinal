@@ -1,0 +1,276 @@
+.UserContenedor {
+  display: grid;
+  grid-template-columns: 370px 1fr;
+  grid-template-rows: 1fr;
+  gap: 24px;
+  padding: 30px;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  align-items: flex-start;
+}
+
+.UserCuadro {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e6ed;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.UserInfo {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 750px; /* Ajusta este valor hasta que quede alineado */
+}
+
+.UserAvatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.UserLogo {
+  width: 140px;
+  height: 140px;
+  border-radius: 20%;
+  margin-bottom: 15px;
+  object-fit: contain;
+}
+
+.UserNombre {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 8px 0;
+  color: #1f2937;
+}
+
+.UserRol,
+.UserCorreo {
+  font-size: 0.95rem;
+  margin: 2px 0;
+  color: #4b5563;
+}
+
+.UserBoton {
+  margin-top: 15px;
+  padding: 10px 22px;
+  background-color: #5eb319;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.UserBoton:hover {
+  background-color: #1e40af;
+}
+
+.UserLudicas,
+.UserEventos {
+  display: flex;
+  flex-direction: column;
+}
+
+.UserTitulo {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #111827;
+}
+
+.UserTarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.UserTarjeta {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border-top: 4px solid #5eb319;
+}
+
+.UserTarjeta:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(94,179,25,0.13);
+}
+
+.UserTarjetaImg {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.UserTarjetaTexto {
+  padding: 16px 12px;
+  font-weight: 600;
+  color: #222;
+  text-align: center;
+  font-size: 1.08rem;
+}
+
+/* Modal */
+.UserModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.UserModalContenido {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.UserModalCerrar {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/*xdddd*/
+
+.UserTarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.UserTarjeta {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.UserTarjetaImg {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+.UserTarjetas > * {
+  height: 100%;
+}
+
+/* Modern profile card */
+.UserProfileCard {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 340px;
+  margin: 0 auto;
+  gap: 0.5rem;
+}
+
+.UserProfileAvatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 0.7rem;
+  border: 3px solid #e6f4ea;
+  object-fit: cover;
+}
+
+.UserProfileName {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.UserProfileList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.7rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.UserProfileList li {
+  font-size: 1rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f7fafc;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.UserProfileLogo {
+  width: 130px;
+  margin: 0.7rem 0 0.5rem 0;
+}
+
+.UserProfileBtn {
+  background: #5eb319;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.UserProfileBtn:hover {
+  background: #3a7d13;
+}
+
+.UserMainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+
+.text-bienvenida{
+  color: rgb(25, 196, 10);
+}
+
+.texto-dash-todos-rol{
+margin-left: 70px;
+}

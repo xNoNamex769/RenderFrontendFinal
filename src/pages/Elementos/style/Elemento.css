@@ -1,0 +1,51 @@
+.formulario-subir {
+
+  max-width: 500px;
+margin-top: 30px;
+margin-left: 450px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.formulario-subir label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.formulario-subir input[type="text"],
+.formulario-subir textarea,
+.formulario-subir input[type="file"] {
+  width: 100%;
+  margin-top: 30px;
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+
+.formulario-subir button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.qr-preview {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.qr-preview img {
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+.qr-preview a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}

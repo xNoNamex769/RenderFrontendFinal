@@ -1,0 +1,51 @@
+.analisis-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+}
+
+.tarjetas-container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.tarjeta {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-left: 8px solid transparent;
+  transition: 0.3s;
+}
+
+.tarjeta h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.recomendaciones {
+  margin-top: 10px;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.95em;
+}
+
+.recomendaciones ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.evento-verde {
+  border-left-color: #4caf50;
+}
+.evento-amarillo {
+  border-left-color: #ff9800;
+}
+.evento-rojo {
+  border-left-color: #f44336;
+}
+.evento-gris {
+  border-left-color: #9e9e9e;
+}

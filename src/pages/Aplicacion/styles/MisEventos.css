@@ -1,0 +1,284 @@
+/* =========================
+   CSS Mejorado para MisEventos (único)
+   ========================= */
+
+/* Contenedor principal */
+.eventos-creados-wrapper-unique {
+  padding: 24px;
+  background: #f9fafb;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+}
+
+.eventos-creados-wrapper-unique h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0d7a56;
+  margin-bottom: 12px;
+}
+
+.eventos-creados-desc-unique {
+  margin-bottom: 24px;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+/* Cards de eventos */
+.evento-creado-item-unique {
+  margin-bottom: 24px;
+}
+
+.evento-creado-card-unique {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.evento-creado-card-unique:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.evento-creado-card-unique h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.evento-creado-card-unique p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.icono-peq-unique {
+  margin-right: 6px;
+  vertical-align: middle;
+  color: #059669;
+}
+
+/* QR */
+.qr-wrapper-unique {
+  display: flex;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.qr-bloque-unique {
+  text-align: center;
+}
+
+.qr-imagen-unique {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+  padding: 6px;
+}
+
+.qr-etiqueta-unique {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+/* Botones */
+.acciones-evento-unique {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.acciones-evento-unique button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-ver-asistencia-unique { background: #e0f2fe; color: #0369a1; }
+.btn-comparar-unique { background: #fef9c3; color: #854d0e; }
+.btn-reporte-unique { background: #ecfdf5; color: #047857; }
+
+.btn-ver-asistencia-unique:hover { background: #bae6fd; }
+.btn-comparar-unique:hover { background: #fde68a; }
+.btn-reporte-unique:hover { background: #d1fae5; }
+
+.icono-btn-unique {
+  font-size: 1.1rem;
+}
+
+/* Tabla de asistencia */
+.tabla-asistencia-unique {
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+.tabla-asistencia-unique table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tabla-asistencia-unique th,
+.tabla-asistencia-unique td {
+  padding: 10px;
+  text-align: left;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla-asistencia-unique th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.estado-tag-unique {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.estado-completo-unique { background: #dcfce7; color: #166534; }
+.estado-incompleto-unique { background: #fef9c3; color: #854d0e; }
+.estado-sin-registro-unique { background: #fee2e2; color: #991b1b; }
+
+/* Modal mejorado */
+.modal-dialog.modal-xl {
+  max-width: 95% !important;
+}
+
+.modal-content {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.modal-header {
+  background: linear-gradient(90deg, #0d7a56, #10b981);
+  color: #fff;
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* KPI cards en modal */
+.reporte-top-row-unique {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.kpi-card-unique {
+  flex: 1;
+  min-width: 160px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.kpi-title-unique {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.kpi-value-unique {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Reporte acciones */
+.reporte-actions-unique {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.btn-small-unique {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-small-unique:hover {
+  background: #f3f4f6;
+}
+
+.select-mode-unique {
+  padding: 6px 8px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+/* Pie de modal */
+.nota-sugerencia-unique {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* Charts dentro de modal */
+#reporte-chart-container-unique {
+  margin-top: 12px;
+}
+
+#reporte-chart-container-unique h5 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #111827;
+}
+/* Centrar modal en pantalla */
+.modal-dialog {
+  margin: auto;              /* centra horizontalmente */
+}
+
+.modal-dialog.modal-xl {
+  max-width: 95% !important; /* tamaño grande */
+  margin: auto;              /* fuerza centrado */
+}
+
+.modal.show .modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;       /* centra vertical */
+  min-height: calc(100% - 1rem);
+}

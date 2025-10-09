@@ -1,0 +1,754 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+.contenedordash {
+  /*App*/
+  
+  display: flex;
+}
+
+.barradash {
+   
+  /*SideBar*/
+  width: 250px;
+  background: #dadbda;
+  color: rgb(0, 0, 0);
+  padding: 20px;
+  
+  height: 100vh;
+}
+
+.titulodash {
+  /*Navbar*/ /*SideBar*/
+  margin-bottom: 20px;
+  font-size: 22px;
+  
+  
+}
+.menudash {
+  /*SideBar*/
+
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  
+}
+
+.opciondash {
+  /*SideBar*/
+   background-color: #ffffff;
+  padding: 10px;
+  margin: 10px 0;
+  text-decoration: none;
+  align-items: center;
+  gap: 10px;
+  
+  display: flex;
+  color: black;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+  border: none;
+}
+
+.opciondash:hover,
+.activa {
+  
+  background: #5eb319;
+}
+
+.contenidodash {
+  /*App*/
+  
+  flex: 1;
+  padding: 20px;
+}
+
+.encabezadodash {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 30px;
+  margin-top: -20px;
+  background-color: #ffffff;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.1rem;
+ 
+}
+
+
+
+
+.busquedadash {
+  /*Navbar*/
+  
+  padding: 8px;
+  width: 290px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+  
+  position: absolute;
+  left: 33%;
+  transform: translateX(-50%);
+  
+}
+
+
+.accionesdash {
+  /*Navbar*/
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  
+  
+}
+
+.iconodash {
+
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.2);
+  color: rgb(87, 86, 86);
+   filter: drop-shadow(1px 5px 1px rgb(94, 179, 25));
+
+   
+   margin-left: 15px;
+
+}
+.iconodashm{
+  margin-left: 30px;
+ 
+
+}
+
+.accionesdash {
+  
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  
+
+}
+
+.opciondash:hover {
+  
+  background: #5eb319,
+  
+  
+}
+
+.activa {
+  
+  background: #4caf50;
+  color: white;
+  
+  
+}
+
+.iconodash {
+  font-size: 25px;
+  
+
+  transition: color 0.3s;
+}
+
+.activa .iconodash {
+  
+  color: rgb(255, 255, 255);
+}
+
+.usuariodash {
+  
+  /*Navbar*/
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 200px;
+}
+
+.avatardash {
+  
+  width: 50px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+ 
+}
+
+.nombredash {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-left: 0; /* antes era 30px, ahora lo eliminamos */
+  flex: 1;
+   /* para que ocupe el espacio disponible entre la imagen y el botón */
+}
+
+
+.Clogodash {
+  background-color: #5eb319;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  gap: 10px;
+  width: 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+}
+
+
+.logodash {
+  /*Navbar*/
+  width: 150px;
+  height: auto;
+  position: relative;
+  top: -16px;
+     filter: drop-shadow(1px 10px 10px rgb(4, 241, 44));
+     
+}
+
+.flexdash {
+  display: flex;
+}
+
+.menudash-lateral.oculto {
+  background-color: #5eb319;
+  display: none;
+}
+
+.tagdash {
+  display: inline-block;
+  background-color: #e2e8f0;
+  color: #4a5568;
+  border-radius: 9999px;
+  
+  padding: 5px 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.moverdash {
+  margin-top: 10px;
+  
+  width: 82vw;
+}
+
+.avatardash2 {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.centerdash {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  
+  
+}
+
+.padddash {
+  padding: 10px;
+  
+  
+}
+
+.img1dash {
+  width: 500px;
+  height: 500px;
+}
+
+.subirdash {
+   background-color: #b35e19;
+  position: relative;
+  top: -3mm;
+    
+}
+
+
+
+/* Fijar el menú lateral (borrar si causa conflictos en el resposive)  */ 
+.barradash {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  height: 100vh; 
+  width: 250px; 
+  background-color: #dbdada;
+  color: white;
+  overflow-y: auto; 
+ background-color: #ffffff;
+  
+  
+}
+
+.contenedordash {
+  display: flex;
+  height: 100vh; 
+     
+}
+
+.contenidodash {
+  margin-left: 250px; 
+  flex-grow: 1;
+  overflow-y: auto; 
+  height: 100vh;
+  padding: 20px;
+  background-color: #f4f4f4;
+  
+   background-position: center;
+   background-repeat: no-repeat;
+   
+   background-size: cover;
+   
+}
+
+.footer-dash {
+  /* Para bajarlo */
+  margin-top: 200px;  /* sube o baja este valor a tu gusto */
+  width: 100%;
+max-width: 1079px;
+
+  height: 100px;
+  /* Si quieres que esté centrado en texto, */
+  text-align: center;
+margin-right: 00px;
+  /* Otras propiedades que tengas */
+ 
+ 
+}
+.opciondash > span.iconodash {
+  flex-shrink: 0;       /* que no se reduzca el tamaño del icono */
+  font-size: 25px;      /* tamaño adecuado */
+  display: flex;   /* para centrar icono si es necesario */
+  align-items: center;
+  justify-content: center;
+}
+.opciondash {
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 10px 0;
+  text-decoration: none;
+  display: flex;           /* importante para alinear icono + texto en línea */
+  align-items: center;     /* centra verticalmente icono y texto */
+  gap: 10px;               /* espacio entre icono y texto */
+  color: black;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+  border: none;
+  white-space: nowrap;     /* evitar que el texto se quiebre y baje */
+}
+.menudash {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* o más, según necesites */
+  padding: 1rem 0;
+  
+}
+.contenidodash {
+  position: relative;
+  margin-left: 250px;
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 100vh;
+  padding: 20px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+    background-color: rgba(255, 255, 255, 0.85);
+  z-index: 1;
+}
+
+.contenidodash::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100;
+  height:2340px;
+  background-color: rgba(3, 3, 3, 0.85); /* Capa blanca semitransparente */
+  z-index: -1;
+  backdrop-filter: blur(1px); /* opcional para suavizar */
+}
+
+.menudesplegabledash {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #f5f0f0;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  width: 150px;
+}
+
+.menudesplegabledash ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.menudesplegabledash li {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menudesplegabledash li:hover {
+  background-color: #f0f0f0;
+}
+
+.Clogodash {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #5eb319;
+  padding: 10px 15px;
+  max-width: 230px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.avatardash {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.nombredash {
+  flex: 1;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+.subirdash {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.subirdash:hover {
+  transform: scale(1.2);
+}
+.Clogodash {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5eb319;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  margin-top: -10px; 
+
+  position: relative;
+  border-radius: 39px;
+  width: 100%; 
+}
+
+.UserHeaderInfo {
+  
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatardash {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.nombredash {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(255, 253, 253);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.subirdash {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.subirdash:hover {
+  transform: scale(1.2);
+}
+
+.opcionesm{
+
+  color: black;
+
+}
+.banner-sindesena {
+  background: linear-gradient(90deg, #009688, #26a69a);
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  animation: slideDown 0.5s ease;
+  border-bottom: 2px solid #00796b;
+  font-weight: bold;
+}
+
+.ver-mas-noti {
+  background: white;
+  color: #5eb319;
+  padding: 5px 10px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.logo-sindesena-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: -5px;
+  animation: bounce 2s infinite;
+}
+
+.logo-sindesena {
+  width: 60px;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+/* --- Banner Sindesena --- */
+.banner-sindesena {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #006f3c, #00b158);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.4s ease;
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo-sindesena-wrapper {
+  flex-shrink: 0;
+  margin-right: 16px;
+  animation: bounce 1.5s infinite;
+}
+
+.logo-sindesena {
+  width: 480px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+}
+
+.banner-sindesena strong {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.banner-sindesena span[role="img"] {
+  font-size: 1.5rem;
+  margin-right: 6px;
+}
+
+.ver-mas-noti {
+  background: white;
+  color: #5eb319;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-left: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ver-mas-noti:hover {
+  background: #e1fff2;
+}
+
+.btn-cerrar-banner {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  margin-left: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btn-cerrar-banner:hover {
+  transform: scale(1.2);
+}
+
+/* Animaciones */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+/* ==== ESTRUCTURA GENERAL ==== */
+.encabezadodash {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+}
+
+/* Contenedor principal en una sola línea */
+.navbar-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* distribuye los elementos */
+  gap: 20px;
+}
+
+/* ==== BUSCADOR ==== */
+
+
+
+/* ==== RESULTADOS ==== */
+.lista-resultados {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.lista-resultados li {
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.lista-resultados li:hover {
+  background-color: #f0f6ff;
+}
+
+/* ==== CAMPANA ==== */
+
+
+.badge-noti {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+/* ==== ANIMACIÓN CAMPANA ==== */
+.animar-campana {
+  animation: campana 0.4s ease;
+}
+
+@keyframes campana {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.iconocampanita{
+margin-right: 30px;
+}
+
+.input-busqueda-header{
+  width: 800px;
+  margin-top: 10px;
+  border-radius: 30px;
+  margin-right: 30px;
+}

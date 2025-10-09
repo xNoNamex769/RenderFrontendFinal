@@ -1,0 +1,286 @@
+
+
+
+
+.body-alquiler-ap {
+    position: relative;
+    display: flex;
+    margin-left: 580px;
+    align-items: center;
+    min-height: 100%;
+    top: -200px;
+    color: white;
+
+   
+}
+
+/* Crea una capa de superposición sobre el fondo */
+.body-alquiler-ap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   
+    z-index: -1; /* Asegura que el overlay esté debajo del contenido */
+}
+
+.header-alquiler-ap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 1; /* Asegura que el header esté por encima del fondo */
+}
+
+.titulo-header-alquiler-ap {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    filter: drop-shadow(10px 10px 1px rgba(0, 248, 12, 0.26));
+
+}
+
+.img-header-alquiler-ap {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(3px 3px 1px rgb(79, 248, 0));
+}
+
+.main-alquiler-ap {
+
+    bottom: 20px; /* Coloca el main al final */
+    left: 0;
+    width: 0px;
+    
+   
+    text-align: center;
+    padding-top: 0;
+  
+    z-index: 1; /* Asegura que el main esté por encima del fondo */
+}
+
+.titulo-main-alquiler-ap {
+    text-align: center;
+    color: rgb(238, 240, 237);
+    font-size: 34px;
+   
+    justify-content: center;
+    display: flex;
+  flex-wrap: wrap;
+   margin-block-end: 3px;
+  
+    max-width: 900px;
+    align-items: center;
+  
+    margin-left: 240px;
+    
+   
+    
+}
+
+/* Imágenes de la galería */
+.box {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation: animate 20s linear infinite;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+@keyframes animate {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+
+.box span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004);
+}
+
+.box span img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Efectos de sombras */
+.img-baloncesto-alquiler-ap {
+    box-shadow: 0px 0px 20px rgb(15, 15, 15);
+    filter: drop-shadow(9px 9px 1px rgb(38, 3, 235));
+}
+
+.img-futbol-alquiler-ap {
+    box-shadow: 0px 0px 30px rgb(18, 19, 18);
+    filter: drop-shadow(10px 10px 1px rgb(5, 5, 238));
+}
+
+.img-danza-alquiler-ap {
+    box-shadow: 0px 0px 30px rgb(18, 18, 19);
+    filter: drop-shadow(10px 10px 1px rgb(4, 8, 230));
+}
+
+.img-juegos-alquiler-ap {
+    box-shadow: 0px 0px 30px rgb(13, 13, 14);
+    filter: drop-shadow(10px 10px 1px rgb(20, 5, 226));
+}
+
+.img-parques-alquiler-ap {
+    box-shadow: 0px 0px 30px rgb(17, 17, 17);
+    filter: drop-shadow(10px 10px 1px rgb(5, 9, 245));
+   
+}
+
+.img-domino-alquiler-ap {
+    box-shadow: 0px 0px 30px rgba(13, 13, 14, 0.658);
+    filter: drop-shadow(10px 10px 1px rgba(8, 4, 238, 0.89));
+}
+
+.img-sapo-alquiler-ap {
+    box-shadow: 0px 0px 30px rgb(7, 7, 7);
+    filter: drop-shadow(10px 10px 1px rgba(4, 47, 240, 0.774));
+}
+
+.img-sena-alquiler-ap {
+   
+    filter: drop-shadow(10px 10px 1px rgb(20, 20, 20));
+}
+
+.texto-alquiler{
+    color: white;
+   
+}
+.texto-unico-elemento{
+    color: black;
+    margin-top: 70px;
+  margin-left: 380px;
+   
+
+}
+
+.texto-bienvenida-bienestar{
+    color: black;
+    margin-left: 30px;
+
+   
+
+}
+
+
+.ubicacion-elemento{
+  width: 300px;
+  margin-left: 300px;
+
+}
+
+.texto-bienestar-ubicacion{
+display: flex;
+font-size: 30px;
+}
+
+
+
+.bienvenida-bienestar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #ffffff, #ffffff);
+  padding: 20px;
+  border-radius: 20px;
+  margin: 10px auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  gap: 5px;
+}
+
+.bienvenida-texto {
+  flex: 1;
+}
+
+.bienvenida-texto h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.bienvenida-texto p {
+  font-size: 1.2rem;
+  color: #34495e;
+  line-height: 1.6;
+}
+
+.ubicacion-destacada {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #16a085;
+  font-size: 1.2rem;
+}
+
+.bienvenida-imagen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.ubicacion-elemento {
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.texto-unico-elemento {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+.texto-unico-elemento::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #0af102;
+  margin: 30px auto 0;
+  border-radius: 2px;
+
+}
+.titulo-principal {
+  background: linear-gradient(to right, #ffffff, #ffffff);
+  padding: 30px 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  margin: 0 auto;
+  max-width: 800px;
+  margin-top: 30px;
+}

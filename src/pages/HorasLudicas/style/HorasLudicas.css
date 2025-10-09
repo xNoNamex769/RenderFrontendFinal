@@ -1,0 +1,426 @@
+:root{
+  /* --------- THEME: moderno / corporativo --------- */
+  --theme: moderno;
+
+  /* Paleta moderno (por defecto) */
+  --m-verde-500: #16a34a;
+  --m-azul-600: #2563eb;
+  --m-azul-800: #1e3a8a;
+  --m-gris-900: #0f1724;
+  --m-gris-600: #64748b;
+  --m-fondo: linear-gradient(145deg,#ffffff 0%, #f4f8ff 100%);
+
+  /* Paleta corporativa (alternativa) */
+  --c-primario: #0b5a8a;
+  --c-secundario: #0f766e;
+  --c-acento: #ffb020;
+  --c-fondo: linear-gradient(135deg,#fbfdff 0%, #f3f7fb 100%);
+
+  /* Tokens generales */
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --gap: 1.25rem;
+  --max-width: 1100px;
+  --shadow-soft: 0 12px 30px rgba(15,23,42,0.06);
+  --shadow-elev: 0 22px 48px rgba(16,24,40,0.09);
+  --glow: 0 6px 24px rgba(37,99,235,0.06);
+  --transition-fast: 220ms cubic-bezier(.2,.85,.2,1);
+  --focus-ring: 4px solid rgba(37,99,235,0.10);
+
+  /* Typography */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --text-muted: #6b7280;
+  --muted-2: #94a3b8;
+  --accent-gloss: linear-gradient(90deg,#4f46e5,#06b6d4);
+}
+
+/* ---------- reset y accesibilidad ---------- */
+.horas-ludicas-container,
+.horas-ludicas-container * {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: none !important;
+  writing-mode: horizontal-tb;
+  white-space: normal !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- contenedor principal ---------- */
+.horas-ludicas-container {
+  max-width: var(--max-width);
+  margin: 2.4rem auto;
+  padding: 1.5rem;
+  background: var(--m-fondo);
+  border-radius: calc(var(--radius-lg) + 6px);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-sans);
+  color: var(--m-gris-900);
+  position: relative;
+  overflow: visible;
+  border: 1px solid rgba(15,23,42,0.04);
+}
+
+/* header refinado con badge y small CTA */
+.horas-ludicas-header {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: calc(var(--radius-lg) - 6px);
+  background: linear-gradient(135deg,#fbfffc 0%, #f7fbff 100%);
+  border: 1px solid rgba(15,23,42,0.03);
+  margin-bottom: 1.25rem;
+}
+
+/* izquierdo: titulos */
+.header-left {
+  display:flex;
+  flex-direction: column;
+  gap: .1rem;
+}
+.titulo-ludicas {
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+ 
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -.02em;
+  line-height: 1.02;
+}
+.subtitulo-ludicas {
+  margin: 0;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: .94rem;
+}
+.frase-motivacional {
+  margin-top: .18rem;
+  font-style: italic;
+  color: rgba(20, 20, 20, 0.85);
+  font-size: .9rem;
+}
+
+/* derecho: small badge / actions */
+.header-right {
+  display:flex;
+  gap:.6rem;
+  align-items:center;
+}
+.badge {
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  background: linear-gradient(90deg,#ecfeff,#f0f9ff);
+  color: var(--m-azul-600);
+  padding: .4rem .6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .86rem;
+  border: 1px solid rgba(37,99,235,0.06);
+  box-shadow: 0 6px 18px rgba(37,99,235,0.03);
+}
+
+/* ---------- layout principal ---------- */
+.horas-ludicas-content {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--gap);
+  align-items: start;
+  margin-bottom: 1.2rem;
+}
+
+/* panel de actividades (izq) ---------- */
+.horas-ludicas-activities {
+  min-width: 0;
+  background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  border: 1px solid rgba(15,23,42,0.04);
+  box-shadow: var(--shadow-elev);
+  overflow: hidden;
+  transition: transform var(--transition-fast);
+}
+.horas-ludicas-activities:hover { transform: translateY(-4px); }
+
+/* heading lista */
+.horas-ludicas-activities h3 {
+  font-size: 1.03rem;
+  margin: 0 0 .85rem 0;
+  font-weight: 800;
+  color: var(--m-gris-900);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+/* lista con separación orgánica */
+.horas-ludicas-activities ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .8rem;
+}
+
+/* card por actividad: más aire, icono y sombra suave */
+.actividad-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: .75rem;
+  align-items: center;
+  padding: .8rem;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,0.03);
+  background: linear-gradient(180deg,#fff 0%, #fbfdff 100%);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.03);
+}
+.actividad-item:hover,
+.actividad-item:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 60px rgba(16,24,40,0.10);
+  border-color: rgba(37,99,235,0.12);
+}
+
+/* avatar / icono de actividad */
+.actividad-icon {
+  width:44px;
+  height:44px;
+  min-width:44px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:.95rem;
+  color:white;
+  background: linear-gradient(135deg, var(--m-azul-600), var(--m-azul-800));
+  box-shadow: 0 6px 18px rgba(37,99,235,0.06);
+}
+
+/* meta + nombre */
+.actividad-meta {
+  display:flex;
+  flex-direction:column;
+  gap:.25rem;
+  min-width:0;
+}
+.actividad-nombre {
+  font-weight: 800;
+  color: #0f1724;
+  font-size: .98rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.actividad-detalle {
+  color: var(--muted-2);
+  font-size: .86rem;
+  display:flex;
+  gap:.6rem;
+  align-items:center;
+}
+
+/* horas estilo chip */
+.actividad-horas {
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.36rem .64rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(37,99,235,0.09), rgba(37,99,235,0.02));
+  color: var(--m-azul-600);
+  font-weight: 900;
+  font-size:.92rem;
+  min-width:64px;
+  justify-content:center;
+  border: 1px solid rgba(37,99,235,0.05);
+}
+
+/* fecha secundaria */
+.actividad-fecha {
+  color: var(--text-muted);
+  font-size: .86rem;
+  text-align: right;
+}
+
+/* acciones (botones pequeños) */
+.actividad-actions {
+  display:flex;
+  gap:.45rem;
+  align-items:center;
+  justify-self:end;
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(15,23,42,0.04);
+  padding: .46rem .6rem;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .86rem;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+.btn-ghost:hover { transform: translateY(-3px); background: rgba(2,6,23,0.03); }
+.btn-ghost:active { transform: translateY(-1px) scale(.997); }
+
+/* ---------- panel resumen (derecha) ---------- */
+.horas-ludicas-summary {
+  background: linear-gradient(180deg,#ffffff 0%, #f7fbff 100%);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem;
+  text-align: center;
+  border: 1px solid rgba(15,23,42,0.04);
+  box-shadow: 0 14px 34px rgba(37,99,235,0.04);
+  display:flex;
+  flex-direction:column;
+  gap:.9rem;
+  justify-content:space-between;
+  min-height: 220px;
+}
+
+/* heading y contador grande */
+.horas-ludicas-summary h3 {
+  font-size: 1.03rem;
+  margin: 0;
+  font-weight: 900;
+  color: var(--m-gris-900);
+}
+.big-count {
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:.6rem;
+}
+.big-count h2 {
+  margin:0;
+  font-size: 2.25rem;
+  line-height:1;
+  color: var(--m-gris-900);
+  font-weight: 900;
+}
+.small-note {
+  color: var(--text-muted);
+  font-size:.92rem;
+}
+
+/* boton principal con efecto gloss y estado disabled */
+.btn-certificado {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.78rem 1rem;
+  border-radius: 12px;
+  border:none;
+  cursor:pointer;
+  font-weight: 900;
+  font-size:.95rem;
+  background-color: #31ad0b;
+  color: white;
+  box-shadow: 0 12px 36px rgba(16,24,40,0.10), 0 6px 18px rgba(16,24,40,0.06);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+  width: 100%;
+}
+.btn-certificado:hover:not(:disabled) { transform: translateY(-4px) scale(1.002); filter: saturate(1.02); }
+.btn-certificado:disabled { opacity:.75; cursor:not-allowed; transform:none; background: linear-gradient(180deg,#e6efe6,#f3faf3); color:#94a59a; box-shadow:none; }
+
+/* ---------- progreso (mejorado) ---------- */
+.progress-bar {
+  width:100%;
+  height:40px;
+  background: linear-gradient(180deg,#f3f6fb,#ffffff);
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,0.04);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  font-weight:800;
+  font-size:.95rem;
+  padding:4px;
+}
+.progress-fill {
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 .75rem;
+  transition: width 900ms cubic-bezier(.2,.8,.2,1);
+  color: white;
+  background: linear-gradient(90deg,var(--m-azul-600),var(--m-azul-800));
+  position:relative;
+  white-space:nowrap;
+  border-radius:999px;
+  box-shadow: 0 8px 24px rgba(37,99,235,0.12) inset;
+  overflow:hidden;
+}
+
+/* animación ligera dentro del fill para dar vida */
+.progress-fill::after {
+  content: "";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+  transform: translateX(-30%);
+  animation: sheen 3.2s linear infinite;
+  pointer-events:none;
+}
+@keyframes sheen {
+  0% { transform: translateX(-60%); opacity:.7; }
+  50% { transform: translateX(30%); opacity:.45; }
+  100% { transform: translateX(120%); opacity:.7; }
+}
+
+/* indicador de objetivo alcanzado */
+.progress-good {
+  background: linear-gradient(90deg,#16a34a,#059669);
+}
+
+/* ---------- info / footer ---------- */
+.horas-ludicas-info {
+  margin-top:.9rem;
+  padding:.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(15,23,42,0.03);
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  color:#0f1724;
+  line-height:1.5;
+  box-shadow: 0 8px 18px rgba(2,6,23,0.02);
+  font-size:.95rem;
+}
+
+/* accesibilidad: foco claro */
+:focus { outline: none; }
+.horas-ludicas-container :focus-visible {
+  box-shadow: var(--focus-ring);
+  border-radius: 8px;
+}
+
+/* responsive */
+@media (max-width: 980px) {
+  .horas-ludicas-content { grid-template-columns: 1fr; }
+  .horas-ludicas-summary { order: 2; }
+  .horas-ludicas-activities { order: 1; }
+  .actividad-item { grid-template-columns: auto 1fr; text-align:left; }
+  .actividad-actions { justify-self:start; }
+  .big-count h2 { font-size:1.9rem; }
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* utilidad: pill pequeño para estados */
+.pill {
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.28rem .5rem;
+  border-radius:999px;
+  font-weight:800;
+  font-size:.82rem;
+  background: rgba(15,23,42,0.04);
+  color: var(--m-gris-900);
+}

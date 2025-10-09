@@ -1,0 +1,555 @@
+/* ConstanciaSENA.css - Diseño Moderno Premium
+   - Experiencia visual elegante con glassmorphism y gradientes sutiles
+   - División asimétrica de pantalla (sidebar + área principal)
+   - Animaciones fluidas y microinteracciones refinadas
+   - UX optimizado para lectura y accesibilidad
+   - Tema profesional con identidad SENA
+*/
+
+:root {
+  --primary: #16a83b;
+  --primary-light: #37b417;
+  --primary-dark: #111111;
+  --secondary: #f8f4f3;
+  --bg-gradient-start: #f8fafb;
+  --bg-gradient-end: #e8f5f1;
+  --surface: #ffffff;
+  --surface-elevated: rgba(255, 255, 255, 0.95);
+  --text-primary: #1a2e28;
+  --text-secondary: #4a5d57;
+  --text-muted: #6b7d77;
+  --border-subtle: rgba(10, 122, 87, 0.08);
+  --shadow-sm: 0 2px 8px rgba(10, 60, 50, 0.04);
+  --shadow-md: 0 8px 24px rgba(10, 60, 50, 0.08);
+  --shadow-lg: 0 16px 48px rgba(10, 60, 50, 0.12);
+  --shadow-glow: 0 0 40px rgba(10, 122, 87, 0.15);
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --spacing-unit: 8px;
+  --transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Wrapper Principal - Layout Asimétrico */
+.constancia-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  padding: calc(var(--spacing-unit) * 5);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--spacing-unit) * 4);
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Patrón de fondo sutil */
+.constancia-wrapper::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(10, 122, 87, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 107, 53, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.constancia-wrapper > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Layout Desktop - División 30/70 */
+@media (min-width: 1024px) {
+  .constancia-wrapper {
+    grid-template-columns: 380px 1fr;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: calc(var(--spacing-unit) * 5);
+  }
+}
+
+/* Tarjeta Lateral de Progreso - Glass Morphism */
+.progreso-info {
+  background: var(--surface-elevated);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--spacing-unit) * 4);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 3);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+}
+
+.progreso-info::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(10, 122, 87, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  transition: transform var(--transition-smooth);
+}
+
+.progreso-info:hover::before {
+  transform: translate(-10%, -10%);
+}
+
+.progreso-info:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.progreso-info p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.progreso-info strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Barra de Progreso Moderna */
+.barra-progreso {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, rgba(10, 122, 87, 0.05), rgba(10, 122, 87, 0.08));
+  border-radius: 999px;
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.barra-progreso::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  to { left: 100%; }
+}
+
+.barra-progreso .progreso {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 14px;
+  font-size: 12px;
+  font-weight: 800;
+  color: white;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-light) 0%, var(--primary) 100%);
+  transition: width 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(10, 122, 87, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.barra-progreso .progreso::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 999px 999px 0 0;
+}
+
+/* Estado Aprobado con Animación */
+.estado-aprobado {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 1.5);
+  color: var(--primary);
+  font-weight: 700;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  background: linear-gradient(135deg, rgba(10, 122, 87, 0.08), rgba(10, 122, 87, 0.04));
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  animation: fadeInScale 0.5s ease;
+ 
+}
+
+.text-constancia{
+  color:white
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cargando {
+  color: var(--text-muted);
+  text-align: center;
+  padding: calc(var(--spacing-unit) * 3);
+  font-style: italic;
+}
+
+/* Contenedor Principal - Documento Elegante */
+.constancia-container {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 5);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 3);
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+}
+
+/* Borde Superior Decorativo */
+.constancia-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 6px;
+  background: linear-gradient(90deg, 
+    var(--primary) 0%, 
+    var(--primary-light) 50%, 
+    var(--secondary) 100%
+  );
+  box-shadow: 0 2px 12px rgba(10, 122, 87, 0.3);
+}
+
+/* Marca de Agua Sofisticada */
+.constancia-container::after {
+  content: "SENA";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 180px;
+  font-weight: 900;
+  color: rgba(10, 122, 87, 0.02);
+  letter-spacing: 20px;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Arial Black', sans-serif;
+}
+
+.constancia-container:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Título Principal */
+.titulo {
+  margin: 0 0 calc(var(--spacing-unit) * 2) 0;
+  font-family: 'Georgia', 'Garamond', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  padding-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.titulo::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  border-radius: 999px;
+}
+
+/* Texto del Cuerpo */
+.texto {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.texto strong {
+  color: var(--primary-dark);
+  font-weight: 700;
+  background: linear-gradient(180deg, transparent 60%, rgba(10, 122, 87, 0.1) 60%);
+  padding: 0 4px;
+  border-radius: var(--radius-xs);
+}
+
+/* Sección QR Rediseñada */
+.qr-section {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 3);
+  align-items: center;
+  justify-content: flex-start;
+  padding: calc(var(--spacing-unit) * 3);
+  background: linear-gradient(135deg, rgba(10, 122, 87, 0.03), rgba(10, 122, 87, 0.01));
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  margin-top: calc(var(--spacing-unit) * 2);
+}
+
+.qr-section p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.qr-section canvas {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: var(--radius-sm);
+  background: white;
+  padding: calc(var(--spacing-unit) * 1.5);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+}
+
+.qr-section canvas:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+/* Firmas Elegantes */
+.firmas {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 4);
+  justify-content: space-between;
+  margin-top: calc(var(--spacing-unit) * 4);
+  padding-top: calc(var(--spacing-unit) * 3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.firmas > div {
+  flex: 1 1 45%;
+  text-align: center;
+}
+
+.subrayado {
+  margin: 0 0 calc(var(--spacing-unit) * 1) 0;
+  padding-bottom: calc(var(--spacing-unit) * 2);
+  border-bottom: 2px solid var(--primary);
+  color: var(--text-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.nombre-firma {
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+/* Botón de Descarga Premium */
+.btn-descargar {
+  align-self: flex-start;
+  margin-top: calc(var(--spacing-unit) * 3);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  color: white;
+  border: none;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-descargar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-smooth);
+}
+
+.btn-descargar:hover::before {
+  left: 100%;
+}
+
+.btn-descargar:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.btn-descargar:active {
+  transform: translateY(-1px);
+}
+
+.btn-descargar:focus {
+  outline: 3px solid rgba(10, 122, 87, 0.3);
+  outline-offset: 3px;
+}
+
+/* Mensaje No Cumplido */
+.mensaje-no-cumplido {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--spacing-unit) * 5);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 2);
+  align-items: center;
+  text-align: center;
+  transition: all var(--transition-smooth);
+}
+
+.mensaje-no-cumplido:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.mensaje-no-cumplido h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Responsive - Móvil */
+@media (max-width: 1023px) {
+  .constancia-wrapper {
+    grid-template-columns: 1fr;
+    padding: calc(var(--spacing-unit) * 3);
+    gap: calc(var(--spacing-unit) * 3);
+  }
+
+  .progreso-info {
+    order: 1;
+  }
+
+  .constancia-container {
+    order: 2;
+    padding: calc(var(--spacing-unit) * 4);
+  }
+
+  .titulo {
+    font-size: 24px;
+  }
+
+  .firmas {
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 3);
+  }
+
+  .firmas > div {
+    flex: 1 1 100%;
+  }
+
+  .btn-descargar {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .qr-section {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Impresión */
+@media print {
+  .constancia-wrapper {
+    background: white;
+    padding: 0;
+  }
+
+  .progreso-info,
+  .btn-descargar {
+    display: none;
+  }
+
+  .constancia-container {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding: 20mm;
+  }
+
+  .constancia-container::before,
+  .constancia-container::after {
+    display: none;
+  }
+}
+
+/* Utilidades */
+.constancia-wrapper .muted {
+  color: var(--text-muted);
+}
+
+/* Animación de entrada */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.constancia-container,
+.progreso-info {
+  animation: slideInUp 0.6s ease;
+}
+
+.progreso-info {
+  animation-delay: 0.1s;
+}
+
+/* Fin - Diseño Moderno Premium */

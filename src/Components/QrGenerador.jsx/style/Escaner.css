@@ -1,0 +1,171 @@
+.qr-container {
+  padding: 2rem;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  background: #f9fafb;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.qr-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.qr-btn {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.qr-btn:hover {
+  background-color: #2563eb;
+}
+
+.qr-reader {
+  width: 100%;
+  min-height: 260px;
+  border: 2px dashed #9ca3af;
+  border-radius: 0.5rem;
+  margin: auto;
+}
+
+.qr-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.qr-check {
+  font-size: 3rem;
+  color: #10b981;
+  animation: bounce 1s infinite;
+}
+
+.qr-success-text {
+  color: #059669;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.qr-message {
+  margin-top: 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.qr-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+  border: 2px solid #2d6a4f;
+}
+
+.qr-intro {
+  margin-bottom: 1.5rem;
+}
+
+.qr-title {
+  font-size: 1.8rem;
+  color: #5eb319;
+  margin-bottom: 0.5rem;
+}
+
+.qr-description {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.qr-note {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.qr-btn {
+  background-color: #5eb319;
+  color: white;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.qr-btn:hover {
+  background-color: #1e5239;
+}
+
+.qr-reader {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.qr-success {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #e9fbee;
+  color: #2d6a4f;
+}
+
+.qr-check {
+  font-size: 3rem;
+}
+
+.qr-success-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.qr-message {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.text-green-600 {
+  color: #2d6a4f;
+}
+
+.text-red-600 {
+  color: #e63946;
+}
+
+.text-black {
+  color: #333;
+}

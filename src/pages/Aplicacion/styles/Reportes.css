@@ -1,0 +1,56 @@
+/* ------------------------------------------------------------------ */
+/* Reportes.css (coloca este archivo junto al TSX)                   */
+/* ------------------------------------------------------------------ */
+
+/* Copia esto a: src/styles/Reportes.css o en la carpeta de estilos */
+
+/* estilos generales */
+
+.reportes-contenedor {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+  margin-top: 18px;
+}
+
+.reportes-encabezado h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #064e3b;
+}
+
+.sub { color: #6b7280; margin-top: 6px; }
+
+.kpis-grid { display: flex; gap: 12px; margin-top: 12px; }
+.kpi-card {
+  flex: 1;
+  background: linear-gradient(180deg,#ecfeff 0%, #f0fdf4 100%);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+.kpi-title { font-size: 0.85rem; color: #065f46; }
+.kpi-value { font-size: 1.6rem; font-weight: 700; color: #064e3b; margin-top: 6px; }
+
+.grids { display: grid; grid-template-columns: 1fr 360px; gap: 12px; margin-top: 14px; }
+.grafico.tarjeta { padding: 12px; border-radius: 10px; background: #fff; box-shadow: 0 2px 8px rgba(2,6,23,0.04); }
+
+.tarjeta { padding: 12px; border-radius: 10px; background: #fff; box-shadow: 0 2px 8px rgba(2,6,23,0.04); }
+
+.lista-destacados ol { padding-left: 18px; margin: 6px 0; }
+.lista-destacados li { margin-bottom: 6px; }
+.muted { color: #6b7280; font-size: 0.9rem; }
+
+.tabla-resumen { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.tabla-resumen th, .tabla-resumen td { padding: 8px 6px; border-bottom: 1px solid #eef2f7; text-align: left; }
+.tabla-resumen th { font-weight: 700; color: #0f172a; }
+.evt-name { max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.nota { margin-top: 10px; color: #6b7280; }
+
+/* adaptativo */
+@media (max-width: 980px) {
+  .grids { grid-template-columns: 1fr; }
+  .kpis-grid { flex-direction: column; }
+}

@@ -1,0 +1,122 @@
+/* usuariosCargados.css */
+
+/* Variables de color */
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --primary: #5dad27;
+  --secondary: #6b7280;
+  --text: #111827;
+  --border: #d1d5db;
+  --hover: #eef2ff;
+  --error: #ef4444;
+  --success: #10b981;
+}
+
+.uc-contenedor {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  min-height: 100vh;
+}
+
+.uc-header h2 {
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.uc-intro {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.uc-contador {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.uc-loading,
+.uc-error,
+.uc-no-data {
+  color: var(--secondary);
+  margin-top: 1rem;
+}
+
+.uc-error {
+  color: var(--error);
+}
+
+.uc-busqueda {
+  margin-bottom: 1rem;
+}
+
+.uc-busqueda input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.uc-busqueda input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.uc-tabla-wrapper {
+  overflow-x: auto;
+  background-color: var(--card);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 1rem;
+}
+
+.uc-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.uc-tabla th,
+.uc-tabla td {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.uc-tabla th {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.uc-tabla tbody tr:hover {
+  background-color: var(--hover);
+  transition: background-color 0.2s;
+}
+
+.uc-tabla td img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 0.25rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .uc-contador {
+    flex-direction: column;
+  }
+
+  .uc-tabla {
+    min-width: 100%;
+  }
+}

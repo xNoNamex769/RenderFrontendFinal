@@ -1,0 +1,229 @@
+/* Variables de colores */
+:root {
+  --bg-color: #f7f9fc;
+  --card-color: #ffffff;
+  --primary-color: #39d62b;
+  --success-color: #16a34a;
+  --danger-color: #dc2626;
+  --text-color: #1f2937;
+  --border-color: #e5e7eb;
+  --hover-color: #f71e0f;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --radius: 8px;
+}
+
+/* Contenedor principal */
+.subir-aprendices-contenedor {
+  max-width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: 'Segoe UI', sans-serif;
+
+  
+}
+
+/* Títulos */
+.subir-aprendices-contenedor h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+color: black;
+}
+
+/* Inputs */
+.subir-aprendices-input-file,
+.subir-aprendices-input-text {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.subir-aprendices-input-file:hover,
+.subir-aprendices-input-text:hover,
+.subir-aprendices-input-file:focus,
+.subir-aprendices-input-text:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Botones */
+.subir-aprendices-btn,
+.subir-aprendices-btn-cancel,
+.subir-aprendices-btn-confirm {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.subir-aprendices-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.subir-aprendices-btn:disabled {
+  background-color: #a5fcbf;
+  cursor: not-allowed;
+}
+
+.subir-aprendices-btn:hover:not(:disabled) {
+  background-color: var(--hover-color);
+  transform: translateY(-1px);
+}
+
+.subir-aprendices-btn-cancel {
+  background-color: #e5e7eb;
+  color: var(--text-color);
+}
+
+.subir-aprendices-btn-cancel:hover {
+  background-color: #d1d5db;
+}
+
+.subir-aprendices-btn-confirm {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.subir-aprendices-btn-confirm:hover {
+  background-color: var(--hover-color);
+}
+
+/* Mensajes */
+.subir-aprendices-mensaje-exito {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.subir-aprendices-mensaje-error {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+/* Modal */
+.subir-aprendices-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(31, 41, 55, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.subir-aprendices-modal {
+  background-color: var(--card-color);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  max-width: 600px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  animation: slideDown 0.25s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.subir-aprendices-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.subir-aprendices-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.subir-aprendices-modal-body p {
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.subir-aprendices-text-danger {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.subir-aprendices-text-success {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.subir-aprendices-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Tablas */
+.subir-aprendices-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.subir-aprendices-tabla th,
+.subir-aprendices-tabla td {
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+}
+
+.subir-aprendices-tabla th {
+  background-color: var(--bg-color);
+  font-weight: 600;
+}
+
+.subir-aprendices-tabla tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.subir-aprendices-tabla tbody tr:hover {
+  background-color: #eef2ff;
+}
+
+/* Progreso */
+.subir-aprendices-progreso {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Vista previa */
+.subir-aprendices-preview {
+  background-color: #f3f4f6;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .subir-aprendices-contenedor {
+    padding: 1rem;
+  }
+  .subir-aprendices-modal {
+    width: 95%;
+  }
+  .subir-aprendices-tabla th,
+  .subir-aprendices-tabla td {
+    font-size: 0.85rem;
+  }
+}

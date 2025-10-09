@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --sena-verde: #5eb319;
+  --sena-naranja: #f97316;
+  --sena-azul: #1d4ed8;
+  --gris-claro: #f3f4f6;
+  --gris-oscuro: #374151;
+  --borde: #e5e7eb;
+  --fondo: #ffffff;
+  --negro: #111827;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--gris-claro);
+  color: var(--negro);
+  line-height: 1.5;
+}
+
+.evento-app-body {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.evento-app-contenedor-principal {
+  width: 100%;
+  max-width: 100%;
+  background-color: var(--fondo);
+  border-radius: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.evento-app-cabecera {
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.evento-app-titulo-seccion {
+  color: black;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.titulo-intro {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.evento-app-seccion-historias {
+  text-align: center;
+  padding: 1rem;
+}
+
+.evento-app-carrusel-historias {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 0.5rem;
+}
+
+.evento-app-historia {
+  flex: 0 0 auto;
+  width: 140px;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: var(--fondo);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+.evento-app-historia:hover {
+  transform: translateY(-4px);
+}
+
+.evento-app-historia p {
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.evento-app-seccion-botones-accion {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.evento-app-boton-accion {
+  background-color: var(--sena-verde);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.evento-app-boton-accion:hover {
+  background-color: var(--sena-naranja);
+  transform: scale(1.05);
+}
+
+
+.evento-app-lista-eventos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+
+.evento-app-tarjeta-evento {
+  background: white;
+  border: 1px solid var(--borde);
+  border-radius: 1rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.evento-app-tarjeta-evento:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.evento-app-cabecera-evento {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.evento-app-foto-usuario {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 3px solid var(--sena-verde);
+}
+
+.evento-app-info-usuario {
+  font-size: 0.95rem;
+}
+
+.evento-app-nombre-usuario {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--negro);
+}
+
+.evento-app-fecha-evento {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.evento-app-contenido-evento {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #374151;
+}
+
+.evento-app-acciones-evento {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+
+.evento-app-boton-me-gusta,
+.evento-app-boton-disgusto,
+.evento-app-boton-comentar {
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.evento-app-boton-me-gusta {
+  background-color: #5eb319;
+  color: white;
+  font-weight: bold;
+}
+.evento-app-boton-me-gusta:hover {
+  /*background-color: #b2f2e6;*/
+  transform: scale(1.05);
+}
+
+.evento-app-boton-disgusto {
+  background-color: #c9302c;
+  color: white;
+  font-weight: bold;
+}
+.evento-app-boton-disgusto:hover {
+  /*background-color: #fca5a5;*/
+  transform: scale(1.05);
+}
+
+.evento-app-boton-comentar {
+  background-color: var(--sena-azul);
+  color: white;
+}
+.evento-app-boton-comentar:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.evento-app-boton-me-gusta.activo,
+.evento-app-boton-disgusto.activo {
+  font-weight: bold;
+  border: 2px solid currentColor;
+}
+
+
+.evento-app-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*backdrop-filter: blur(10px);*/
+  background: rgba(14, 13, 13, 0.75);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  padding: 2rem 1rem; 
+  overflow-y: auto;
+}
+
+.evento-app-modal-contenido {
+  background-color:white;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  color: black;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  position: relative;
+  margin: auto; 
+  overflow: visible;
+}
+
+.evento-app-modal-cerrar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.evento-app-modal-cerrar:hover {
+  transform: scale(1.2);
+  color: black;
+}
+
+.evento-app-modal-titulo {
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+  color: black;
+  font-weight: 600;
+}
+
+.evento-app-modal-banner img {
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.evento-app-modal-detalles p,
+.evento-app-modal-descripcion p,
+.evento-app-modal-organizador p {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: black;
+}
+
+.evento-app-modal-organizador h4,
+.evento-app-modal-reacciones h4 {
+  margin-top: 1.5rem;
+  color: black;
+  font-weight: 500;
+}
+
+.evento-app-modal-reacciones ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.evento-app-modal-reacciones li {
+  padding: 2px 0;
+  color: black;
+}
+
+.evento-app-modal-feedbacks {
+  margin-top: 1.5rem;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #333;
+}
+
+.estado-reaccion {
+  margin-top: 6px;
+  font-weight: 500;
+  color: #2e7d32;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.estado-reaccion span {
+  background-color: #e0f2f1;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: inline-block;
+  color: #004d40;
+  font-size: 13.5px;
+}
+
+.estado-feedback {
+  margin-top: 8px;
+  background-color: #f3f4f6;
+  padding: 8px 12px;
+  border-left: 4px solid #00796b;
+  border-radius: 8px;
+  color: #333;
+  font-size: 13.5px;
+  font-style: italic;
+}
+
+.estado-feedback p {
+  margin: 4px 0;
+}
+
+.color-eventoa {
+  color: black;
+}

@@ -69,7 +69,7 @@ const CatalogoDisponible = () => {
               &times;
             </span>
             <img
-              src={`https://render-hhyo.onrender.com/qrcode/${qrActivo.IdElemento}.png`}
+              src={`https://render-hhyo.onrender.com/qrcodes/${qrActivo.IdElemento}.png`}
               alt={`QR de ${qrActivo.Nombre}`}
               className="qr-grande"
             />

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { FaBell, FaBars } from "react-icons/fa";
 import avatar from "../img/avatar.png";
 import "./GlassIcons/style/Notificaciones.css";
+import "./styles/NavbarFix.css";
 import { io } from "socket.io-client";
 import Rotar from "../RotatingText/Rotar";
 import {

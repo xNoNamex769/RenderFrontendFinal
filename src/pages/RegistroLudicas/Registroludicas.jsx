@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { QRCodeCanvas } from "qrcode.react";
-import "./style/RegistroLudicas.css";
-import cuadradoImg from "../RegistroActividades/img/cuadrado.jpg";
+import Swal from "sweetalert2";
+
+import "./style/RegistroLudicasMejorado.css";
 
 const RegistroLudica = () => {
   const [form, setForm] = useState({
@@ -17,7 +18,7 @@ const RegistroLudica = () => {
   });
 
   const [imagen, setImagen] = useState(null);
-  const [preview, setPreview] = useState(cuadradoImg);
+  const [preview, setPreview] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [actividadCreada, setActividadCreada] = useState(null);
 
@@ -41,7 +42,12 @@ const RegistroLudica = () => {
     e.preventDefault();
 
     if (form.HoraInicio >= form.HoraFin) {
-      alert("La hora de inicio debe ser menor que la de fin.");
+      Swal.fire({
+        icon: "error",
+        title: "Error en horario",
+        text: "La hora de inicio debe ser menor que la de fin.",
+        confirmButtonColor: "#5eb319",
+      });
       return;
     }
 
@@ -52,7 +58,15 @@ const RegistroLudica = () => {
     setShowModal(false);
 
     const token = localStorage.getItem("token");
-    if (!token) return alert("Debes iniciar sesión");
+    if (!token) {
+      Swal.fire({
+        icon: "warning",
+        title: "Sesión requerida",
+        text: "Debes iniciar sesión para continuar",
+        confirmButtonColor: "#5eb319",
+      });
+      return;
+    }
 
     const decoded = JSON.parse(atob(token.split(".")[1]));
     const IdUsuario = decoded?.IdUsuario;
@@ -79,138 +93,158 @@ const RegistroLudica = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      alert("✅ Lúdica registrada con éxito");
+      Swal.fire({
+        icon: "success",
+        title: "¡Éxito!",
+        text: "Lúdica registrada con éxito",
+        confirmButtonColor: "#5eb319",
+        timer: 3000,
+        showConfirmButton: true,
+      });
       setActividadCreada(response.data.actividad);
     } catch (error) {
       console.error("❌ Error al registrar lúdica:", error);
-      alert("Hubo un error al registrar la lúdica.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un error al registrar la lúdica. Por favor intenta nuevamente.",
+        confirmButtonColor: "#5eb319",
+      });
     }
   };
 
  return (
-  <div className="registro-container">
-    <h2 className="registro-titulo">Registrar Lúdica</h2>
-    <div className="image-container">
-  <img
-    src={cuadradoImg}
-    alt="Decoración de registro"
-    className="preview-image"
-  />
-</div>
+  <div className="reglud-wrapper">
+    <div className="reglud-container">
+      <h2 className="reglud-titulo">Registrar Lúdica</h2>
 
+      {preview && (
+        <div className="reglud-preview-top">
+          <img
+            src={preview}
+            alt="Vista previa de la lúdica"
+            className="reglud-preview-img"
+          />
+        </div>
+      )}
 
-    <form className="registro-form" onSubmit={handleSubmit}>
-      <div className="registro-grid">
-        <label className="registro-label">
-          Nombre *
+      <form className="reglud-form" onSubmit={handleSubmit}>
+        <div className="reglud-grid">
+          <label className="reglud-label">
+            📝 Nombre de la Lúdica *
+            <input
+              className="reglud-input"
+              type="text"
+              name="NombreActi"
+              value={form.NombreActi}
+              onChange={handleChange}
+              placeholder="Ej: Torneo de Ajedrez"
+              required
+            />
+          </label>
+
+          <label className="reglud-label">
+            📅 Fecha *
+            <input
+              className="reglud-input"
+              type="date"
+              name="Fecha"
+              value={form.Fecha}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+          <label className="reglud-label">
+            🕒 Hora de inicio *
+            <input
+              className="reglud-input"
+              type="time"
+              name="HoraInicio"
+              value={form.HoraInicio}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+          <label className="reglud-label">
+            ⏰ Hora de fin *
+            <input
+              className="reglud-input"
+              type="time"
+              name="HoraFin"
+              value={form.HoraFin}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+          <label className="reglud-label">
+            🎯 Tipo de lúdica *
+            <select
+              className="reglud-select"
+              name="TipoLudica"
+              value={form.TipoLudica}
+              onChange={handleChange}
+            >
+              <option value="Recreativa">Recreativa</option>
+              <option value="Cultural">Cultural</option>
+              <option value="Deportiva">Deportiva</option>
+            </select>
+          </label>
+
+          <label className="reglud-label">
+            📍 Ubicación *
+            <input
+              className="reglud-input"
+              type="text"
+              name="Ubicacion"
+              value={form.Ubicacion}
+              onChange={handleChange}
+              placeholder="Ej: Salón 201"
+              required
+            />
+          </label>
+
+          <label className="reglud-label" style={{ gridColumn: "1 / -1" }}>
+            📄 Descripción *
+            <textarea
+              className="reglud-textarea"
+              name="Descripcion"
+              value={form.Descripcion}
+              onChange={handleChange}
+              placeholder="Describe la actividad lúdica..."
+              rows="3"
+              required
+            />
+          </label>
+        </div>
+
+        <div className="reglud-checkbox">
           <input
-            className="registro-input"
-            type="text"
-            name="NombreActi"
-            value={form.NombreActi}
+            type="checkbox"
+            name="HorarioContinuo"
+            checked={form.HorarioContinuo}
             onChange={handleChange}
-            required
           />
-        </label>
+          <span>🔄 Esta actividad se repite todos los días en el mismo horario</span>
+        </div>
 
-        <label className="registro-label">
-          Fecha *
-          <input
-            className="registro-input"
-            type="date"
-            name="Fecha"
-            value={form.Fecha}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <div className="reglud-file-input">
+          <input type="file" name="Imagen" accept="image/*" onChange={handleImageChange} />
+        </div>
 
-        <label className="registro-label" style={{ gridColumn: "1 / 3" }}>
-          Descripción *
-          <textarea
-            className="registro-input"
-            name="Descripcion"
-            value={form.Descripcion}
-            onChange={handleChange}
-            rows="3"
-            required
-          />
-        </label>
-
-        <label className="registro-label">
-          Hora de inicio *
-          <input
-            className="registro-input"
-            type="time"
-            name="HoraInicio"
-            value={form.HoraInicio}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label className="registro-label">
-          Hora de fin *
-          <input
-            className="registro-input"
-            type="time"
-            name="HoraFin"
-            value={form.HoraFin}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label className="registro-label">
-          Tipo de lúdica *
-          <select
-            className="registro-select"
-            name="TipoLudica"
-            value={form.TipoLudica}
-            onChange={handleChange}
-          >
-            <option value="Recreativa">Recreativa</option>
-            <option value="Cultural">Cultural</option>
-            <option value="Deportiva">Deportiva</option>
-          </select>
-        </label>
-
-        <label className="registro-label">
-          Ubicación *
-          <input
-            className="registro-input"
-            type="text"
-            name="Ubicacion"
-            value={form.Ubicacion}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-
-      <div className="registro-checkbox-unico">
-        <input
-          type="checkbox"
-          name="HorarioContinuo"
-          checked={form.HorarioContinuo}
-          onChange={handleChange}
-        />
-        <span>¿Es un horario continuo?</span>
-      </div>
-
-      <div className="registro-input-archivo">
-  <input type="file" name="Imagen" accept="image/*" onChange={handleImageChange} />
-</div>
-
-
-      <button type="submit" className="btn-registrar">Registrar Lúdica</button>
-    </form>
+        <button type="submit" className="reglud-btn-submit">
+          🎉 Registrar Lúdica
+        </button>
+      </form>
+    </div>
 
     {/* Modal */}
     {showModal && (
-      <div className="modal-overlay">
-        <div className="modal-content">
-          <h3>Confirma los datos</h3>
+      <div className="reglud-modal-overlay">
+        <div className="reglud-modal-content">
+          <h3>✅ Confirma los datos</h3>
           <p><strong>Nombre:</strong> {form.NombreActi}</p>
           <p><strong>Descripción:</strong> {form.Descripcion}</p>
           <p><strong>Fecha:</strong> {form.Fecha}</p>
@@ -218,9 +252,9 @@ const RegistroLudica = () => {
           <p><strong>Ubicación:</strong> {form.Ubicacion}</p>
           <p><strong>Tipo:</strong> {form.TipoLudica}</p>
           <p><strong>Horario continuo:</strong> {form.HorarioContinuo ? "Sí" : "No"}</p>
-          <div className="modal-buttons">
-            <button onClick={handleConfirm}>Aceptar</button>
-            <button onClick={() => setShowModal(false)}>Cancelar</button>
+          <div className="reglud-modal-buttons">
+            <button onClick={handleConfirm}>✅ Aceptar</button>
+            <button onClick={() => setShowModal(false)}>❌ Cancelar</button>
           </div>
         </div>
       </div>

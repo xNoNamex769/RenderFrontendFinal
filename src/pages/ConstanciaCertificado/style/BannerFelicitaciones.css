@@ -1,0 +1,394 @@
+/* ===== Estilos generales del contenedor ===== */
+.csena-wrapper {
+  background: #f5f7f6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #111;
+}
+
+/* ===== Contenedor principal de la constancia ===== */
+.csena-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 900px;
+  padding: 3rem;
+  text-align: center;
+  border: 3px solid #5bc731;;
+}
+
+/* ===== Banner de felicitaciones ===== */
+.csena-banner {
+  background: linear-gradient(135deg, #5bc731 0%, #5bc731 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(62, 163, 22, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.csena-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.csena-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.csena-banner-icon-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1rem;
+}
+
+.csena-banner-trophy {
+  font-size: 3.5rem;
+  color: #ffd700;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  animation: trophy-bounce 2s ease-in-out infinite;
+}
+
+@keyframes trophy-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.csena-banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+.csena-banner-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.csena-banner-subtitle {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+.csena-banner-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.csena-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.csena-stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.csena-stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.csena-stat-divider {
+  font-size: 2rem;
+  font-weight: 300;
+  opacity: 0.6;
+}
+
+.csena-stat-total {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.csena-check-icon {
+  font-size: 1.2rem;
+  color: #ffd700;
+}
+
+/* ===== Encabezado principal ===== */
+.csena-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.csena-header-icon {
+  color: #5bc731;;
+  margin-bottom: 0.5rem;
+}
+
+.csena-titulo {
+  font-size: 1.8rem;
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.csena-titulo-decoracion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.csena-decor-line {
+  flex: 1;
+  height: 2px;
+  background: #5bc731;;
+}
+
+.csena-decor-icon {
+  color: #5bc731;;
+}
+
+/* ===== Info del aprendiz ===== */
+.csena-info-aprendiz {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.csena-info-item {
+  margin: 0.5rem;
+  text-align: left;
+}
+
+.csena-info-label {
+  font-weight: 600;
+  color: #0e0d0d;
+  display: block;
+}
+
+.csena-info-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ===== Texto principal ===== */
+.csena-texto-principal {
+  margin: 2rem 0;
+}
+
+.csena-texto {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.csena-horas {
+  color: #5bc731;;
+  font-weight: 700;
+}
+
+/* ===== Detalles de formación ===== */
+.csena-detalles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.csena-detalle-card {
+  background: #f8f9f8;
+  border: 1px solid #dbe3dc;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.csena-detalle-card:hover {
+  transform: scale(1.03);
+}
+
+.csena-detalle-icon {
+  font-size: 1.8rem;
+}
+
+.csena-detalle-content {
+  text-align: left;
+}
+
+.csena-detalle-label {
+  font-weight: 600;
+  color:#191a19;;
+}
+
+.csena-detalle-value {
+  display: block;
+  font-size: 1rem;
+}
+
+/* ===== Información de emisión ===== */
+.csena-emision {
+  border-top: 2px solid #1a713c;
+  padding-top: 1.5rem;
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.csena-emision-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.5rem 0;
+}
+
+.csena-emision-icon {
+  color: #5bc731;
+  font-size: 1.5rem;
+}
+
+.csena-emision-label {
+  display: block;
+  font-weight: 600;
+  color: #111;
+}
+
+.csena-emision-value {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* ===== Firmas ===== */
+.csena-firmas {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.csena-subrayado {
+  border-bottom: 1px solid #111;
+  margin-bottom: 0.3rem;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.csena-firma-nombre {
+  color: #21711a;
+  font-weight: 600;
+}
+
+/* ===== Botón de descarga ===== */
+.csena-btn {
+  background: #5bc731;;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.csena-btn:hover {
+  background: #155e32;
+}
+
+/* ===== Estado no cumplido ===== */
+.csena-no-cumplido {
+  background: #fff;
+  border-radius: 16px;
+  padding: 3rem;
+  max-width: 650px;
+  text-align: center;
+  border: 2px dashed #1a713c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.csena-no-icon {
+  color: #1a713c;
+  margin-bottom: 1rem;
+}
+
+.csena-no-cumplido h2 {
+  font-size: 1.6rem;
+  color: #111;
+}
+
+.csena-barra {
+  width: 100%;
+  background: #eaeaea;
+  height: 18px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.csena-barra-fill {
+  background: #1a713c;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+  line-height: 18px;
+  transition: width 0.6s ease-in-out;
+}
+
+/* ===== Texto de carga ===== */
+.csena-cargando {
+  color: #19cf19;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem;
+}

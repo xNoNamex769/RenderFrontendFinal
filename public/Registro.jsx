@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaTimes, FaCheckCircle } from 'react-icons/fa';
 import api from '../src/services/api';
 import './styles/registro.css';
 
@@ -162,7 +163,7 @@ const Registro = () => {
 
     const hayErrores = Object.keys(valid).length > 0;
     if (hayErrores) {
-      setMensaje('❌ Corrige los errores e intenta nuevamente.');
+      setMensaje(<><FaTimes /> Corrige los errores e intenta nuevamente.</>);
       setTipoMensaje('error');
       setCargando(false);
       return;
@@ -181,14 +182,14 @@ const Registro = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      setMensaje('✅ Registro exitoso.');
+      setMensaje(<><FaCheckCircle /> Registro exitoso.</>);
       setTipoMensaje('exito');
 
       // pequeña pausa UX antes de navegar (opcional)
       setTimeout(() => navigate('/Cuenta'), 900);
     } catch (err) {
-      console.error('❌ Error al registrar:', err);
-      setMensaje('❌ Error al registrar. Intenta más tarde.');
+      console.error('Error al registrar:', err);
+      setMensaje(<><FaTimes /> Error al registrar. Intenta más tarde.</>);
       setTipoMensaje('error');
     } finally {
       setCargando(false);

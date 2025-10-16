@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import victor from "./img/avatar.png"
 import caminata from "./img/caminata.jpg";
 import fulbol from "./img/fulbol.webp";

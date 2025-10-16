@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { FaFileAlt, FaCheckCircle, FaTimes } from "react-icons/fa";
 import "../style/AdminConstancias.css";
 
 const AdminConstancias = () => {
@@ -72,7 +73,7 @@ const AdminConstancias = () => {
 
   return (
     <div className="admin-constancias">
-      <h2>📄 Constancias Generadas</h2>
+      <h2><FaFileAlt /> Constancias Generadas</h2>
       {constancias.length === 0 ? (
         <p>No hay constancias generadas.</p>
       ) : (
@@ -97,19 +98,19 @@ const AdminConstancias = () => {
         <td>
           {c.tieneDeuda
             ? " Tiene préstamos pendientes. No puede aprobar."
-            : "✅ Ninguna"}
+            : <><FaCheckCircle /> Ninguna</>}
         </td>
         <td>
           {c.ConstanciaEstado === "Pendiente" && !c.tieneDeuda ? (
             <button onClick={() => aprobarConstancia(c.ConstanciaId)}>
-              ✅ Aprobar
+              <FaCheckCircle /> Aprobar
             </button>
           ) : c.ConstanciaEstado === "Pendiente" && c.tieneDeuda ? (
             <button disabled title="El aprendiz tiene préstamos pendientes">
-              ❌ No puede aprobar
+              <FaTimes /> No puede aprobar
             </button>
           ) : (
-            "✔️ Aprobada"
+            <><FaCheckCircle /> Aprobada</>
           )}
         </td>
       </tr>

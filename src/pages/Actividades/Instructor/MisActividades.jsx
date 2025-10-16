@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import "../styles/MisActividades.css";
 
 export default function MisActividades() {
@@ -24,7 +25,15 @@ export default function MisActividades() {
 
 setActividades(actividadesUsuario);
         })
-        .catch((err) => console.error("❌ Error actividades:", err));
+        .catch((err) => {
+          console.error("❌ Error actividades:", err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se pudieron cargar las actividades",
+            confirmButtonColor: "#5eb319",
+          });
+        });
     }
   }, []);
 
@@ -44,6 +53,12 @@ setActividades(actividadesUsuario);
       setAsistencias((prev) => ({ ...prev, [idActividad]: res.data }));
     } catch (err) {
       console.error("❌ Error obteniendo asistencia:", err);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo cargar la asistencia",
+        confirmButtonColor: "#5eb319",
+      });
     }
   };
 

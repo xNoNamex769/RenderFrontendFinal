@@ -55,15 +55,26 @@ body, html {
 
 .cal-notifications-btn {
   position: relative;
-  font-size: 1.8rem;
-  background: none;
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
   border: none;
   cursor: pointer;
-  transition: transform 0.2s;
+  padding: 0.7rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(94, 179, 25, 0.3);
 }
 
 .cal-notifications-btn:hover {
   transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(94, 179, 25, 0.4);
+}
+
+.cal-bell-icon {
+  color: white;
+  font-size: 1.3rem;
 }
 
 .cal-notification-badge {
@@ -241,83 +252,240 @@ body, html {
 .cal-modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0,0,0,0.65);
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .cal-event-modal-container {
-  background-color: var(--card-bg);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   width: 95%;
-  max-width: 700px;
+  max-width: 650px;
   max-height: 90vh;
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  box-shadow: var(--shadow);
-  overflow-y: auto;
+  border-radius: 20px;
+  padding: 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
   position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .cal-modal-close {
   position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 2rem;
-  color: var(--muted-text);
-  background: none;
-  border: none;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.cal-modal-close:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+  transform: rotate(90deg);
+}
+
+.cal-modal-badge {
+  padding: 1.5rem 2rem 0.5rem;
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+}
+
+.cal-tipo-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .cal-event-modal-title {
-  margin-top: 0;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--primary-color);
+  margin: 0;
+  padding: 0.5rem 2rem 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .cal-event-modal-content {
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 200px);
 }
 
 .cal-event-modal-image {
   width: 100%;
-  max-height: 300px;
-  border-radius: var(--border-radius);
+  height: 250px;
+  border-radius: 12px;
   object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Detalles del evento */
+.cal-event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cal-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border-left: 4px solid #5eb319;
+  transition: all 0.3s ease;
+}
+
+.cal-detail-item:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.cal-detail-icon {
+  color: #5eb319;
+  font-size: 1.3rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.cal-detail-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.3rem;
+}
+
+.cal-detail-value {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.cal-description-section {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: #f0f9ff;
+  border-radius: 12px;
+  border: 2px solid #bae6fd;
+}
+
+.cal-description-section h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0c4a6e;
+}
+
+.cal-description-section p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151;
 }
 
 /* Botones confirmación/feedback */
+.cal-event-participation {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
 .cal-btn-confirmar,
 .cal-btn-feedback {
+  flex: 1;
   cursor: pointer;
   border: none;
-  padding: 0.7rem 1.4rem;
-  border-radius: var(--border-radius);
-  font-weight: 600;
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 700;
   font-size: 1rem;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 180px;
 }
 
 .cal-btn-confirmar {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
   color: white;
+  box-shadow: 0 4px 12px rgba(94, 179, 25, 0.3);
 }
 
 .cal-btn-feedback {
-  background-color: var(--secondary-color);
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-.cal-btn-confirmar:hover,
+.cal-btn-confirmar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(94, 179, 25, 0.4);
+}
+
 .cal-btn-feedback:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.cal-asistencia-confirmada {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  min-width: 180px;
 }
 
 /* Inputs en modal */

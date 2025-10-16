@@ -1,170 +1,72 @@
-/* Estilos específicos para el componente de Registro */
+/* ===================================
+   REGISTRO - DISEÑO LIMPIO Y MODERNO
+   =================================== */
+
+:root {
+  --reg-bg-main: #f0f4f8;
+  --reg-card-bg: #ffffff;
+  --reg-primary: #5eb319;
+  --reg-primary-dark: #3a7d13;
+  --reg-secondary: #2c3e50;
+  --reg-danger: #e74c3c;
+  --reg-border: #dfe6e9;
+  --reg-text: #2c3e50;
+  --reg-text-light: #636e72;
+  --reg-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --reg-shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+  --reg-shadow-lg: 0 12px 40px rgba(0,0,0,0.15);
+  --reg-radius: 12px;
+  --reg-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Contenedor Principal */
+.contenedor-registro {
+  max-width: 950px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: var(--reg-card-bg);
+  border-radius: var(--reg-radius);
+  box-shadow: var(--reg-shadow-lg);
+  animation: reg-fadeInUp 0.6s ease-out;
+}
+
+@keyframes reg-fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título */
+.tituloUnico.registro-activsena {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, var(--reg-primary) 0%, var(--reg-primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+/* Formulario */
 .formulario-registro {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-.grupo-campo-registro {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.etiqueta-registro {
-  color: #374151;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.etiqueta-registro-desktop {
-  font-size: 1rem;
-}
-
-.asterisco-obligatorio-registro {
-  color: #ef4444;
-  margin-left: 0.25rem;
-}
-
-.contenedor-input-registro {
-  position: relative;
-}
-
-.icono-input-registro {
-  position: absolute;
-  left: 0.75rem;
-  top: 1px;
-  height: 1rem;
-  width: 1rem;
-  color: #9ca3af;
-  fill: currentColor;
-}
-
-.campo-input-registro {
-  width: 100%;
-  height: 3rem;
-  padding-left: 2.5rem;
-  padding-right: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background-color: white;
-  box-sizing: border-box;
-}
-
-.campo-input-registro:focus {
-  outline: none;
-  border-color: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-}
-
-.campo-input-registro::placeholder {
-  color: #9ca3af;
-}
-
-.campo-input-registro:invalid {
-  border-color: #59595f;
-}
-
-.campo-input-registro:invalid:focus {
-  border-color: #44ef6f;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
+/* Grid de Campos */
 .grilla-campos-registro {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.grilla-campos-registro-desktop {
-  grid-template-columns: 1fr 1fr;
-}
-
-.contenedor-terminos-registro {
-  display: flex;
-  align-items: flex-start;
-  margin-right: 100px;
-}
-
-.checkbox-terminos-registro {
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0.25rem;
-  border-radius: 0.25rem;
-  border: 1px solid #d1d5db;
-  accent-color: #10b981;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.checkbox-terminos-registro:focus {
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-}
-
-.texto-terminos-registro {
-  font-size: 0.75rem;
-  color: #4b5563;
-  line-height: 1.5;
-}
-
-.texto-terminos-registro-desktop {
-  font-size: 0.875rem;
-}
-
-.enlace-terminos-registro {
-  color: #10b981;
-  text-decoration: none;
-  transition: color 0.2s;
-  cursor: pointer;
-}
-
-.enlace-terminos-registro:hover {
-  color: #059669;
-  text-decoration: underline;
-}
-
-.boton-registro {
-  width: 100%;
-  background-color: #10b981;
-  color: white;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.75rem;
-  height: 3rem;
-  border-radius: 0.5rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.boton-registro:hover {
-  background-color: #25e91e;
-}
-
-.boton-registro:active {
-  transform: translateY(1px);
-}
-
-.boton-registro:disabled {
-  background-color: #9ca3af;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.mensaje-error-registro {
-  font-size: 0.75rem;
-  color: #ef4444;
-  margin-top: 0.25rem;
-}
-
-.campo-valido-registro {
-  border-color: #10b981;
-}
-
-.campo-invalido-registro {
-  border-color: #ef4444;
+  gap: 1.25rem;
 }
 
 @media (min-width: 768px) {
@@ -172,136 +74,284 @@
     grid-template-columns: 1fr 1fr;
   }
 }
-:root{
-  --bg: #ffffff;
-  --surface: #f9fafb;
-  --text: #374151;
-  --muted: #6b7280;
-  --success: #48e414;
-  --success-50: rgba(23, 245, 34, 0.08);
-  --danger: #ef4444;
-  --border: #e5e7eb;
-  --input-height: 3rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --spacing: 1rem;
-  --shadow-sm: 0 1px 2px rgba(15, 88, 235, 0.04);
-}
 
-/* Contenedor principal */
-.contenedor-registro {
-  max-width: 900px;
-  margin: 18px auto;
-  padding: 18px;
-  background: var(--surface);
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.04);
-}
-
-/* Título */
-.tituloUnico {
-  margin-bottom: 12px;
-  color: var(--text);
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-/* Formulario */
-.formulario-registro {
+/* Grupo de Campo */
+.grupo-campo-registro {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 8px 4px;
+  gap: 0.5rem;
 }
-
-/* Grid */
-.grilla-campos-registro {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.85rem;
-}
-
-@media(min-width: 768px){
-  .grilla-campos-registro { grid-template-columns: 1fr 1fr; }
-}
-
-/* Grupo campo */
-.grupo-campo-registro { display: flex; flex-direction: column; gap: 0.35rem; }
 
 /* Etiqueta */
-.etiqueta-registro { color: var(--text); font-weight: 600; font-size: 0.95rem; display:flex; align-items:center; gap:6px; }
+.etiqueta-registro {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--reg-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  letter-spacing: 0.3px;
+}
 
-/* Asterisco */
-.asterisco-obligatorio-registro { color: var(--danger); font-weight:700; }
+/* Asterisco Obligatorio */
+.asterisco-obligatorio-registro {
+  color: var(--reg-danger);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
 
 /* Inputs */
 .campo-input-registro,
-select.campo-input-registro,
-input[type="file"] {
-  height: var(--input-height);
-  padding: 0 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 1rem;
-  box-sizing: border-box;
-  transition: border-color .15s ease, box-shadow .15s ease;
-  background: var(--bg);
-}
-
-/* Ajuste para inputs con icono (si los pones) */
-.contenedor-input-registro .campo-input-registro { padding-left: 2.5rem; }
-
-/* Focus visible */
-.campo-input-registro:focus,
-select.campo-input-registro:focus,
-input[type="file"]:focus {
-  outline: none;
-  border-color: var(--success);
-  box-shadow: 0 0 0 4px var(--success-50);
-}
-
-/* Estados válido/inválido */
-.campo-valido-registro { border-color: var(--success); box-shadow: 0 0 0 4px var(--success-50); }
-.campo-invalido-registro { border-color: var(--danger) !important; box-shadow: 0 0 0 4px rgba(239,68,68,0.08) !important; }
-
-/* Checkbox y terminos */
-.contenedor-terminos-registro { display:flex; gap:0.6rem; align-items:flex-start; margin-top: 6px; }
-.checkbox-terminos-registro { width: 1.125rem; height: 1.125rem; border-radius: 4px; border: 1px solid var(--border); accent-color: var(--success); cursor: pointer; }
-.checkbox-terminos-registro:focus { outline: none; box-shadow: 0 0 0 4px var(--success-50); }
-.texto-terminos-registro { font-size: 0.9rem; color: var(--muted); }
-.enlace-terminos-registro { color: var(--success); text-decoration: none; font-weight:600; }
-.enlace-terminos-registro:hover { text-decoration: underline; }
-
-/* Botón */
-.boton-registro {
-  background: linear-gradient(180deg, var(--success), #059605);
-  color: #fff;
-  border: none;
+select.campo-input-registro {
+  width: 100%;
   height: 3.25rem;
-  padding: 0 16px;
-  border-radius: var(--radius-md);
+  padding: 0 1rem;
+  border: 2px solid var(--reg-border);
+  border-radius: var(--reg-radius);
+  font-size: 1rem;
+  color: var(--reg-text);
+  background: var(--reg-card-bg);
+  box-sizing: border-box;
+  transition: var(--reg-transition);
+  font-family: inherit;
+}
+
+.campo-input-registro::placeholder {
+  color: var(--reg-text-light);
+}
+
+.campo-input-registro:focus,
+select.campo-input-registro:focus {
+  outline: none;
+  border-color: var(--reg-primary);
+  box-shadow: 0 0 0 4px rgba(94, 179, 25, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Input File */
+input[type="file"].campo-input-registro,
+input[type="file"] {
+  padding: 0.75rem 1rem;
+  height: auto;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, var(--reg-primary) 0%, var(--reg-primary-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: var(--reg-transition);
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(94, 179, 25, 0.3);
+}
+
+/* Estados de Validación */
+.campo-valido-registro {
+  border-color: var(--reg-primary);
+  box-shadow: 0 0 0 4px rgba(94, 179, 25, 0.1);
+}
+
+.campo-invalido-registro {
+  border-color: var(--reg-danger) !important;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1) !important;
+  animation: reg-shake 0.4s ease;
+}
+
+@keyframes reg-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+/* Mensaje de Error */
+.mensaje-error-registro {
+  font-size: 0.875rem;
+  color: var(--reg-danger);
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.mensaje-error-registro::before {
+  content: "⚠️";
+  font-size: 1rem;
+}
+
+/* Mensaje de Éxito */
+.mensaje-exito {
+  font-size: 1rem;
+  color: var(--reg-primary);
+  font-weight: 700;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-radius: var(--reg-radius);
+  border-left: 4px solid var(--reg-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: reg-slideIn 0.4s ease-out;
+}
+
+.mensaje-exito::before {
+  content: "✅";
+  font-size: 1.5rem;
+}
+
+@keyframes reg-slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Preview de Imagen */
+.preview-imagen {
+  margin-top: 1rem;
+  max-width: 200px;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: var(--reg-radius);
+  border: 3px solid var(--reg-primary);
+  box-shadow: var(--reg-shadow-md);
+  transition: var(--reg-transition);
+}
+
+.preview-imagen:hover {
+  transform: scale(1.05);
+  box-shadow: var(--reg-shadow-lg);
+}
+
+/* Términos y Condiciones */
+.contenedor-terminos-registro {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: var(--reg-radius);
+  border: 2px solid var(--reg-border);
+}
+
+.checkbox-terminos-registro {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 6px;
+  border: 2px solid var(--reg-border);
+  accent-color: var(--reg-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  transition: var(--reg-transition);
+}
+
+.checkbox-terminos-registro:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(94, 179, 25, 0.2);
+}
+
+.checkbox-terminos-registro:checked {
+  transform: scale(1.1);
+}
+
+.texto-terminos-registro {
+  font-size: 0.95rem;
+  color: var(--reg-text);
+  line-height: 1.6;
+}
+
+.enlace-terminos-registro {
+  color: var(--reg-primary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--reg-transition);
+}
+
+.enlace-terminos-registro:hover {
+  color: var(--reg-primary-dark);
+  text-decoration: underline;
+}
+
+/* Botón de Registro */
+.boton-registro {
+  width: 100%;
+  height: 3.5rem;
+  padding: 0 2rem;
+  background: linear-gradient(135deg, var(--reg-primary) 0%, var(--reg-primary-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--reg-radius);
+  font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform .12s ease, box-shadow .12s ease;
-  box-shadow: 0 8px 20px rgba(16,185,129,0.12);
-}
-.boton-registro:disabled { background: #c7d7d1; cursor:not-allowed; box-shadow:none; }
-.boton-registro:hover:not(:disabled){ transform: translateY(-1px); }
-
-/* Mensajes */
-.mensaje-error-registro { color: var(--danger); font-size: 0.85rem; margin-top: 4px; }
-.mensaje-exito { color: var(--success); font-size: 0.95rem; font-weight:600; }
-
-/* Previews de imagen */
-.preview-imagen {
-  margin-top: 6px;
-  max-width: 160px;
-  max-height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  box-shadow: 0 6px 16px rgba(2,6,23,0.04);
+  transition: var(--reg-transition);
+  box-shadow: 0 8px 24px rgba(94, 179, 25, 0.4);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
 }
 
-/* Utilities */
-.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
+.boton-registro::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.boton-registro:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.boton-registro:hover:not(:disabled) {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(94, 179, 25, 0.5);
+}
+
+.boton-registro:active:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.boton-registro:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contenedor-registro {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .tituloUnico.registro-activsena {
+    font-size: 1.75rem;
+  }
+
+  .grilla-campos-registro {
+    grid-template-columns: 1fr;
+  }
+}

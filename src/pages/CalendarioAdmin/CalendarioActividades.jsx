@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style/Calendario.css';
 import fondo4 from './img/fondo4.jpg';
-import { FaBell } from 'react-icons/fa';
+import { FaBell, FaCalendarAlt, FaMapMarkerAlt, FaClock, FaEnvelope, FaUser, FaCheckCircle, FaComments, FaTimes } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
@@ -81,7 +81,7 @@ const [resActividades, resEventos] = await Promise.all([
             image: evento.Imagen?.startsWith("http")
               ? evento.Imagen
               : evento.Imagen
-              ? `http://localhost:3001/uploads/${evento.Imagen}`
+              ? `https://render-hhyo.onrender.com/uploads/${evento.Imagen}`
               : fondo4,
             applicant: usuario ? usuario.NombreCompleto : 'Desconocido',
             location: evento.UbicacionEvento,
@@ -260,7 +260,7 @@ const [resActividades, resEventos] = await Promise.all([
 
           {/* Botón de notificaciones */}
           <button className={`cal-notifications-btn ${showNotifications ? 'cal-active' : ''}`} onClick={toggleNotifications}>
-            <i className="cal-bell-icon">📅</i>
+            <FaBell className="cal-bell-icon" />
             <span className="cal-notification-badge">{events.length}</span>
           </button>
 
@@ -315,38 +315,89 @@ const [resActividades, resEventos] = await Promise.all([
 
       {/* Modal informativo */}
       {showInfoModal && selectedEvent && (
-        <div className="cal-modal-overlay">
-          <div className="cal-event-modal-container">
-            <button className="cal-modal-close" onClick={() => setShowInfoModal(false)}>&times;</button>
+        <div className="cal-modal-overlay" onClick={() => setShowInfoModal(false)}>
+          <div className="cal-event-modal-container" onClick={(e) => e.stopPropagation()}>
+            <button className="cal-modal-close" onClick={() => setShowInfoModal(false)}>
+              <FaTimes />
+            </button>
+            
+            {/* Badge de tipo */}
+            <div className="cal-modal-badge">
+              <span className={`cal-tipo-badge ${selectedEvent.tipo}`}>
+                {selectedEvent.tipo === "actividad" ? "Actividad Lúdica" : "Evento SENA"}
+              </span>
+            </div>
+
             <h2 className="cal-event-modal-title">{selectedEvent.title}</h2>
+            
             <div className="cal-event-modal-content">
               <img src={selectedEvent.image} alt={selectedEvent.title} className="cal-event-modal-image" />
+              
               <div className="cal-event-details">
-                <p><strong>Tipo:</strong> {selectedEvent.tipo === "actividad" ? "Actividad" : "Evento"}</p>
+                <div className="cal-detail-item">
+                  <FaCalendarAlt className="cal-detail-icon" />
+                  <div>
+                    <span className="cal-detail-label">Fecha</span>
+                    <span className="cal-detail-value">{selectedEvent.date}</span>
+                  </div>
+                </div>
+
+                <div className="cal-detail-item">
+                  <FaClock className="cal-detail-icon" />
+                  <div>
+                    <span className="cal-detail-label">Horario</span>
+                    <span className="cal-detail-value">{selectedEvent.time}</span>
+                  </div>
+                </div>
+
+                <div className="cal-detail-item">
+                  <FaMapMarkerAlt className="cal-detail-icon" />
+                  <div>
+                    <span className="cal-detail-label">Lugar</span>
+                    <span className="cal-detail-value">{selectedEvent.location}</span>
+                  </div>
+                </div>
+
+                <div className="cal-detail-item">
+                  <FaUser className="cal-detail-icon" />
+                  <div>
+                    <span className="cal-detail-label">{selectedEvent.tipo === "actividad" ? "Organizador" : "Creado por"}</span>
+                    <span className="cal-detail-value">{selectedEvent.applicant}</span>
+                  </div>
+                </div>
+
+                <div className="cal-detail-item">
+                  <FaEnvelope className="cal-detail-icon" />
+                  <div>
+                    <span className="cal-detail-label">Contacto</span>
+                    <span className="cal-detail-value">{selectedEvent.contact}</span>
+                  </div>
+                </div>
+
+                <div className="cal-description-section">
+                  <h4>Descripción</h4>
+                  <p>{selectedEvent.description}</p>
+                </div>
+
                 <div className="cal-event-participation">
                   {!selectedEvent.asistio ? (
                     <button className="cal-btn-confirmar" onClick={() => confirmarAsistencia(selectedEvent.id)}>
-                      ✔ Asistiré
+                      <FaCheckCircle /> Confirmar Asistencia
                     </button>
                   ) : (
-                    <span className="cal-asistencia-confirmada">✅ Pre Asistencia confirmada</span>
+                    <div className="cal-asistencia-confirmada">
+                      <FaCheckCircle /> Asistencia Confirmada
+                    </div>
                   )}
 
                   {!selectedEvent.feedbackDado && selectedEvent.asistio && (
                     <button className="cal-btn-feedback" onClick={() => setShowFeedback(true)}>
-                      💬 Dar feedback
+                      <FaComments /> Dar Feedback
                     </button>
                   )}
                 </div>
-                <p><strong>Fecha:</strong> {selectedEvent.date}</p>
-                <p><strong>Lugar:</strong> {selectedEvent.location}</p>
-                <p><strong>Contacto:</strong> {selectedEvent.contact}</p>
-                {selectedEvent.tipo === "actividad" ? (
-                  <p><strong>Solicitante:</strong> {selectedEvent.applicant}</p>
-                ) : (
-                  <p><strong>Creado por:</strong> {selectedEvent.applicant}</p>
-                )}
-                <p>{selectedEvent.description}</p>
+
+                <p className="cal-description-text">{selectedEvent.description}</p>
 
                 {showFeedback && (
                   <div className="cal-modal-overlay">

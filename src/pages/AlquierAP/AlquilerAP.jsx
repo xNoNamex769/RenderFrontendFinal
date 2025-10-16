@@ -4,10 +4,19 @@ import io from "socket.io-client";
 import "./style/AlquilerAP.css";
 import bienestar from "../../../public/img/fondo1.jpeg";
 import InventarioResumen from "./Inventario";
+import {
+  FaBox,
+  FaCheckCircle,
+  FaMapMarkerAlt,
+  FaClock,
+  FaStar,
+  FaBullseye,
+  FaCubes,
+} from "react-icons/fa";
 
-// ⚡ Conexión correcta a socket.io en Render
+// ⚡ Conexión a socket.io en Render
 const socket = io("https://render-hhyo.onrender.com", {
-  transports: ["websocket"], // fuerza websocket estable
+  transports: ["websocket"],
 });
 
 const Alquiler = () => {
@@ -33,7 +42,7 @@ const Alquiler = () => {
     socket.on("nuevaNotificacion", (data) => {
       if (data.tipo === "Elemento") {
         setNuevaNotificacion(data);
-        cargarCatalogo(); // recarga automáticamente
+        cargarCatalogo();
       }
     });
 
@@ -42,7 +51,7 @@ const Alquiler = () => {
     };
   }, []);
 
-  // 🔹 Placeholders en caso de que falten elementos
+  // 🔹 Placeholders
   const placeholders = [
     "futbol.jpg",
     "baloncesto.jpg",
@@ -54,7 +63,7 @@ const Alquiler = () => {
     "logo-sena.png",
   ];
 
-  // 🔹 Combinar elementos reales con placeholders
+  // 🔹 Completar hasta 8 elementos
   const itemsCarrusel = [...imagenes];
   while (itemsCarrusel.length < 8) {
     const i = itemsCarrusel.length;
@@ -66,64 +75,123 @@ const Alquiler = () => {
   }
 
   return (
-    <>
-      <h1 className="texto-unico-elemento titulo-principal">
-        Préstamo De Elementos
-      </h1>
-
-      {/* 🔹 Resumen de inventario */}
-      <InventarioResumen elementos={imagenes} />
+    <div className="alquiler-container">
+      {/* Header con ícono en vez de emoji */}
+      <header className="alquiler-header">
+        <div className="header-icon-wrapper">
+          <FaCubes size={50} className="header-icon" />
+        </div>
+        <div className="header-content">
+          <h1 className="alquiler-titulo">
+            <FaBox className="inline-icon" /> Préstamo de Elementos
+          </h1>
+          <p className="alquiler-subtitulo">
+            Explora nuestro catálogo y solicita los elementos que necesitas
+          </p>
+        </div>
+      </header>
 
       {/* 🔔 Notificación emergente */}
       {nuevaNotificacion && (
         <div className="notificacion-popup">
-          🔔 {nuevaNotificacion.titulo}: {nuevaNotificacion.mensaje}
+          <FaCheckCircle /> {nuevaNotificacion.titulo}: {nuevaNotificacion.mensaje}
         </div>
       )}
 
-      {/* 🔹 Carrusel de elementos */}
-      <div className="body-alquiler-ap">
-        <div className="box">
+      {/* 🔹 Sección de Ubicación y Bienvenida (ARRIBA - Primera información visible) */}
+      <section className="bienvenida-section">
+        <div className="bienvenida-card">
+          <div className="bienvenida-content">
+            <div className="bienvenida-icon">
+              <FaMapMarkerAlt size={40} className="icon-ubicacion" />
+            </div>
+            <div className="bienvenida-texto">
+              <h2>
+                <FaBox className="inline-icon" /> ¡Bienvenido al área de Préstamo
+                de Elementos!
+              </h2>
+              <p>
+                Aquí puedes explorar todos los elementos disponibles que Bienestar
+                al Aprendiz tiene para ti. Si deseas hacer uso de algún elemento,
+                dirígete directamente al área de Bienestar.
+              </p>
+              <div className="bienvenida-info-box">
+                <FaMapMarkerAlt />
+                <div>
+                  <strong>Ubicación</strong>
+                  <p>Bienestar del Aprendiz - Edificio Principal</p>
+                </div>
+              </div>
+              <div className="bienvenida-info-box">
+                <FaClock />
+                <div>
+                  <strong>Horario de Atención</strong>
+                  <p>Lunes a Viernes: 7:00 AM - 5:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bienvenida-imagen">
+            <img
+              src={bienestar}
+              alt="Ubicación Bienestar"
+              className="ubicacion-imagen"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 Resumen de inventario */}
+      <InventarioResumen elementos={imagenes} />
+
+      {/* 🔹 Grid de elementos */}
+      <section className="elementos-section">
+        <div className="section-header">
+          <h2>
+            <FaBullseye className="inline-icon" /> Catálogo de Elementos Disponibles
+          </h2>
+          <span className="elementos-count">{imagenes.length} elementos</span>
+        </div>
+
+        <div className="elementos-grid">
           {itemsCarrusel.map((img, index) => (
-            <span key={index} style={{ "--i": index + 1 }}>
-              <img
-                src={
-                  img.esPlaceholder
-                    ? `/img/${img.Imagen}`
-                    : img.Imagen.startsWith("http") // ✅ Soporte Cloudinary y Render
-                    ? img.Imagen
-                    : `https://render-hhyo.onrender.com/uploads/${img.Imagen}`
-                }
-                alt={img.NombreElemento}
-                className="img-alquiler-catalogo"
-              />
-            </span>
+            <div
+              key={index}
+              className={`elemento-card ${img.esPlaceholder ? "placeholder" : ""}`}
+            >
+              <div className="elemento-imagen-wrapper">
+                <img
+                  src={
+                    img.esPlaceholder
+                      ? `/img/${img.Imagen}`
+                      : img.Imagen.startsWith("http")
+                      ? img.Imagen
+                      : `https://render-hhyo.onrender.com/uploads/${img.Imagen}`
+                  }
+                  alt={img.NombreElemento}
+                  className="elemento-imagen"
+                />
+                {!img.esPlaceholder && (
+                  <div className="elemento-badge">
+                    <FaCheckCircle /> Disponible
+                  </div>
+                )}
+              </div>
+              <div className="elemento-info">
+                <h3 className="elemento-nombre">{img.NombreElemento}</h3>
+                {!img.esPlaceholder && (
+                  <div className="elemento-meta">
+                    <span className="elemento-estado">
+                      <FaStar /> Popular
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           ))}
         </div>
-      </div>
-
-      {/* 🔹 Sección bienvenida */}
-      <main className="bienvenida-bienestar">
-        <div className="bienvenida-texto">
-          <h2>¡Bienvenido al área de Préstamo de Elementos!</h2>
-          <p>
-            Aquí puedes explorar todos los elementos disponibles que Bienestar
-            al Aprendiz tiene para ti. Si deseas hacer uso de algún elemento,
-            dirígete directamente al área de Bienestar.
-          </p>
-          <p className="ubicacion-destacada">
-            📍 ¡Te esperamos en Bienestar del Aprendiz!
-          </p>
-        </div>
-        <div className="bienvenida-imagen">
-          <img
-            src={bienestar}
-            alt="Ubicación Bienestar"
-            className="ubicacion-elemento"
-          />
-        </div>
-      </main>
-    </>
+      </section>
+    </div>
   );
 };
 

@@ -1,284 +1,676 @@
-/* =========================
-   CSS Mejorado para MisEventos (único)
-   ========================= */
+/* ========================================
+   MIS EVENTOS - ESTILO SENA
+   Prefijo: miseventos-
+   Colores SENA: Blanco, Verde, Negro
+======================================== */
 
-/* Contenedor principal */
-.eventos-creados-wrapper-unique {
-  padding: 24px;
-  background: #f9fafb;
+:root {
+  --miseventos-verde-sena: #5eb319;
+  --miseventos-verde-oscuro: #3a7d13;
+  --miseventos-verde-claro: #dcfce7;
+  --miseventos-verde-muy-claro: #f0fdf4;
+  --miseventos-blanco: #ffffff;
+  --miseventos-negro: #1f2937;
+  --miseventos-gris: #6b7280;
+  --miseventos-gris-claro: #f9fafb;
+}
+
+/* Wrapper principal */
+.miseventos-wrapper {
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  color: #1f2937;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
 }
 
-.eventos-creados-wrapper-unique h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #0d7a56;
-  margin-bottom: 12px;
+/* Contenedor del header */
+.miseventos-container {
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+  background: var(--miseventos-blanco);
+  border-radius: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 3px solid var(--miseventos-verde-claro);
+  overflow: hidden;
+  position: relative;
 }
 
-.eventos-creados-desc-unique {
-  margin-bottom: 24px;
-  font-size: 1rem;
-  color: #4b5563;
+.miseventos-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--miseventos-verde-sena), var(--miseventos-verde-oscuro), var(--miseventos-verde-sena));
 }
 
-/* Cards de eventos */
-.evento-creado-item-unique {
-  margin-bottom: 24px;
-}
-
-.evento-creado-card-unique {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  padding: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.evento-creado-card-unique:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.evento-creado-card-unique h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 8px;
-}
-
-.evento-creado-card-unique p {
-  margin: 4px 0;
-  font-size: 0.95rem;
-  color: #374151;
-}
-
-.icono-peq-unique {
-  margin-right: 6px;
-  vertical-align: middle;
-  color: #059669;
-}
-
-/* QR */
-.qr-wrapper-unique {
-  display: flex;
-  gap: 16px;
-  margin: 12px 0;
-}
-
-.qr-bloque-unique {
+/* Título */
+.miseventos-titulo {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--miseventos-negro);
+  margin: 0;
   text-align: center;
+  letter-spacing: -0.5px;
+  padding: 2.5rem 3rem 1rem 3rem;
+  background: linear-gradient(135deg, var(--miseventos-verde-muy-claro), var(--miseventos-blanco));
 }
 
-.qr-imagen-unique {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  background: #f9fafb;
-  padding: 6px;
+.miseventos-titulo::after {
+  content: "📅";
+  margin-left: 1rem;
 }
 
-.qr-etiqueta-unique {
-  display: block;
-  margin-top: 4px;
-  font-size: 0.85rem;
-  color: #374151;
+.miseventos-descripcion {
+  text-align: center;
+  padding: 0 3rem 2rem 3rem;
+  font-size: 1rem;
+  color: var(--miseventos-gris);
+  line-height: 1.6;
+  border-bottom: 3px solid var(--miseventos-verde-claro);
 }
 
-/* Botones */
-.acciones-evento-unique {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.acciones-evento-unique button {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 14px;
-  font-size: 0.9rem;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.btn-ver-asistencia-unique { background: #e0f2fe; color: #0369a1; }
-.btn-comparar-unique { background: #fef9c3; color: #854d0e; }
-.btn-reporte-unique { background: #ecfdf5; color: #047857; }
-
-.btn-ver-asistencia-unique:hover { background: #bae6fd; }
-.btn-comparar-unique:hover { background: #fde68a; }
-.btn-reporte-unique:hover { background: #d1fae5; }
-
-.icono-btn-unique {
+.miseventos-sin-datos {
+  max-width: 1200px;
+  margin: 2rem auto;
+  text-align: center;
+  padding: 3rem;
+  background: var(--miseventos-blanco);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--miseventos-gris);
   font-size: 1.1rem;
 }
 
-/* Tabla de asistencia */
-.tabla-asistencia-unique {
-  margin-top: 16px;
-  overflow-x: auto;
+/* Cards de eventos */
+.miseventos-evento-item {
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
 }
 
-.tabla-asistencia-unique table {
+.miseventos-card {
+  background: var(--miseventos-blanco);
+  border-radius: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 3px solid var(--miseventos-verde-claro);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.miseventos-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--miseventos-verde-sena), var(--miseventos-verde-oscuro), var(--miseventos-verde-sena));
+}
+
+.miseventos-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 50px rgba(94, 179, 25, 0.2);
+  border-color: var(--miseventos-verde-sena);
+}
+
+.miseventos-nombre {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--miseventos-negro);
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--miseventos-verde-claro);
+}
+
+/* Información del evento */
+.miseventos-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.miseventos-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--miseventos-verde-muy-claro);
+  border-radius: 1rem;
+  border-left: 4px solid var(--miseventos-verde-sena);
+  font-weight: 600;
+  color: var(--miseventos-negro);
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.miseventos-info-item:hover {
+  background: var(--miseventos-verde-claro);
+  transform: translateX(4px);
+}
+
+.miseventos-icono {
+  font-size: 1.5rem;
+  color: var(--miseventos-verde-sena);
+  flex-shrink: 0;
+}
+
+.miseventos-descripcion-evento {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: var(--miseventos-gris-claro);
+  border-radius: 1rem;
+  border-left: 4px solid var(--miseventos-verde-sena);
+  font-size: 1rem;
+  color: var(--miseventos-negro);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* QR Section */
+.miseventos-qr-section {
+  background: linear-gradient(135deg, var(--miseventos-verde-muy-claro), var(--miseventos-blanco));
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 3px solid var(--miseventos-verde-claro);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.miseventos-qr-section:hover {
+  box-shadow: 0 6px 20px rgba(94, 179, 25, 0.15);
+  border-color: var(--miseventos-verde-sena);
+}
+
+/* Modern QR Toggle Button */
+.miseventos-qr-toggle-btn-modern {
   width: 100%;
-  border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 12px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--miseventos-blanco), var(--miseventos-verde-muy-claro));
+  border: 3px solid var(--miseventos-verde-claro);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.miseventos-qr-toggle-btn-modern:hover {
+  background: linear-gradient(135deg, var(--miseventos-verde-muy-claro), var(--miseventos-verde-claro));
+  border-color: var(--miseventos-verde-sena);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(94, 179, 25, 0.2);
+}
+
+.miseventos-qr-toggle-btn-modern:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.miseventos-qr-toggle-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.miseventos-qr-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.miseventos-qr-icon {
+  font-size: 2rem;
+  color: var(--miseventos-verde-sena);
+  flex-shrink: 0;
+}
+
+.miseventos-qr-toggle-text {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--miseventos-negro);
+  text-align: left;
+}
+
+.miseventos-qr-toggle-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--miseventos-verde-sena), var(--miseventos-verde-oscuro));
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(94, 179, 25, 0.3);
+  transition: all 0.3s ease;
+}
+
+.miseventos-qr-toggle-btn-modern:hover .miseventos-qr-toggle-right {
+  box-shadow: 0 4px 12px rgba(94, 179, 25, 0.4);
+  transform: scale(1.05);
+}
+
+.miseventos-toggle-icon {
+  font-size: 1.25rem;
+  color: var(--miseventos-blanco);
+}
+
+.miseventos-toggle-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--miseventos-blanco);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* QR Content with Animation */
+.miseventos-qr-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-top 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.miseventos-qr-visible {
+  max-height: 1000px;
+  opacity: 1;
+  margin-top: 1.5rem;
+}
+
+.miseventos-qr-hidden {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+/* QR Container */
+.miseventos-qr-contenedor {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 0;
+}
+
+.miseventos-qr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: var(--miseventos-blanco);
+  border-radius: 1.25rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 4px solid var(--miseventos-verde-sena);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
   overflow: hidden;
 }
 
-.tabla-asistencia-unique th,
-.tabla-asistencia-unique td {
-  padding: 10px;
-  text-align: left;
-  font-size: 0.9rem;
-  border-bottom: 1px solid #e5e7eb;
+.miseventos-qr-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--miseventos-verde-sena), var(--miseventos-verde-oscuro));
 }
 
-.tabla-asistencia-unique th {
-  background: #f3f4f6;
+.miseventos-qr-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(94, 179, 25, 0.35);
+  border-color: var(--miseventos-verde-oscuro);
+}
+
+.miseventos-qr-imagen {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border: 3px solid var(--miseventos-verde-claro);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  background: var(--miseventos-blanco);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.miseventos-qr-item:hover .miseventos-qr-imagen {
+  border-color: var(--miseventos-verde-sena);
+  box-shadow: 0 6px 20px rgba(94, 179, 25, 0.3);
+}
+
+.miseventos-qr-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--miseventos-verde-oscuro);
+}
+
+/* QR Badge */
+.miseventos-qr-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, var(--miseventos-verde-sena), var(--miseventos-verde-oscuro));
+  color: var(--miseventos-blanco);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(94, 179, 25, 0.4);
+}
+
+.miseventos-qr-badge-salida {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+}
+
+/* QR Info */
+.miseventos-qr-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--miseventos-verde-muy-claro);
+  border-radius: 999px;
+  border: 2px solid var(--miseventos-verde-claro);
+  margin-top: 0.5rem;
+}
+
+.miseventos-qr-info-icon {
+  font-size: 1.25rem;
+  color: var(--miseventos-verde-sena);
+}
+
+.miseventos-qr-info span {
+  font-size: 0.95rem;
   font-weight: 600;
+  color: var(--miseventos-negro);
 }
 
-.estado-tag-unique {
+/* Botones de acción */
+.miseventos-acciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.miseventos-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.miseventos-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.miseventos-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.miseventos-btn:hover {
+  transform: translateY(-3px);
+}
+
+.miseventos-btn-icono {
+  font-size: 1.25rem;
+  z-index: 1;
+}
+
+.miseventos-btn span {
+  z-index: 1;
+}
+
+.miseventos-btn-asistencia {
+  background: linear-gradient(135deg, var(--miseventos-verde-sena), var(--miseventos-verde-oscuro));
+  color: var(--miseventos-blanco);
+  box-shadow: 0 6px 20px rgba(94, 179, 25, 0.35);
+}
+
+.miseventos-btn-asistencia:hover {
+  box-shadow: 0 10px 30px rgba(94, 179, 25, 0.45);
+}
+
+.miseventos-btn-estadisticas {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  color: var(--miseventos-blanco);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+}
+
+.miseventos-btn-estadisticas:hover {
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.45);
+}
+
+.miseventos-btn-confirmados {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: var(--miseventos-blanco);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+}
+
+.miseventos-btn-confirmados:hover {
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.45);
+}
+
+.miseventos-btn-comparar {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: var(--miseventos-blanco);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+}
+
+.miseventos-btn-comparar:hover {
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.45);
+}
+
+/* Tabla de asistencia */
+.miseventos-tabla-contenedor {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--miseventos-verde-muy-claro);
+  border-radius: 1.5rem;
+  border: 3px solid var(--miseventos-verde-claro);
+}
+
+.miseventos-tabla-titulo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--miseventos-negro);
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--miseventos-verde-sena);
+}
+
+.miseventos-tabla-wrapper {
+  overflow-x: auto;
+  border-radius: 1rem;
+  background: var(--miseventos-blanco);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.miseventos-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.miseventos-tabla thead {
+  background: linear-gradient(135deg, var(--miseventos-verde-sena), var(--miseventos-verde-oscuro));
+  color: var(--miseventos-blanco);
+}
+
+.miseventos-tabla th {
+  padding: 1.25rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+
+.miseventos-tabla tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 2px solid var(--miseventos-verde-claro);
+}
+
+.miseventos-tabla tbody tr:hover {
+  background-color: var(--miseventos-verde-muy-claro);
+}
+
+.miseventos-tabla tbody tr:last-child {
+  border-bottom: none;
+}
+
+.miseventos-tabla td {
+  padding: 1rem;
+  color: var(--miseventos-negro);
+  font-weight: 500;
+}
+
+/* Estados de asistencia */
+.miseventos-estado {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-}
-
-.estado-completo-unique { background: #dcfce7; color: #166534; }
-.estado-incompleto-unique { background: #fef9c3; color: #854d0e; }
-.estado-sin-registro-unique { background: #fee2e2; color: #991b1b; }
-
-/* Modal mejorado */
-.modal-dialog.modal-xl {
-  max-width: 95% !important;
-}
-
-.modal-content {
-  border-radius: 16px;
-  border: none;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
-
-.modal-header {
-  background: linear-gradient(90deg, #0d7a56, #10b981);
-  color: #fff;
-  border-radius: 16px 16px 0 0;
-}
-
-.modal-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-/* KPI cards en modal */
-.reporte-top-row-unique {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: center;
-}
-
-.kpi-card-unique {
-  flex: 1;
-  min-width: 160px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 12px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.kpi-title-unique {
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
   font-size: 0.85rem;
-  color: #6b7280;
-}
-
-.kpi-value-unique {
-  font-size: 1.4rem;
   font-weight: 700;
-  color: #111827;
+  white-space: nowrap;
 }
 
-/* Reporte acciones */
-.reporte-actions-unique {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  margin-left: auto;
+.miseventos-estado-completo {
+  background: var(--miseventos-verde-claro);
+  color: var(--miseventos-verde-oscuro);
+  border: 2px solid var(--miseventos-verde-sena);
 }
 
-.btn-small-unique {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 10px;
-  font-size: 0.85rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.miseventos-estado-incompleto {
+  background: #fef3c7;
+  color: #92400e;
+  border: 2px solid #f59e0b;
 }
 
-.btn-small-unique:hover {
-  background: #f3f4f6;
+.miseventos-estado-sin-registro {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 2px solid #ef4444;
 }
 
-.select-mode-unique {
-  padding: 6px 8px;
-  font-size: 0.85rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
+/* Animaciones */
+@keyframes miseventos-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Pie de modal */
-.nota-sugerencia-unique {
-  margin-top: 16px;
-  font-size: 0.85rem;
-  color: #6b7280;
-  text-align: center;
+.miseventos-card {
+  animation: miseventos-fadeIn 0.4s ease-out;
 }
 
-/* Charts dentro de modal */
-#reporte-chart-container-unique {
-  margin-top: 12px;
-}
+/* Responsive */
+@media (max-width: 768px) {
+  .miseventos-wrapper {
+    padding: 1rem;
+  }
 
-#reporte-chart-container-unique h5 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: #111827;
-}
-/* Centrar modal en pantalla */
-.modal-dialog {
-  margin: auto;              /* centra horizontalmente */
-}
+  .miseventos-container,
+  .miseventos-card {
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
 
-.modal-dialog.modal-xl {
-  max-width: 95% !important; /* tamaño grande */
-  margin: auto;              /* fuerza centrado */
-}
+  .miseventos-titulo {
+    padding: 2rem 1.5rem 1rem 1.5rem;
+    font-size: 2rem;
+  }
 
-.modal.show .modal-dialog {
-  display: flex;
-  justify-content: center;
-  align-items: center;       /* centra vertical */
-  min-height: calc(100% - 1rem);
+  .miseventos-descripcion {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+
+  .miseventos-nombre {
+    font-size: 1.5rem;
+  }
+
+  .miseventos-info {
+    grid-template-columns: 1fr;
+  }
+
+  .miseventos-qr-contenedor {
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  .miseventos-qr-toggle-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .miseventos-qr-toggle-left {
+    justify-content: center;
+  }
+  
+  .miseventos-qr-toggle-right {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .miseventos-qr-imagen {
+    width: 150px;
+    height: 150px;
+  }
+
+  .miseventos-acciones {
+    grid-template-columns: 1fr;
+  }
+
+  .miseventos-tabla-wrapper {
+    overflow-x: scroll;
+  }
+
+  .miseventos-tabla {
+    font-size: 0.85rem;
+  }
+
+  .miseventos-tabla th,
+  .miseventos-tabla td {
+    padding: 0.75rem 0.5rem;
+  }
 }

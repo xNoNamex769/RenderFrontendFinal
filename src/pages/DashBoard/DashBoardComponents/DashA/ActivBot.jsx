@@ -8,7 +8,7 @@ export default function ActivBot({ irAChatai }) {
   return (
     
     <button onClick={irAChatai} className="activbot" >
-   {/* <img src="/img/robotica.png" alt="Bot" width={90} /> */}
+   {<img src="/img/robotica.png" alt="Bot" width={90} /> }
 
     </button>
   );

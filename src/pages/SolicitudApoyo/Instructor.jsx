@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import "./style/Instructor.css";
 import { jwtDecode } from 'jwt-decode';
 
@@ -98,7 +99,12 @@ const Instructor = () => {
     if (!instructor || !token) return;
 
     if (!/^\d{10}$/.test(telefono)) {
-      alert("Número inválido. Debe tener exactamente 10 dígitos.");
+      Swal.fire({
+        icon: "error",
+        title: "Número inválido",
+        text: "Debe tener exactamente 10 dígitos.",
+        confirmButtonColor: "#5eb319",
+      });
       return;
     }
 
@@ -110,10 +116,23 @@ const Instructor = () => {
         headers: { Authorization: `Bearer ${token}` }
       }
     )
-      .then(() => alert("Número actualizado correctamente"))
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "¡Éxito!",
+          text: "Número actualizado correctamente",
+          confirmButtonColor: "#5eb319",
+          timer: 2500,
+        });
+      })
       .catch(err => {
         console.error("Error al actualizar teléfono:", err);
-        alert("Error al actualizar número");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Error al actualizar número",
+          confirmButtonColor: "#5eb319",
+        });
       })
       .finally(() => setGuardando(false));
   };
@@ -123,7 +142,12 @@ const Instructor = () => {
       const IdInstructor = obtenerIdInstructor();
       const token = localStorage.getItem('token');
       if (!IdInstructor || !token) {
-        alert("Error: no se pudo obtener el ID del instructor o token");
+        Swal.fire({
+          icon: "error",
+          title: "Error de sesión",
+          text: "No se pudo obtener el ID del instructor o token",
+          confirmButtonColor: "#5eb319",
+        });
         return;
       }
 
@@ -145,11 +169,22 @@ const Instructor = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      alert('Solicitud actualizada y registrada en historial');
+      Swal.fire({
+        icon: "success",
+        title: "¡Éxito!",
+        text: "Solicitud actualizada y registrada en historial",
+        confirmButtonColor: "#5eb319",
+        timer: 2500,
+      });
       await cargarSolicitudesInstructor(IdInstructor, token);
     } catch (error) {
       console.error('Error al actualizar y registrar historial', error);
-      alert('Hubo un error al actualizar la solicitud.');
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un error al actualizar la solicitud.",
+        confirmButtonColor: "#5eb319",
+      });
     } finally {
       setGuardando(false);
     }

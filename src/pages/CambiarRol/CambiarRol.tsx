@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import "./style/Admin.css";
 
 const rolesDisponibles = [
@@ -38,11 +39,22 @@ const CambiarRol = () => {
         { IdRol: nuevoRolId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      alert("✅ Rol actualizado correctamente");
+      Swal.fire({
+        icon: "success",
+        title: "¡Éxito!",
+        text: "Rol actualizado correctamente",
+        confirmButtonColor: "#5eb319",
+        timer: 2500,
+      });
       obtenerUsuarios(); // refrescar lista
     } catch (err) {
       console.error("Error al cambiar rol:", err);
-      alert("❌ Error al cambiar rol");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Error al cambiar rol",
+        confirmButtonColor: "#5eb319",
+      });
     }
   };
 

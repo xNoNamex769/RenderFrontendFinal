@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './style/CartaInstructor.css';
 import { obtenerIdUsuario } from '../../utils/getDecodedToken';
-import defaultImg from './img/defecto.png'; 
+import defaultImg from './img/defecto.png';
+import { FaUserTie, FaMapMarkerAlt, FaCamera, FaSave, FaSearch, FaEnvelope, FaPhone, FaBriefcase, FaTimes } from 'react-icons/fa'; 
 
 interface FormData {
   profesion: string;
@@ -155,116 +156,170 @@ const PerfilInstructorForm = () => {
   );
 
   return (
-    <div className="contenedor-form-perfil">
-      {formData && (
-        <div className="mi-perfil-actual">
-          <h3> Mi perfil actual</h3>
-          <img
-            src={getImagenValida(formData.imagen)}
-            alt="Mi imagen"
-            className="imagen-perfil-propia"
-            onError={(e) => (e.currentTarget.src = defaultImg)}
-          />
-          <p><strong>Profesión:</strong> {formData.profesion}</p>
-          <p><strong>Ubicación:</strong> {formData.ubicacion}</p>
+    <div className="cartainst-wrapper">
+      <div className="cartainst-header">
+        <h2 className="cartainst-titulo">Perfil de Instructor</h2>
+        <p className="cartainst-descripcion">
+          Crea o edita tu perfil profesional y conecta con otros instructores del SENA.
+        </p>
+      </div>
+
+      {formData && formData.profesion && (
+        <div className="cartainst-mi-perfil">
+          <h3 className="cartainst-mi-perfil-titulo">
+            <FaUserTie className="cartainst-icono" /> Mi Perfil Actual
+          </h3>
+          <div className="cartainst-mi-perfil-contenido">
+            <img
+              src={getImagenValida(formData.imagen)}
+              alt="Mi imagen"
+              className="cartainst-mi-perfil-imagen"
+              onError={(e) => (e.currentTarget.src = defaultImg)}
+            />
+            <div className="cartainst-mi-perfil-info">
+              <p><FaBriefcase className="cartainst-info-icono" /> <strong>Profesión:</strong> {formData.profesion}</p>
+              <p><FaMapMarkerAlt className="cartainst-info-icono" /> <strong>Ubicación:</strong> {formData.ubicacion}</p>
+            </div>
+          </div>
         </div>
       )}
 
-      <h2>Crear o Editar Mi Perfil</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Profesión:</label>
-        <input
-          type="text"
-          name="profesion"
-          value={formData.profesion}
-          onChange={handleInputChange}
-          required
-        />
+      <div className="cartainst-formulario-contenedor">
+        <h3 className="cartainst-formulario-titulo">Crear o Editar Mi Perfil</h3>
+        <form onSubmit={handleSubmit} className="cartainst-formulario">
+          <div className="cartainst-campo">
+            <label className="cartainst-label">
+              <FaBriefcase className="cartainst-label-icono" /> Profesión:
+            </label>
+            <input
+              type="text"
+              name="profesion"
+              value={formData.profesion}
+              onChange={handleInputChange}
+              className="cartainst-input"
+              placeholder="Ej: Instructor de Programación"
+              required
+            />
+          </div>
 
-        <label>Ubicación:</label>
-        <input
-          type="text"
-          name="ubicacion"
-          value={formData.ubicacion}
-          onChange={handleInputChange}
-          required
-        />
+          <div className="cartainst-campo">
+            <label className="cartainst-label">
+              <FaMapMarkerAlt className="cartainst-label-icono" /> Ubicación:
+            </label>
+            <input
+              type="text"
+              name="ubicacion"
+              value={formData.ubicacion}
+              onChange={handleInputChange}
+              className="cartainst-input"
+              placeholder="Ej: Bogotá, Colombia"
+              required
+            />
+          </div>
 
-        <label>Imagen (foto):</label>
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+          <div className="cartainst-campo">
+            <label className="cartainst-label">
+              <FaCamera className="cartainst-label-icono" /> Imagen (foto):
+            </label>
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={handleFileChange} 
+              className="cartainst-input-file"
+            />
+          </div>
 
-        {formData.imagen && (
-          <img
-            src={formData.imagen}
-            alt="Vista previa"
-            style={{ width: '120px', marginTop: '10px', borderRadius: '8px' }}
-            onError={(e) => (e.currentTarget.src = defaultImg)}
-          />
-        )}
+          {formData.imagen && (
+            <div className="cartainst-preview">
+              <img
+                src={formData.imagen}
+                alt="Vista previa"
+                className="cartainst-preview-imagen"
+                onError={(e) => (e.currentTarget.src = defaultImg)}
+              />
+            </div>
+          )}
 
-        <button type="submit">Guardar Perfil</button>
-      </form>
+          <button type="submit" className="cartainst-btn-guardar">
+            <FaSave className="cartainst-btn-icono" /> Guardar Perfil
+          </button>
+        </form>
 
-      {mensaje && <p className="mensaje-form">{mensaje}</p>}
-
-      <hr style={{ margin: '30px 0' }} />
-
-      <h2>Instructores Registrados</h2>
-
-      {/* Filtros */}
-      <div className="filtros">  
-        <input
-          type="text"
-          placeholder="Buscar por nombre"
-          value={filtroNombre}
-          onChange={e => setFiltroNombre(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Buscar por ciudad"
-          value={filtroUbicacion}
-          onChange={e => setFiltroUbicacion(e.target.value)}
-        />
+        {mensaje && <p className="cartainst-mensaje">{mensaje}</p>}
       </div>
 
-      <div className="grid-instructores">
-        {instructoresFiltrados.map((inst) => (
-          <div key={inst.UsuarioId} className="card-instructor">
-            <img
-              src={getImagenValida(inst.imagen)}
-              alt={`Foto de ${inst.nombre}`}
-              className="imagen-instructor"
-              onError={(e) => (e.currentTarget.src = defaultImg)}
-            />
-            <h3>{inst.nombre}</h3>
-            <p><strong>Profesión:</strong> {inst.profesion || 'Sin definir'}</p>
-            <p><strong>Ubicación:</strong> {inst.ubicacion || 'No especificada'}</p>
+      <div className="cartainst-instructores-seccion">
+        <h3 className="cartainst-instructores-titulo">
+          <FaUserTie className="cartainst-icono" /> Instructores Registrados
+        </h3>
 
-            <button
-              className="btn-ver-mas"
-              onClick={() => setInstructorActivo(inst)}
-            >
-              Ver más
-            </button>
+        <div className="cartainst-filtros">
+          <div className="cartainst-filtro-item">
+            <FaSearch className="cartainst-filtro-icono" />
+            <input
+              type="text"
+              placeholder="Buscar por nombre"
+              value={filtroNombre}
+              onChange={e => setFiltroNombre(e.target.value)}
+              className="cartainst-filtro-input"
+            />
           </div>
-        ))}
+          <div className="cartainst-filtro-item">
+            <FaMapMarkerAlt className="cartainst-filtro-icono" />
+            <input
+              type="text"
+              placeholder="Buscar por ciudad"
+              value={filtroUbicacion}
+              onChange={e => setFiltroUbicacion(e.target.value)}
+              className="cartainst-filtro-input"
+            />
+          </div>
+        </div>
+
+        <div className="cartainst-grid">
+          {instructoresFiltrados.map((inst) => (
+            <div key={inst.UsuarioId} className="cartainst-card">
+              <img
+                src={getImagenValida(inst.imagen)}
+                alt={`Foto de ${inst.nombre}`}
+                className="cartainst-card-imagen"
+                onError={(e) => (e.currentTarget.src = defaultImg)}
+              />
+              <h4 className="cartainst-card-nombre">{inst.nombre}</h4>
+              <div className="cartainst-card-info">
+                <p><FaBriefcase className="cartainst-card-icono" /> {inst.profesion || 'Sin definir'}</p>
+                <p><FaMapMarkerAlt className="cartainst-card-icono" /> {inst.ubicacion || 'No especificada'}</p>
+              </div>
+              <button
+                className="cartainst-btn-ver-mas"
+                onClick={() => setInstructorActivo(inst)}
+              >
+                Ver más
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
 
       {instructorActivo && (
-        <div className="modal-overlay" onClick={() => setInstructorActivo(null)}>
-          <div className="modal-contenido" onClick={e => e.stopPropagation()}>
-            <button className="cerrar-modal" onClick={() => setInstructorActivo(null)}>×</button>
+        <div className="cartainst-modal-overlay" onClick={() => setInstructorActivo(null)}>
+          <div className="cartainst-modal-contenido" onClick={e => e.stopPropagation()}>
+            <button className="cartainst-modal-cerrar" onClick={() => setInstructorActivo(null)}>
+              <FaTimes />
+            </button>
             <img
               src={getImagenValida(instructorActivo.imagen)}
-              className="imagen-modal"
+              className="cartainst-modal-imagen"
               alt="Instructor"
               onError={(e) => (e.currentTarget.src = defaultImg)}
             />
-            <h2>{instructorActivo.nombre}</h2>
-            <p><strong>Correo:</strong> {instructorActivo.correo}</p>
-            <p><strong>Teléfono:</strong> {instructorActivo.telefono}</p>
-            <p><strong>Profesión:</strong> {instructorActivo.profesion}</p>
-            <p><strong>Ubicación:</strong> {instructorActivo.ubicacion}</p>
+            <h3 className="cartainst-modal-nombre">{instructorActivo.nombre}</h3>
+            <div className="cartainst-modal-info">
+              <p><FaEnvelope className="cartainst-modal-icono" /> <strong>Correo:</strong> {instructorActivo.correo}</p>
+              <p><FaPhone className="cartainst-modal-icono" /> <strong>Teléfono:</strong> {instructorActivo.telefono}</p>
+              <p><FaBriefcase className="cartainst-modal-icono" /> <strong>Profesión:</strong> {instructorActivo.profesion}</p>
+              <p><FaMapMarkerAlt className="cartainst-modal-icono" /> <strong>Ubicación:</strong> {instructorActivo.ubicacion}</p>
+            </div>
           </div>
         </div>
       )}

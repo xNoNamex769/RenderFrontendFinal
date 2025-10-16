@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./style/HorasLudicas.css";
 import Swal from "sweetalert2";
+import {
+  FaTrophy,
+  FaClock,
+  FaCheckCircle,
+  FaCalendarAlt,
+  FaCertificate,
+  FaStar,
+  FaLightbulb,
+  FaBullseye,
+} from "react-icons/fa";
 
 const objetivo = 80;
 
@@ -70,51 +80,76 @@ const HorasLudicas = () => {
 
   return (
     <section className="horas-ludicas-container">
+      {/* Header con íconos */}
       <header className="horas-ludicas-header">
-        <div className="intro-banner">
+        <div className="header-icon-wrapper">
+          <FaTrophy size={50} className="header-icon" />
+        </div>
+        <div className="header-content">
           <h1 className="titulo-ludicas">
-            Tu progreso en actividades lúdicas
+            <FaBullseye className="inline-icon" /> Tu Progreso en Actividades
+            Lúdicas
           </h1>
           <p className="subtitulo-ludicas">
             Participa, aprende, diviértete y alcanza las{" "}
             <strong>{objetivo} horas</strong> requeridas para tu formación.
           </p>
           <p className="frase-motivacional">
-            "Aprender también es jugar, compartir y crecer".
+            <FaLightbulb className="inline-icon" /> Aprender también es jugar,
+            compartir y crecer
           </p>
         </div>
       </header>
 
       <div className="horas-ludicas-content">
-        <article className="horas-ludicas-activities">
-          <h3>Actividades realizadas</h3>
-          <ul>
-            {actividades.map(({ actividad, horas, fecha }, idx) => (
-              <li key={idx} className="actividad-item">
-                <span className="actividad-nombre">{actividad}</span>
-                <span className="actividad-horas">{formatearTiempo(horas)}</span>
-                <span className="actividad-fecha">{fecha}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
-
+        {/* Panel de resumen */}
         <aside className="horas-ludicas-summary">
-          <h3>Resumen</h3>
-          <p>
-            <strong>{formatearTiempo(totalHoras)}</strong> acumuladas
-          </p>
+          <div className="summary-header">
+            <FaClock className="summary-icon" size={40} />
+            <h3>Resumen de Progreso</h3>
+          </div>
+
+          <div className="horas-display">
+            <div className="horas-numero">{formatearTiempo(totalHoras)}</div>
+            <p className="horas-label">Horas Acumuladas</p>
+          </div>
+
+          <div className="progress-bar-wrapper">
+            <div className="progress-info">
+              <span>Progreso</span>
+              <span className="progress-percentage">
+                {Math.round(progreso)}%
+              </span>
+            </div>
+            <div className="progress-bar">
+              <div
+                className={`progress-fill ${
+                  objetivoAlcanzado ? "progress-complete" : ""
+                }`}
+                style={{ width: `${progreso}%` }}
+              >
+                <span className="progress-text">{Math.round(progreso)}%</span>
+              </div>
+            </div>
+          </div>
 
           {objetivoAlcanzado ? (
-            <p className="mensaje-exito">
-              ¡Felicidades! Has alcanzado el objetivo de{" "}
-              <strong>{objetivo}</strong> horas.
-            </p>
+            <div className="mensaje-exito">
+              <FaCheckCircle size={24} />
+              <p>
+                ¡Felicidades! Has alcanzado el objetivo de{" "}
+                <strong>{objetivo} horas</strong>.
+              </p>
+            </div>
           ) : (
-            <p>
-              Te faltan <strong>{objetivo - totalHoras}</strong> horas para
-              llegar a <strong>{objetivo}</strong>
-            </p>
+            <div className="mensaje-pendiente">
+              <FaStar size={20} />
+              <p>
+                Te faltan{" "}
+                <strong>{(objetivo - totalHoras).toFixed(1)} horas</strong> para
+                llegar a <strong>{objetivo} horas</strong>
+              </p>
+            </div>
           )}
 
           <button
@@ -125,48 +160,92 @@ const HorasLudicas = () => {
             onClick={() => {
               if (objetivoAlcanzado) {
                 Swal.fire({
-                  icon: "info",
+                  icon: "success",
                   title: "🎓 Constancia disponible",
                   text: "Dirígete al menú de Constancias y haz clic en 'Descargar' para obtener tu certificado.",
-                  confirmButtonText: "ok",
-                  confirmButtonColor: "#35b40eff",
+                  confirmButtonText: "Entendido",
+                  confirmButtonColor: "#16a34a",
                 });
               }
             }}
           >
+            <FaCertificate />
             {objetivoAlcanzado
               ? "Descargar Certificado"
-              : "Descarga disponible al alcanzar el objetivo"}
+              : "Certificado disponible al completar"}
           </button>
-
-          <div
-            className="progress-bar"
-            role="progressbar"
-            aria-valuenow={totalHoras}
-            aria-valuemin="0"
-            aria-valuemax={objetivo}
-            aria-label="Barra de progreso de horas lúdicas"
-          >
-            <div
-              className="progress-fill"
-              style={{ width: `${progreso}%` }}
-            >
-              {Math.round(progreso)}%
-            </div>
-          </div>
         </aside>
+
+        {/* Lista de actividades */}
+        <article className="horas-ludicas-activities">
+          <div className="activities-header">
+            <h3>
+              <FaCalendarAlt className="inline-icon" /> Actividades Realizadas
+            </h3>
+            <span className="activities-count">
+              {actividades.length} actividades
+            </span>
+          </div>
+
+          {actividades.length === 0 ? (
+            <div className="no-activities">
+              <FaCalendarAlt size={50} />
+              <p>Aún no has registrado actividades</p>
+              <p className="no-activities-subtitle">
+                Participa en eventos y talleres para acumular horas
+              </p>
+            </div>
+          ) : (
+            <ul className="activities-list">
+              {actividades.map(({ actividad, horas, fecha }, idx) => (
+                <li key={idx} className="actividad-item">
+                  <div className="actividad-icon">
+                    <FaCheckCircle />
+                  </div>
+                  <div className="actividad-content">
+                    <span className="actividad-nombre">{actividad}</span>
+                    <div className="actividad-meta">
+                      <span className="actividad-fecha">
+                        <FaCalendarAlt size={12} /> {fecha}
+                      </span>
+                      <span className="actividad-horas">
+                        <FaClock size={12} /> {formatearTiempo(horas)}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </article>
       </div>
 
+      {/* Sección informativa con íconos */}
       <section className="horas-ludicas-info">
-        <h3>¿Qué son las horas lúdicas?</h3>
-        <p>
-          Son actividades recreativas y educativas que ayudan a tu desarrollo
-          personal y social.
-        </p>
-        <p>
-          Participar en talleres, clases y eventos organizados cuenta como horas
-          lúdicas.
-        </p>
+        <div className="info-card">
+          <div className="info-icon">
+            <FaLightbulb size={30} />
+          </div>
+          <div className="info-content">
+            <h3>¿Qué son las horas lúdicas?</h3>
+            <p>
+              Son actividades recreativas y educativas que ayudan a tu desarrollo
+              personal y social.
+            </p>
+          </div>
+        </div>
+        <div className="info-card">
+          <div className="info-icon">
+            <FaBullseye size={30} />
+          </div>
+          <div className="info-content">
+            <h3>¿Cómo acumular horas?</h3>
+            <p>
+              Participar en talleres, clases y eventos organizados cuenta como
+              horas lúdicas. ¡Mantente activo!
+            </p>
+          </div>
+        </div>
       </section>
     </section>
   );

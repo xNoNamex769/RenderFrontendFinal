@@ -243,3 +243,242 @@ input[type="text"]::placeholder {
 .lista-resultados li:hover {
   background-color: #f1f5ff;
 }
+
+/* ========================================
+   MENÚ LATERAL APRENDIZ MEJORADO - CLASES ÚNICAS
+======================================== */
+
+/* Sidebar mejorado */
+.menulateralap-barradash {
+  width: 280px;
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 1.5rem;
+  color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1000;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  border-right: 3px solid #5eb319;
+}
+
+/* Header del usuario mejorado */
+.menulateralap-user-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid #5eb319;
+}
+
+.menulateralap-user-header:hover {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  border-color: #3a7d13;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(94, 179, 25, 0.2);
+}
+
+.menulateralap-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #5eb319;
+  box-shadow: 0 4px 12px rgba(94, 179, 25, 0.3);
+}
+
+.menulateralap-nombre {
+  font-weight: 700;
+  color: #1f2937;
+  font-size: 1.125rem;
+}
+
+/* Dropdown perfil mejorado */
+.menulateralap-dropdown {
+  margin-top: 0.75rem;
+  background: #f9fafb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  animation: slideDown 0.3s ease;
+  border: 2px solid #e5e7eb;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menulateralap-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.menulateralap-opcion-dropdown {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: #374151;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menulateralap-opcion-dropdown:hover {
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+  color: white;
+  transform: translateX(4px);
+}
+
+/* Menú principal mejorado */
+.menulateralap-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar personalizado */
+.menulateralap-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menulateralap-menu::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 10px;
+}
+
+.menulateralap-menu::-webkit-scrollbar-thumb {
+  background: #5eb319;
+  border-radius: 10px;
+}
+
+.menulateralap-menu::-webkit-scrollbar-thumb:hover {
+  background: #3a7d13;
+}
+
+/* Grupo de menú */
+.menulateralap-grupo {
+  margin-bottom: 1.5rem;
+}
+
+/* Título de sección mejorado */
+.menulateralap-titulo-seccion {
+  background: #f9fafb;
+  border: none;
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: 100%;
+  border: 2px solid #e5e7eb;
+}
+
+.menulateralap-titulo-seccion:hover {
+  background: #dcfce7;
+  color: #3a7d13;
+  border-color: #5eb319;
+}
+
+/* Opciones del menú mejoradas */
+.menulateralap-opcion {
+  background: #ffffff;
+  border: none;
+  color: #374151;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  margin: 0.25rem 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  width: 100%;
+  border-left: 3px solid transparent;
+  border: 2px solid #f3f4f6;
+}
+
+.menulateralap-opcion:hover {
+  background: #dcfce7;
+  color: #1f2937;
+  transform: translateX(4px);
+  border-left-color: #5eb319;
+  border-color: #5eb319;
+}
+
+.menulateralap-opcion.activa {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #1f2937;
+  border-left-color: #5eb319;
+  border-color: #5eb319;
+  font-weight: 600;
+}
+
+.menulateralap-icono {
+  font-size: 1.125rem;
+  color: #5eb319;
+}
+
+/* Botón cerrar sesión mejorado */
+.menulateralap-btn-cerrar {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--sena-verde), var(--sena-verde-claro));
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.menulateralap-btn-cerrar:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.menulateralap-icono-cerrar {
+  font-size: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menulateralap-barradash {
+    width: 260px;
+  }
+}

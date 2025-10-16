@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./styles/aprendicesCargados.css";
-import { FaUserGraduate } from "react-icons/fa"; 
+import { FaUserGraduate, FaChevronUp, FaChevronDown, FaPhone, FaIdCard, FaGraduationCap, FaClock } from "react-icons/fa"; 
 
 export default function AprendicesCargados() {
   type AprendizConUsuario = {
@@ -26,6 +26,9 @@ export default function AprendicesCargados() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [busqueda, setBusqueda] = useState<string>("");
+  const [paginaActual, setPaginaActual] = useState<number>(1);
+  const [itemsPorPagina] = useState<number>(15);
+  const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
 
   const safeStr = (v: any) =>
     v === null || v === undefined ? "" : String(v).trim();
@@ -138,6 +141,70 @@ const aprendicesFiltrados = aprendices.filter((a) => {
   );
 });
 
+  // Cálculos de paginación
+  const totalPaginas = Math.ceil(aprendicesFiltrados.length / itemsPorPagina);
+  const indiceInicio = (paginaActual - 1) * itemsPorPagina;
+  const indiceFin = indiceInicio + itemsPorPagina;
+  const aprendicesPaginados = aprendicesFiltrados.slice(indiceInicio, indiceFin);
+
+  // Resetear a página 1 cuando cambia la búsqueda
+  React.useEffect(() => {
+    setPaginaActual(1);
+  }, [busqueda]);
+
+  const irAPagina = (pagina: number) => {
+    if (pagina >= 1 && pagina <= totalPaginas) {
+      setPaginaActual(pagina);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const generarBotonesPaginacion = () => {
+    const botones: (number | string)[] = [];
+    const rango = 2; // Mostrar 2 páginas a cada lado de la actual
+
+    if (totalPaginas <= 7) {
+      // Si hay pocas páginas, mostrar todas
+      for (let i = 1; i <= totalPaginas; i++) {
+        botones.push(i);
+      }
+    } else {
+      // Siempre mostrar primera página
+      botones.push(1);
+
+      if (paginaActual > rango + 2) {
+        botones.push('...');
+      }
+
+      // Páginas alrededor de la actual
+      const inicio = Math.max(2, paginaActual - rango);
+      const fin = Math.min(totalPaginas - 1, paginaActual + rango);
+
+      for (let i = inicio; i <= fin; i++) {
+        botones.push(i);
+      }
+
+      if (paginaActual < totalPaginas - rango - 1) {
+        botones.push('...');
+      }
+
+      // Siempre mostrar última página
+      botones.push(totalPaginas);
+    }
+
+    return botones;
+  };
+
+  const toggleExpand = (key: string) => {
+    const newExpandidos = new Set(expandidos);
+    if (newExpandidos.has(key)) {
+      newExpandidos.delete(key);
+    } else {
+      newExpandidos.add(key);
+    }
+    setExpandidos(newExpandidos);
+  };
+
  return (
   <div className="apc-contenedor">
     <div className="apc-header">
@@ -173,36 +240,126 @@ const aprendicesFiltrados = aprendices.filter((a) => {
     </div>
 
     {aprendicesFiltrados.length > 0 ? (
-      <div className="apc-tabla-wrapper">
-        <table className="apc-tabla">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Teléfono</th>
-              <th>Documento</th>
-              <th>Ficha</th>
-              <th>Programa</th>
-              <th>Jornada</th>
-            </tr>
-          </thead>
-          <tbody>
-            {aprendicesFiltrados.map((a, i) => (
-              <tr key={a.__key}>
-                <td>{i + 1}</td>
-                <td>{a.usuario?.Nombre} {a.usuario?.Apellido}</td>
-                <td>{a.usuario?.Correo ?? "-"}</td>
-                <td>{a.usuario?.Telefono ?? "-"}</td>
-                <td>{a.usuario?.Documento ?? "-"}</td>
-                <td>{a.Ficha ?? "-"}</td>
-                <td>{a.ProgramaFormacion ?? "-"}</td>
-                <td>{a.Jornada ?? "-"}</td>
+      <>
+        <div className="apc-info-paginacion">
+          <p className="apc-info-texto">
+            Mostrando <strong>{indiceInicio + 1}</strong> a <strong>{Math.min(indiceFin, aprendicesFiltrados.length)}</strong> de <strong>{aprendicesFiltrados.length}</strong> aprendices
+          </p>
+        </div>
+
+        <div className="apc-tabla-wrapper">
+          <table className="apc-tabla">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Ficha</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {aprendicesPaginados.map((a, i) => (
+                <React.Fragment key={a.__key}>
+                  <tr>
+                    <td>{indiceInicio + i + 1}</td>
+                    <td>
+                      <div className="apc-nombre-cell">
+                        <span className="apc-nombre-completo">{a.usuario?.Nombre} {a.usuario?.Apellido}</span>
+                      </div>
+                    </td>
+                    <td>{a.usuario?.Correo ?? "-"}</td>
+                    <td>
+                      <span className="apc-badge-ficha">{a.Ficha ?? "-"}</span>
+                    </td>
+                    <td>
+                      <button 
+                        className="apc-btn-expandir"
+                        onClick={() => toggleExpand(a.__key!)}
+                        title={expandidos.has(a.__key!) ? "Ocultar detalles" : "Ver detalles"}
+                      >
+                        {expandidos.has(a.__key!) ? (
+                          <>
+                            <span className="apc-icono-flecha"><FaChevronUp /></span> Ocultar
+                          </>
+                        ) : (
+                          <>
+                            <span className="apc-icono-flecha"><FaChevronDown /></span> Ver más
+                          </>
+                        )}
+                      </button>
+                    </td>
+                  </tr>
+                  {expandidos.has(a.__key!) && (
+                    <tr className="apc-fila-expandida">
+                      <td colSpan={5}>
+                        <div className="apc-detalles">
+                          <div className="apc-detalles-grid">
+                            <div className="apc-detalle-item">
+                              <span className="apc-detalle-label"><FaPhone /> Teléfono:</span>
+                              <span className="apc-detalle-valor">{a.usuario?.Telefono || "No especificado"}</span>
+                            </div>
+                            <div className="apc-detalle-item">
+                              <span className="apc-detalle-label"><FaIdCard /> Documento:</span>
+                              <span className="apc-detalle-valor">{a.usuario?.Documento || "No especificado"}</span>
+                            </div>
+                            <div className="apc-detalle-item">
+                              <span className="apc-detalle-label"><FaGraduationCap /> Programa:</span>
+                              <span className="apc-detalle-valor">{a.ProgramaFormacion || "No especificado"}</span>
+                            </div>
+                            <div className="apc-detalle-item">
+                              <span className="apc-detalle-label"><FaClock /> Jornada:</span>
+                              <span className="apc-detalle-valor">{a.Jornada || "No especificado"}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {totalPaginas > 1 && (
+          <div className="apc-paginacion">
+            <button
+              className="apc-btn-paginacion apc-btn-prev"
+              onClick={() => irAPagina(paginaActual - 1)}
+              disabled={paginaActual === 1}
+              title="Página anterior"
+            >
+              ‹ Anterior
+            </button>
+
+            <div className="apc-numeros-paginacion">
+              {generarBotonesPaginacion().map((boton, idx) => (
+                boton === '...' ? (
+                  <span key={`dots-${idx}`} className="apc-dots">...</span>
+                ) : (
+                  <button
+                    key={boton}
+                    className={`apc-btn-numero ${paginaActual === boton ? 'activo' : ''}`}
+                    onClick={() => irAPagina(boton as number)}
+                  >
+                    {boton}
+                  </button>
+                )
+              ))}
+            </div>
+
+            <button
+              className="apc-btn-paginacion apc-btn-next"
+              onClick={() => irAPagina(paginaActual + 1)}
+              disabled={paginaActual === totalPaginas}
+              title="Página siguiente"
+            >
+              Siguiente ›
+            </button>
+          </div>
+        )}
+      </>
     ) : (
       !loading && <p className="apc-no-data">No hay aprendices que coincidan con la búsqueda.</p>
     )}

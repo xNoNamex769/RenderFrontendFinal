@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import './styles/FeedbackStyle.css';
-import axios from 'axios';
+import axios from "axios";
+import Swal from "sweetalert2";
+import { FaStar, FaComments, FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import "./styles/FeedbackStyle.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { FaPaperPlane, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface Usuario {
   Nombre: string;
@@ -115,7 +118,12 @@ export default function Feedbacks() {
   // Enviar feedback
   const enviarFeedback = async () => {
     if (!feedback.trim() || calificacion === 0) {
-      alert("Completa el feedback y selecciona una calificación.");
+      Swal.fire({
+        icon: "warning",
+        title: "Campos incompletos",
+        text: "Completa el feedback y selecciona una calificación.",
+        confirmButtonColor: "#5eb319",
+      });
       return;
     }
     try {
@@ -126,13 +134,24 @@ export default function Feedbacks() {
         Calificacion: calificacion,
         FechaEnvio: new Date()
       });
-      alert("✅ Feedback enviado");
+      Swal.fire({
+        icon: "success",
+        title: "¡Éxito!",
+        text: "Feedback enviado",
+        confirmButtonColor: "#5eb319",
+        timer: 2500,
+      });
       setFeedback("");
       setCalificacion(0);
       obtenerFeedbacks(actividadActual.IdActividad);
     } catch (err) {
       console.error("Error al enviar feedback:", err);
-      alert("❌ No se pudo enviar el feedback.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo enviar el feedback.",
+        confirmButtonColor: "#5eb319",
+      });
     }
   };
 
@@ -154,82 +173,193 @@ export default function Feedbacks() {
   };
 
   return (
-    <div className="carousel-container">
-      <h2>FEEDBACK DE ACTIVIDADES</h2>
+    <div className="fb-feedback-container">
+      {/* Header mejorado */}
+      <header className="fb-feedback-header">
+       
+        <div className="fb-header-content">
+          <h1 className="fb-feedback-titulo"><FaComments /> Feedback de Actividades</h1>
+          <p className="fb-feedback-subtitulo">
+            Comparte tu experiencia y ayuda a mejorar nuestras actividades
+          </p>
+        </div>
+      </header>
 
       {actividadActual && (
-        <div className="carousel">
+        <div className="fb-actividad-card">
+          {/* Navegación */}
+          <button 
+            className="fb-nav-btn fb-nav-prev" 
+            onClick={() => cambiarSlide(index > 0 ? index - 1 : actividades.length - 1)}
+            disabled={actividades.length <= 1}
+          >
+            <FaChevronLeft />
+          </button>
+          <button 
+            className="fb-nav-btn fb-nav-next" 
+            onClick={() => cambiarSlide(index < actividades.length - 1 ? index + 1 : 0)}
+            disabled={actividades.length <= 1}
+          >
+            <FaChevronRight />
+          </button>
+
           {/* Imagen de la actividad */}
-          <img
-            src={actividadActual.Imagen || "https://via.placeholder.com/300x200"}
-            alt={actividadActual.NombreActi}
-            className="carousel-image"
-          />
-
-          {/* Información + comentarios */}
-          <div className="actividad-info">
-            <div>
-              <h3>{actividadActual.NombreActi} ⭐ {promedio()}/5</h3>
-              <p>{actividadActual.Descripcion}</p>
-              <p>📍 {actividadActual.Ubicacion}</p>
-              <p>🗓️ {formatearFecha(actividadActual.FechaInicio)} — {formatearFecha(actividadActual.FechaFin)}</p>
-              <p>🕒 {formatearHora(actividadActual.HoraInicio)} - {formatearHora(actividadActual.HoraFin)}</p>
+          <div className="fb-actividad-imagen-wrapper">
+            <img
+              src={actividadActual.Imagen || "https://via.placeholder.com/300x200"}
+              alt={actividadActual.NombreActi}
+              className="fb-actividad-imagen"
+            />
+            <div className="fb-imagen-overlay">
+              <div className="fb-rating-badge">
+                <FaStar /> {promedio()}/5
+              </div>
             </div>
+          </div>
 
-            {/* Lista de comentarios */}
-            <div className="feedback-lista">
-              <h4>🗣️ Comentarios:</h4>
-              {feedbacks.length === 0 ? (
-                <p className="text-muted">Aún no hay comentarios.</p>
+          {/* Información de la actividad */}
+          <div className="actividad-content">
+            <div className="actividad-header">
+              <h2 className="actividad-nombre">{actividadActual.NombreActi}</h2>
+              {actividadActiva() ? (
+                <span className="badge-activa">🟢 Activa</span>
               ) : (
-                feedbacks.map((fb, i) => (
-                  <div key={i} className="feedback-item">
-                    <img
-                      src={fb.usuario?.Imagen || "https://via.placeholder.com/50"}
-                      alt={fb.usuario?.Nombre || "Anónimo"}
-                      className="feedback-user-img"
-                    />
-                    <p><strong>{fb.usuario?.Nombre || "Anónimo"}:</strong> {fb.ComentarioFeedback}</p>
-                    <p>{"⭐".repeat(fb.Calificacion || 0)}</p>
-                  </div>
-                ))
+                <span className="badge-finalizada">🔴 Finalizada</span>
               )}
             </div>
 
-            {/* Formulario para dejar feedback */}
-            {actividadActiva() ? (
-              <div className="feedback-form">
-                <h4>📝 Deja tu feedback:</h4>
-                <div className="estrellas-selector">
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <span
-                      key={n}
-                      className={n <= calificacion ? "estrella activa" : "estrella"}
-                      onClick={() => setCalificacion(n)}
-                    >★</span>
+            <p className="actividad-descripcion">{actividadActual.Descripcion}</p>
+
+            <div className="actividad-detalles">
+              <div className="detalle-item">
+                <FaMapMarkerAlt />
+                <span>{actividadActual.Ubicacion}</span>
+              </div>
+              <div className="detalle-item">
+                <FaCalendarAlt />
+                <span>{formatearFecha(actividadActual.FechaInicio)} - {formatearFecha(actividadActual.FechaFin)}</span>
+              </div>
+              <div className="detalle-item">
+                <FaClock />
+                <span>{formatearHora(actividadActual.HoraInicio)} - {formatearHora(actividadActual.HoraFin)}</span>
+              </div>
+            </div>
+
+            {/* Lista de comentarios mejorada */}
+            <div className="comentarios-section">
+              <div className="comentarios-header">
+                <h3>💬 Comentarios ({feedbacks.length})</h3>
+              </div>
+              
+              {feedbacks.length === 0 ? (
+                <div className="no-comentarios">
+                  <FaComments size={50} />
+                  <p>Aún no hay comentarios</p>
+                  <span>Sé el primero en compartir tu experiencia</span>
+                </div>
+              ) : (
+                <div className="comentarios-lista">
+                  {feedbacks.map((fb, i) => (
+                    <div key={i} className="comentario-card">
+                      <div className="comentario-header">
+                        <img
+                          src={fb.usuario?.Imagen || "https://via.placeholder.com/50"}
+                          alt={fb.usuario?.Nombre || "Anónimo"}
+                          className="comentario-avatar"
+                        />
+                        <div className="comentario-info">
+                          <strong className="comentario-nombre">{fb.usuario?.Nombre || "Anónimo"}</strong>
+                          <div className="comentario-rating">
+                            {[...Array(5)].map((_, idx) => (
+                              <FaStar 
+                                key={idx} 
+                                className={idx < (fb.Calificacion || 0) ? "star-filled" : "star-empty"}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <p className="comentario-texto">{fb.ComentarioFeedback}</p>
+                    </div>
                   ))}
                 </div>
-                <textarea
-                  rows={3}
-                  placeholder="Escribe tu opinión..."
-                  value={feedback}
-                  onChange={(e) => setFeedback(e.target.value)}
-                />
-                <button onClick={enviarFeedback}>Enviar Feedback</button>
+              )}
+            </div>
+
+            {/* Formulario para dejar feedback mejorado */}
+            {actividadActiva() ? (
+              <div className="form-section">
+                <h3 className="form-titulo">📝 Deja tu Feedback</h3>
+                <div className="form-content">
+                  <div className="rating-selector">
+                    <label>Tu calificación:</label>
+                    <div className="stars-selector">
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <FaStar
+                          key={n}
+                          className={n <= calificacion ? "star-selected" : "star-unselected"}
+                          onClick={() => setCalificacion(n)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="textarea-wrapper">
+                    <textarea
+                      rows={4}
+                      placeholder="Comparte tu experiencia sobre esta actividad..."
+                      value={feedback}
+                      onChange={(e) => setFeedback(e.target.value)}
+                      className="feedback-textarea"
+                    />
+                  </div>
+                  <button className="btn-enviar" onClick={enviarFeedback}>
+                    <FaPaperPlane /> Enviar Feedback
+                  </button>
+                </div>
               </div>
             ) : (
-              <p className="text-muted">🔒 Actividad terminada - se cerraron los comentarios.</p>
+              <div className="actividad-cerrada">
+                <p>🔒 Esta actividad ha finalizado y los comentarios están cerrados</p>
+              </div>
             )}
           </div>
         </div>
       )}
 
-      {/* Indicadores de slide */}
-      <div className="carousel-indicators">
-        {actividades.map((_, i) => (
-          <button key={i} className={i === index ? "active" : ""} onClick={() => cambiarSlide(i)}></button>
-        ))}
-      </div>
+      {/* Paginación mejorada */}
+      {actividades.length > 1 && (
+        <div className="paginacion-wrapper">
+          <div className="paginacion-info">
+            <span className="pagina-actual">{index + 1}</span>
+            <span className="separador">/</span>
+            <span className="total-paginas">{actividades.length}</span>
+          </div>
+          <div className="carousel-dots">
+            {actividades.map((_, i) => (
+              <button 
+                key={i} 
+                className={`dot ${i === index ? "dot-active" : ""}`} 
+                onClick={() => cambiarSlide(i)}
+                aria-label={`Ir a actividad ${i + 1}`}
+              />
+            ))}
+          </div>
+          <div className="paginacion-botones">
+            <button 
+              className="btn-pag btn-anterior"
+              onClick={() => cambiarSlide(index > 0 ? index - 1 : actividades.length - 1)}
+            >
+              ← Anterior
+            </button>
+            <button 
+              className="btn-pag btn-siguiente"
+              onClick={() => cambiarSlide(index < actividades.length - 1 ? index + 1 : 0)}
+            >
+              Siguiente →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

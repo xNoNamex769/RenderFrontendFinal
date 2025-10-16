@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import './style/Administrador.css';
 import {
   PieChart,
@@ -21,7 +22,15 @@ const Administrador = () => {
   useEffect(() => {
     axios.get('https://render-hhyo.onrender.com/api/solicitudapoyo')
       .then((res) => setSolicitudes(res.data))
-      .catch((err) => console.error('Error al obtener solicitudes:', err));
+      .catch((err) => {
+        console.error('Error al obtener solicitudes:', err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudieron cargar las solicitudes",
+          confirmButtonColor: "#5eb319",
+        });
+      });
   }, []);
 
   const resumenPorEstado = solicitudes.reduce((acc, solicitud) => {
@@ -57,6 +66,12 @@ const Administrador = () => {
       setHistorialVisible((prev) => ({ ...prev, [idSolicitud]: !prev[idSolicitud] }));
     } catch (err) {
       console.error('Error al obtener historial:', err);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo cargar el historial",
+        confirmButtonColor: "#5eb319",
+      });
     }
   };
 

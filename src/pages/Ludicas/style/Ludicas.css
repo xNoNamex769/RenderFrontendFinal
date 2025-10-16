@@ -280,3 +280,333 @@
 .ludicas-footer {
   height: 50px;
 }
+
+/* ========================================
+   MEJORAS LÚDICAS - CLASES ÚNICAS
+======================================== */
+
+/* Header mejorado */
+.ludicas-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ludicas-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+  box-shadow: 0 8px 24px rgba(94, 179, 25, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Estadísticas */
+.ludicas-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ludicas-stat-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  border: 2px solid #e5e7eb;
+}
+
+.ludicas-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: #5eb319;
+}
+
+.ludicas-stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.ludicas-stat-icon-green {
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+}
+
+.ludicas-stat-icon-red {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.ludicas-stat-icon-blue {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.ludicas-stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ludicas-stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+}
+
+.ludicas-stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Buscador mejorado */
+.ludicas-search-barr {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.ludicas-search-icon {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 1.125rem;
+}
+
+.ludicas-search-barr input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.5rem;
+  border-radius: 999px;
+  border: 2px solid #e5e7eb;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+}
+
+.ludicas-search-barr input:focus {
+  border-color: #5eb319;
+  box-shadow: 0 0 0 4px rgba(94, 179, 25, 0.1);
+}
+
+/* Filtros de categorías mejorados */
+.ludicas-categorias-filter {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.ludicas-categoria-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: 2px solid #e5e7eb;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.ludicas-categoria-btn:hover {
+  background-color: #f3f4f6;
+  border-color: #5eb319;
+  transform: translateY(-2px);
+}
+
+.ludicas-categoria-btn.ludicas-categoria-active {
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+  color: #fff;
+  border-color: #5eb319;
+}
+
+/* Paginación mejorada */
+.ludicas-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0 2rem;
+}
+
+.ludicas-pag-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: white;
+  color: #374151;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ludicas-pag-btn:hover:not(:disabled) {
+  background: #5eb319;
+  color: white;
+  border-color: #5eb319;
+  transform: translateY(-2px);
+}
+
+.ludicas-pag-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ludicas-pag-info {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+/* Modal mejorado */
+.ludicas-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.ludicas-modal-content {
+  background: white;
+  border-radius: 1.5rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.ludicas-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #374151;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.ludicas-modal-close:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+  transform: rotate(90deg);
+}
+
+.ludicas-modal-image-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.ludicas-modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ludicas-modal-body {
+  padding: 2rem;
+}
+
+.ludicas-modal-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.ludicas-modal-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+  color: white;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.ludicas-modal-details p {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.ludicas-modal-details svg {
+  color: #5eb319;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ludicas-header-top {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ludicas-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ludicas-stat-number {
+    font-size: 1.5rem;
+  }
+}

@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import "./styles/DetallesAlquiler.css"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { FaClipboardList, FaChartBar, FaCheckCircle, FaSearch, FaThumbtack, FaCheck, FaTimes, FaEdit, FaSave } from "react-icons/fa";
+import "./styles/DetallesAlquiler.css";
 const BACKEND_URL = "https://render-hhyo.onrender.com/api";
 
 const DetallesAlquiler = () => {
@@ -83,90 +85,150 @@ const DetallesAlquiler = () => {
     (registro.Estado?.toLowerCase() || "").includes(searchEstado.toLowerCase())
   );
 
-  return (
-    <div className="contenedor-alquiler">
-      <h1> Registros de Préstamos</h1>
- <p className="descripcion-alquiler">
-        En esta sección se muestran todos los registros de préstamo de elementos realizados por los aprendices. 
-        Aquí puedes buscar préstamos por nombre, ficha o estado, marcar los elementos como entregados cuando 
-        se devuelvan correctamente, y agregar o editar observaciones relacionadas con cada préstamo.
-      </p>
-      <input
-        type="text"
-        placeholder="Buscar por elemento, aprendiz o ficha"
-        value={searchNombre}
-        onChange={(e) => setSearchNombre(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Filtrar por estado (En uso, Entregado)"
-        value={searchEstado}
-        onChange={(e) => setSearchEstado(e.target.value)}
-      />
+  const totalEntregados = registrosAlquiler.filter(r => r.CumplioConEntrega).length;
 
-      <table className="tabla-alquiler">
-        <thead>
-          <tr>
-            <th>Elemento</th>
-            <th>Aprendiz</th>
-            <th>Ficha</th>
-            <th>Programa</th>
-            <th>Estado</th>
-            <th>Cumplió Entrega</th>
-            <th>Observaciones</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredRegistros.map((registro) => (
-            <tr key={registro.IdAlquiler}>
-              <td>{registro.NombreElemento}</td>
-              <td>{registro.usuario?.Nombre || "Sin nombre"}</td>
-              <td>{registro.usuario?.aprendiz?.Ficha || "Sin ficha"}</td>
-              <td>{registro.usuario?.aprendiz?.ProgramaFormacion || "Sin programa"}</td>
-              <td>{registro.Estado || "En uso"}</td>
-              <td>{registro.CumplioConEntrega ? "Sí" : "No"}</td>
-              <td>{registro.Observaciones || "Sin observaciones"}</td>
-              <td>
-                {!registro.CumplioConEntrega && (
-                  <button className='btn-cosas-xd' onClick={() => marcarComoEntregado(registro.IdAlquiler)}>
-                    Marcar como entregado
-                  </button>
-                )}
-                <button className='btn-cosas-xd'
-                  style={{ marginLeft: '8px' }}
-                  onClick={() => abrirModalEdicion(registro.IdAlquiler, registro.Observaciones)}
-                >
-                  Editar observaciones
-                </button>
-              </td>
-            </tr>
-          ))}
-          {filteredRegistros.length === 0 && (
+  return (
+    <div className="det-alq-wrapper">
+      {/* Header */}
+      <div className="det-alq-header">
+        <h1 className="det-alq-title"><FaClipboardList /> Registros de Préstamos</h1>
+        <p className="det-alq-subtitle">Gestiona todos los préstamos de elementos realizados por los aprendices</p>
+      </div>
+
+      {/* Estadísticas */}
+      <div className="det-alq-stats">
+        <div className="det-alq-stat-card">
+          <div className="det-alq-stat-icon"><FaChartBar /></div>
+          <div className="det-alq-stat-content">
+            <span className="det-alq-stat-value">{registrosAlquiler.length}</span>
+            <span className="det-alq-stat-label">Total Préstamos</span>
+          </div>
+        </div>
+        <div className="det-alq-stat-card">
+          <div className="det-alq-stat-icon"><FaCheckCircle /></div>
+          <div className="det-alq-stat-content">
+            <span className="det-alq-stat-value">{totalEntregados}</span>
+            <span className="det-alq-stat-label">Devueltos</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Filtros */}
+      <div className="det-alq-filters">
+        <div className="det-alq-filter-group">
+          <label className="det-alq-filter-label"><FaSearch /> Buscar</label>
+          <input
+            type="text"
+            className="det-alq-filter-input"
+            placeholder="Buscar por elemento, aprendiz o ficha..."
+            value={searchNombre}
+            onChange={(e) => setSearchNombre(e.target.value)}
+          />
+        </div>
+        <div className="det-alq-filter-group">
+          <label className="det-alq-filter-label"><FaThumbtack /> Estado</label>
+          <input
+            type="text"
+            className="det-alq-filter-input"
+            placeholder="Filtrar por estado..."
+            value={searchEstado}
+            onChange={(e) => setSearchEstado(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {/* Tabla */}
+      <div className="det-alq-table-container">
+        <table className="det-alq-table">
+          <thead className="det-alq-table-head">
             <tr>
-              <td colSpan="8" style={{ textAlign: 'center' }}>
-                No se encontraron registros que coincidan con la búsqueda.
-              </td>
+              <th>Elemento</th>
+              <th>Aprendiz</th>
+              <th>Ficha</th>
+              <th>Programa</th>
+              <th>Estado</th>
+              <th>Entrega</th>
+              <th>Observaciones</th>
+              <th>Acciones</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="det-alq-table-body">
+            {filteredRegistros.map((registro) => (
+              <tr key={registro.IdAlquiler} className="det-alq-table-row">
+                <td className="det-alq-table-cell">
+                  <span className="det-alq-element-name">{registro.NombreElemento}</span>
+                </td>
+                <td className="det-alq-table-cell">{registro.usuario?.Nombre || "Sin nombre"}</td>
+                <td className="det-alq-table-cell">
+                  <span className="det-alq-ficha-badge">{registro.usuario?.aprendiz?.Ficha || "N/A"}</span>
+                </td>
+                <td className="det-alq-table-cell det-alq-programa">
+                  {registro.usuario?.aprendiz?.ProgramaFormacion || "Sin programa"}
+                </td>
+                <td className="det-alq-table-cell">
+                  {registro.Estado ? (
+                    <span className={`det-alq-status-badge ${registro.Estado === 'Entregado' ? 'entregado' : 'en-uso'}`}>
+                      {registro.Estado}
+                    </span>
+                  ) : (
+                    <span className="det-alq-text-muted">-</span>
+                  )}
+                </td>
+                <td className="det-alq-table-cell">
+                  {registro.Estado ? (
+                    <span className={`det-alq-check-badge ${registro.CumplioConEntrega ? 'si' : 'no'}`}>
+                      {registro.CumplioConEntrega ? <><FaCheck /> Sí</> : <><FaTimes /> No</>}
+                    </span>
+                  ) : (
+                    <span className="det-alq-text-muted">-</span>
+                  )}
+                </td>
+                <td className="det-alq-table-cell det-alq-observaciones">
+                  {registro.Observaciones || "Sin observaciones"}
+                </td>
+                <td className="det-alq-table-cell det-alq-actions">
+                  {!registro.CumplioConEntrega && (
+                    <button className='det-alq-btn det-alq-btn-entregar' onClick={() => marcarComoEntregado(registro.IdAlquiler)}>
+                      <FaCheck /> Marcar como Devuelto
+                    </button>
+                  )}
+                  <button className='det-alq-btn det-alq-btn-editar' onClick={() => abrirModalEdicion(registro.IdAlquiler, registro.Observaciones)}>
+                    <FaEdit /> Editar
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {filteredRegistros.length === 0 && (
+              <tr>
+                <td colSpan="8" className="det-alq-empty-state">
+                  <div className="det-alq-empty-icon"><FaSearch /></div>
+                  <p>No se encontraron registros</p>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {/* Modal */}
       {modalVisible && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Editar Observaciones</h2>
+        <div className="det-alq-modal-overlay" onClick={() => setModalVisible(false)}>
+          <div className="det-alq-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="det-alq-modal-close" onClick={() => setModalVisible(false)}><FaTimes /></button>
+            <h2 className="det-alq-modal-title"><FaEdit /> Editar Observaciones</h2>
             <textarea
+              className="det-alq-modal-textarea"
               value={observacionEdit}
               onChange={(e) => setObservacionEdit(e.target.value)}
               rows={5}
-              style={{ width: '100%' }}
+              placeholder="Escribe las observaciones aquí..."
             />
-            <div style={{ marginTop: '1rem' }}>
-              <button onClick={guardarObservacion}>Guardar</button>
-              <button onClick={() => setModalVisible(false)} style={{ marginLeft: '1rem' }}>
-                Cancelar
+            <div className="det-alq-modal-actions">
+              <button className="det-alq-modal-btn det-alq-modal-btn-save" onClick={guardarObservacion}>
+                <FaSave /> Guardar
+              </button>
+              <button className="det-alq-modal-btn det-alq-modal-btn-cancel" onClick={() => setModalVisible(false)}>
+                <FaTimes /> Cancelar
               </button>
             </div>
           </div>

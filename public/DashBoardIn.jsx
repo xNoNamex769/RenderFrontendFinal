@@ -33,6 +33,7 @@ import "../src/styles/Resposive.css";
 import "../src/styles/global.css";
 import AsistentesEventos from "../src/pages/Asistencia/Instructor/AsistentesEventos";
 import Noticias from "../src/pages/Noticias/Noticias";
+import EventoAnalisisIA from "../src/pages/EventoAnalisis/EventoAnalisisIA";
 export default function DashBoard() {
   const [menuAbierto, setMenuAbierto] = useState(true);
   const [contenidoActual, setContenidoActual] = useState("userviewin");
@@ -102,6 +103,7 @@ export default function DashBoard() {
           {contenidoActual === "asistenciaseventos" && <AsistentesEventos/>}
          {contenidoActual === "panelfeedback" && <PanelFeedback />}
           {contenidoActual === "noticias" && <Noticias />}
+        {contenidoActual === "analisis-eventos" && <EventoAnalisisIA />}
        {contenidoActual === "config" && (
   <ConfigViewIn
     setContenidoActual={handleSetContenido}

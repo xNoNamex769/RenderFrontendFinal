@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function HeroHomeSection() {
   let images = [
     "url(./img/fondocol.jpg)",
-    "url(./img/fondoef.jpg)",
+    "url(./img/pruebafondo.png)",
     "url(./img/portada2.jpg)",
   ];
   

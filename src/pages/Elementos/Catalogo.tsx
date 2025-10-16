@@ -38,7 +38,7 @@ const CatalogoDisponible = () => {
         {catalogo.map((el) => (
           <div key={el.IdElemento} className="card-elemento">
             <img
-              src={`http://localhost:3001/uploads/${el.Imagen}`}
+              src={`https://render-hhyo.onrender.com/uploads/${el.Imagen}`}
               alt={el.NombreElemento}
               className="img-elemento"
             />

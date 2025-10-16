@@ -1,6 +1,7 @@
   import React, { useEffect } from "react";
   import { useSearchParams, useNavigate } from "react-router-dom";
   import axios from "axios";
+  import Swal from "sweetalert2";
 
   export default function Asistencia() {
     const [searchParams] = useSearchParams();
@@ -12,8 +13,12 @@
       const token = localStorage.getItem("token");
 
       if (!token) {
-        alert("❌ Debes iniciar sesión para registrar asistencia.");
-        navigate("/iniciosesion");
+        Swal.fire({
+          icon: "warning",
+          title: "Sesión requerida",
+          text: "Debes iniciar sesión para registrar asistencia.",
+          confirmButtonColor: "#5eb319",
+        }).then(() => navigate("/iniciosesion"));
         return;
       }
 
@@ -28,17 +33,30 @@
             { headers: { Authorization: `Bearer ${token}` } }
           )
           .then((res) => {
-            alert(res.data.msg || "✅ Asistencia registrada correctamente.");
-            navigate("/iniciosesion");
+            Swal.fire({
+              icon: "success",
+              title: "¡Éxito!",
+              text: res.data.msg || "Asistencia registrada correctamente.",
+              confirmButtonColor: "#5eb319",
+              timer: 2500,
+            }).then(() => navigate("/iniciosesion"));
           })
           .catch((err) => {
             console.error(err);
-            alert("❌ Error al registrar asistencia.");
-            navigate("/");
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Error al registrar asistencia.",
+              confirmButtonColor: "#5eb319",
+            }).then(() => navigate("/"));
           });
       } else {
-        alert("❌ Faltan parámetros en la URL.");
-        navigate("/");
+        Swal.fire({
+          icon: "error",
+          title: "Parámetros faltantes",
+          text: "Faltan parámetros en la URL.",
+          confirmButtonColor: "#5eb319",
+        }).then(() => navigate("/"));
       }
     }, []);
 

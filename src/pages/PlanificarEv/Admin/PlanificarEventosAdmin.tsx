@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { FaCheck, FaTimes, FaCheckCircle, FaClock, FaCalendarAlt } from "react-icons/fa";
 import "../styles/AdminEventos.css";
 
 interface Usuario {
@@ -97,7 +99,7 @@ const PlanificacionesEventos: React.FC = () => {
 
   return (
     <div className="pe-contenedor">
-      <h2 className="pe-titulo">🗓️ Planificaciones de Eventos</h2>
+      <h2 className="pe-titulo"><FaCalendarAlt /> Planificaciones de Eventos</h2>
 
       {mensaje && <p className="pe-mensaje">{mensaje}</p>}
 
@@ -107,13 +109,13 @@ const PlanificacionesEventos: React.FC = () => {
           className={pestanaActiva === "pendientes" ? "pe-tab pe-tab-activa" : "pe-tab"}
           onClick={() => setPestanaActiva("pendientes")}
         >
-          ⏳ Pendientes
+          <FaClock /> Pendientes
         </button>
         <button
           className={pestanaActiva === "aprobados" ? "pe-tab pe-tab-activa" : "pe-tab"}
           onClick={() => setPestanaActiva("aprobados")}
         >
-          ✅ Aprobados
+          <FaCheckCircle /> Aprobados
         </button>
       </div>
 
@@ -121,7 +123,7 @@ const PlanificacionesEventos: React.FC = () => {
       {modalRechazoId && (
         <div className="modal-imagen-fondo" onClick={() => setModalRechazoId(null)}>
           <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-cerrar" onClick={() => setModalRechazoId(null)}>✖</button>
+            <button className="modal-cerrar" onClick={() => setModalRechazoId(null)}><FaTimes /></button>
             <h3>Motivo del rechazo</h3>
             <textarea
               rows={4}
@@ -138,7 +140,12 @@ const PlanificacionesEventos: React.FC = () => {
                   setModalRechazoId(null);
                   setMotivoRechazo("");
                 } else {
-                  alert("Debes escribir un motivo de rechazo.");
+                  Swal.fire({
+                    icon: "warning",
+                    title: "Motivo requerido",
+                    text: "Debes escribir un motivo de rechazo.",
+                    confirmButtonColor: "#5eb319",
+                  });
                 }
               }}
             >
@@ -186,8 +193,8 @@ const PlanificacionesEventos: React.FC = () => {
               <td>{e.usuario.rol?.NombreRol || "N/A"}</td>
               <td>
                 {e.gestionEvento?.Aprobar === "Pendiente"
-                  ? "⏳ Pendiente"
-                  : "✅ Aprobado"}
+                  ? <><FaClock /> Pendiente</>
+                  : <><FaCheckCircle /> Aprobado</>}
               </td>
               <td>
                 {e.gestionEvento?.Aprobar === "Pendiente" ? (
@@ -198,21 +205,26 @@ const PlanificacionesEventos: React.FC = () => {
                         if (e.gestionEvento?.IdGestionE) {
                           aprobarEvento(e.gestionEvento.IdGestionE);
                         } else {
-                          alert("❌ No se encontró el ID de gestión del evento.");
+                          Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "No se encontró el ID de gestión del evento.",
+                            confirmButtonColor: "#5eb319",
+                          });
                         }
                       }}
                     >
-                      ✅ Aprobar
+                      <FaCheck /> Aprobar
                     </button>
                     <button
                       className="pe-boton pe-boton-rechazo"
                       onClick={() => setModalRechazoId(e.gestionEvento?.IdGestionE || null)}
                     >
-                      ❌ Rechazar
+                      <FaTimes /> Rechazar
                     </button>
                   </>
                 ) : (
-                  <span style={{ color: "green", fontWeight: "bold" }}>✔️</span>
+                  <span style={{ color: "green", fontWeight: "bold" }}><FaCheck /></span>
                 )}
               </td>
             </tr>
@@ -224,7 +236,7 @@ const PlanificacionesEventos: React.FC = () => {
       {modalImagen && (
         <div className="modal-imagen-fondo" onClick={() => setModalImagen(null)}>
           <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-cerrar" onClick={() => setModalImagen(null)}>✖</button>
+            <button className="modal-cerrar" onClick={() => setModalImagen(null)}><FaTimes /></button>
             <img src={modalImagen} alt="Imagen ampliada" className="modal-imagen" />
           </div>
         </div>

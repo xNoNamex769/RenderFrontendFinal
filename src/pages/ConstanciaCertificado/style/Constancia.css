@@ -26,23 +26,25 @@
   --radius-xs: 6px;
   --radius-sm: 10px;
   --radius-md: 16px;
-  --radius-lg: 24px;
   --spacing-unit: 8px;
   --transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Wrapper Principal - Layout Asimétrico */
+/* Wrapper Principal - Layout Centrado */
 .constancia-wrapper {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
   padding: calc(var(--spacing-unit) * 5);
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: calc(var(--spacing-unit) * 4);
   box-sizing: border-box;
   position: relative;
   overflow-x: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Patrón de fondo sutil */
@@ -63,16 +65,7 @@
 .constancia-wrapper > * {
   position: relative;
   z-index: 1;
-}
-
-/* Layout Desktop - División 30/70 */
-@media (min-width: 1024px) {
-  .constancia-wrapper {
-    grid-template-columns: 380px 1fr;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: calc(var(--spacing-unit) * 5);
-  }
+  width: 100%;
 }
 
 /* Tarjeta Lateral de Progreso - Glass Morphism */
@@ -459,6 +452,284 @@
   font-weight: 700;
 }
 
+/* ===== NUEVOS ESTILOS MEJORADOS ===== */
+
+/* Banner de progreso dentro de la constancia */
+.banner-progreso-constancia {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  padding: calc(var(--spacing-unit) * 4);
+  border-radius: var(--radius-md);
+  margin-bottom: calc(var(--spacing-unit) * 4);
+  box-shadow: var(--shadow-md);
+  border: 3px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-progreso-constancia::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 3);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.banner-icon {
+  flex-shrink: 0;
+  color: var(--primary);
+  background: linear-gradient(135deg, rgba(10, 122, 87, 0.1), rgba(10, 122, 87, 0.05));
+  padding: calc(var(--spacing-unit) * 2);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(10, 122, 87, 0.2);
+}
+
+.banner-text h3 {
+  margin: 0 0 calc(var(--spacing-unit) * 1) 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--negro);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.banner-text p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.banner-text strong {
+  font-weight: 700;
+  color: var(--negro);
+  background: linear-gradient(135deg, rgba(10, 122, 87, 0.1), rgba(10, 122, 87, 0.05));
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+}
+
+/* Icono para mensaje no cumplido */
+.no-cumplido-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, rgba(10, 122, 87, 0.1), rgba(10, 122, 87, 0.05));
+  border-radius: 50%;
+  color: var(--primary);
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Header decorativo de la constancia */
+.constancia-header {
+  text-align: center;
+  margin-bottom: calc(var(--spacing-unit) * 4);
+  position: relative;
+}
+
+.header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  border-radius: 50%;
+  color: white;
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  box-shadow: 0 8px 24px rgba(10, 122, 87, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.titulo-decoracion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing-unit) * 2);
+  margin-top: calc(var(--spacing-unit) * 2);
+}
+
+.decoracion-linea {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.decoracion-icono {
+  color: var(--primary);
+  font-size: 20px;
+}
+
+/* Información del aprendiz destacada */
+.info-aprendiz {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: calc(var(--spacing-unit) * 2);
+  margin-bottom: calc(var(--spacing-unit) * 4);
+  padding: calc(var(--spacing-unit) * 3);
+  background: linear-gradient(135deg, rgba(10, 122, 87, 0.05), rgba(10, 122, 87, 0.02));
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-subtle);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 1);
+}
+
+.info-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* Texto principal mejorado */
+.texto-principal {
+  margin: calc(var(--spacing-unit) * 3) 0;
+  padding: calc(var(--spacing-unit) * 3);
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.highlight-horas {
+  color: var(--primary);
+  font-size: 1.1em;
+  padding: 2px 8px;
+  background: linear-gradient(135deg, rgba(10, 122, 87, 0.1), rgba(10, 122, 87, 0.05));
+  border-radius: var(--radius-xs);
+}
+
+/* Detalles de formación con tarjetas */
+.detalles-formacion {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: calc(var(--spacing-unit) * 2);
+  margin: calc(var(--spacing-unit) * 4) 0;
+}
+
+.detalle-card {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 2);
+  padding: calc(var(--spacing-unit) * 2.5);
+  background: white;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+}
+
+.detalle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.detalle-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.detalle-icon {
+  font-size: 32px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.detalle-content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 0.5);
+  flex: 1;
+}
+
+.detalle-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.detalle-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Información de emisión */
+.info-emision {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: calc(var(--spacing-unit) * 2);
+  margin-top: calc(var(--spacing-unit) * 4);
+  padding: calc(var(--spacing-unit) * 3);
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-radius: var(--radius-md);
+  border: 2px solid #bae6fd;
+}
+
+.emision-item {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 2);
+}
+
+.emision-icon {
+  font-size: 28px;
+  color: var(--primary);
+  min-width: 32px;
+}
+
+.emision-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 0.5);
+}
+
+.emision-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.emision-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ===== FIN NUEVOS ESTILOS ===== */
+
 /* Responsive - Móvil */
 @media (max-width: 1023px) {
   .constancia-wrapper {
@@ -499,6 +770,28 @@
     flex-direction: column;
     text-align: center;
   }
+  
+  .detalles-formacion {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-emision {
+    grid-template-columns: 1fr;
+  }
+  
+  .banner-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .banner-text h3 {
+    font-size: 1.25rem;
+  }
+  
+  .no-cumplido-icon {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 /* Impresión */
@@ -509,7 +802,8 @@
   }
 
   .progreso-info,
-  .btn-descargar {
+  .btn-descargar,
+  .banner-progreso-constancia {
     display: none;
   }
 

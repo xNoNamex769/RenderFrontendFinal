@@ -16,6 +16,7 @@ import VerificarToken from "../public/VerificarToken";
 import Asistencia from "./pages/Asistencia/Asistencia";
 import EscanerQR from "./Components/QrGenerador.jsx/EscanerHtml5QR";
 import Cuenta from "../public/Cuenta";
+import CuentaMejorada from "../public/CuentaMejorada";
 import QRGenerator from "./Components/QrGenerador.jsx/QRGenerator";
 import HistorialAsistencia from "./pages/Asistencia/HistorialAsistencia";
 import QRGeneratorSalida from "./Components/QrGenerador.jsx/QRGeneratorSalida";
@@ -32,6 +33,7 @@ import ToastProvider from "../public/ToastProvider";
 import UsuariosCargados from "../public/UsuariosCargados";
 import Aplicacion from "../src/pages/Aplicacion/Aplicacion"
 import HorasLudicas from "./pages/HorasLudicas/HorasLudicas";
+import EventoAnalisisIA from "./pages/EventoAnalisis/EventoAnalisisIA";
 export default function RutasComponents() {
   return (
     <BrowserRouter>
@@ -41,6 +43,7 @@ export default function RutasComponents() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/cuenta" element={<Cuenta />} />
+            <Route path="/cuenta-mejorada" element={<CuentaMejorada />} />
             <Route path="/registro" element={<Registro />} />
             <Route path="/verificar-token" element={<VerificarToken />} />
             <Route path="/dash" element={<DashBoard />} />
@@ -65,6 +68,7 @@ export default function RutasComponents() {
                <Route path="/aplicacion" element={<Aplicacion />} />
              <Route path="/planevento" element={<PlanificarEvento />} />
                <Route path="/feedback" element={<Feedbacks />} />
+            <Route path="/analisis-eventos" element={<EventoAnalisisIA />} />
           </Routes>
         </IAProvider>
       </AuthProvider>

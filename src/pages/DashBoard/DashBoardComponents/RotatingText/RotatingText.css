@@ -47,7 +47,7 @@
 .rotating-text-main {
   padding-left: 0.5rem;   /* px-2 */
   padding-right: 0.5rem;  /* px-2 */
-  background-color: #19d642; /* bg-cyan-300 */
+  background-color: #5ed619; /* bg-cyan-300 */
   color: black;           /* text-black */
   overflow: hidden;
 
@@ -104,7 +104,7 @@
   }
 }
 .texto-activsena{
-  color: rgb(29, 197, 29);
+  color: rgb(15, 15, 15);
   margin-left: 30px;
   font-size: 30px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

@@ -8,6 +8,14 @@ import {
   FaClock,
   FaPhone,
   FaEnvelope,
+  FaRunning,
+  FaCalendarCheck,
+  FaStar,
+  FaTrophy,
+  FaFire,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaBullseye,
 } from "react-icons/fa";
 import "./styles/UserView.css";
 import axios from "axios";
@@ -46,6 +54,8 @@ export default function UserViewAp({ setContenidoActual }) {
 
   const [actividades, setActividades] = useState([]);
   const [eventos, setEventos] = useState([]);
+  const [totalFeedbacks, setTotalFeedbacks] = useState(0);
+  const [promedioCalificacion, setPromedioCalificacion] = useState(0);
 
   const abrirModal = (titulo, contenido) => {
     setModalContenido({ titulo, contenido });
@@ -133,6 +143,41 @@ export default function UserViewAp({ setContenidoActual }) {
     fetchEventos();
   }, []);
 
+  // Obtener estadísticas del usuario
+  useEffect(() => {
+    const fetchEstadisticas = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const idUsuario = payload.IdUsuario;
+
+        // Obtener feedbacks del usuario
+        const resFeedbacks = await axios.get(
+          "https://render-hhyo.onrender.com/api/feedback"
+        );
+        const feedbacksUsuario = resFeedbacks.data.filter(
+          (fb) => fb.IdUsuario === idUsuario
+        );
+        setTotalFeedbacks(feedbacksUsuario.length);
+
+        // Calcular promedio de calificaciones del usuario
+        if (feedbacksUsuario.length > 0) {
+          const suma = feedbacksUsuario.reduce(
+            (acc, fb) => acc + (fb.Calificacion || 0),
+            0
+          );
+          const promedio = suma / feedbacksUsuario.length;
+          setPromedioCalificacion(promedio.toFixed(1));
+        }
+      } catch (error) {
+        console.error("Error al obtener estadísticas:", error);
+      }
+    };
+    fetchEstadisticas();
+  }, []);
+
   return (
     <section className="UserContenedor">
       {/* Info del usuario */}
@@ -141,15 +186,57 @@ export default function UserViewAp({ setContenidoActual }) {
       ) : (
         <div className="UserCuadro UserInfo">
           <div className="UserProfileCard">
-            <img src={avatar} alt="Avatar" className="UserProfileAvatar" />
-            <div className="UserProfileName">
-              {usuario.Nombre} {usuario.Apellido}
+            <div className="profile-header">
+              <img src={avatar} alt="Avatar" className="UserProfileAvatar" />
+              <div className="UserProfileName">
+                {usuario.Nombre} {usuario.Apellido}
+              </div>
+              <div className="user-rol-badge">
+                <FaUserGraduate /> {usuario?.rol?.NombreRol || "Sin rol"}
+              </div>
             </div>
+
+            {/* Estadísticas del usuario */}
+            <div className="user-stats-grid">
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-green">
+                  <FaRunning />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{actividades.length}</div>
+                  <div className="stat-label">Actividades</div>
+                </div>
+              </div>
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-blue">
+                  <FaCalendarCheck />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{eventos.length}</div>
+                  <div className="stat-label">Eventos</div>
+                </div>
+              </div>
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-yellow">
+                  <FaStar />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{totalFeedbacks}</div>
+                  <div className="stat-label">Feedbacks</div>
+                </div>
+              </div>
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-orange">
+                  <FaTrophy />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{promedioCalificacion || "0.0"}</div>
+                  <div className="stat-label">Promedio</div>
+                </div>
+              </div>
+            </div>
+
             <ul className="UserProfileList">
-              <li>
-                <FaUserGraduate /> <b>Rol:</b>{" "}
-                {usuario?.rol?.NombreRol || "Sin rol"}
-              </li>
               <li>
                 <FaBook /> <b>Programa:</b>{" "}
                 {usuario?.perfilAprendiz?.ProgramaFormacion || "No aplica"}
@@ -171,7 +258,7 @@ export default function UserViewAp({ setContenidoActual }) {
             </ul>
             <img src={logo} className="UserProfileLogo" alt="Logo SENA" />
             <button className="UserProfileBtn">
-              Gestiona, Diviértete en la plataforma más innovadora
+              <FaFire /> Explora y Participa
             </button>
           </div>
         </div>
@@ -181,7 +268,9 @@ export default function UserViewAp({ setContenidoActual }) {
       <div className="UserMainContent">
         {/* Lúdicas */}
         <div className="UserCuadro UserLudicas">
-          <h3 className="UserTitulo">Actividades</h3>
+          <h3 className="UserTitulo">
+            <FaRunning className="titulo-icono estilo-iconos-user" /> Actividades Disponibles
+          </h3>
           <div className="UserTarjetas">
             {actividades.length === 0 ? (
               <p>No hay actividades disponibles.</p>
@@ -194,13 +283,13 @@ export default function UserViewAp({ setContenidoActual }) {
                     abrirModal(
                       actividad.NombreActi,
                       <>
-                        <p>📅 Fecha: {formatearFecha(actividad.FechaInicio)}</p>
+                        <p><FaCalendarAlt className="modal-icono" /> <b>Fecha:</b> {formatearFecha(actividad.FechaInicio)}</p>
                         <p>
-                          🕒 Hora: {formatearHora(actividad.HoraInicio)} -{" "}
+                          <FaClock className="modal-icono" /> <b>Hora:</b> {formatearHora(actividad.HoraInicio)} -{" "}
                           {formatearHora(actividad.HoraFin)}
                         </p>
-                        <p>📍 Lugar: {actividad.Ubicacion}</p>
-                        <p>🎯 Tipo: {actividad.Tipo}</p>
+                        <p><FaMapMarkerAlt className="modal-icono" /> <b>Lugar:</b> {actividad.Ubicacion}</p>
+                        <p><FaBullseye className="modal-icono" /> <b>Tipo:</b> {actividad.Tipo}</p>
                         <p>{actividad.Descripcion}</p>
                       </>
                     )
@@ -221,7 +310,9 @@ export default function UserViewAp({ setContenidoActual }) {
 
         {/* Eventos */}
         <div className="UserCuadro UserEventos">
-          <h3 className="UserTitulo">Eventos Sena!</h3>
+          <h3 className="UserTitulo">
+            <FaCalendarCheck className="titulo-icono estilo-iconos-user" /> Eventos SENA
+          </h3>
           <div className="UserTarjetas">
             {eventos.length === 0 ? (
               <p>No hay eventos disponibles.</p>
@@ -235,14 +326,14 @@ export default function UserViewAp({ setContenidoActual }) {
                       evento.NombreEvento,
                       <>
                         <p>
-                          📅 Fecha: {formatearFecha(evento.FechaInicio)} -{" "}
+                          <FaCalendarAlt className="modal-icono" /> <b>Fecha:</b> {formatearFecha(evento.FechaInicio)} -{" "}
                           {formatearFecha(evento.FechaFin)}
                         </p>
                         <p>
-                          🕒 Hora: {formatearHora(evento.HoraInicio)} -{" "}
+                          <FaClock className="modal-icono" /> <b>Hora:</b> {formatearHora(evento.HoraInicio)} -{" "}
                           {formatearHora(evento.HoraFin)}
                         </p>
-                        <p>📍 Lugar: {evento.UbicacionEvento}</p>
+                        <p><FaMapMarkerAlt className="modal-icono" /> <b>Lugar:</b> {evento.UbicacionEvento}</p>
                         <p>{evento.DescripcionEvento}</p>
                       </>
                     )

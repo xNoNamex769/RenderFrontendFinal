@@ -97,7 +97,7 @@ const NoticiasDestacadas: React.FC = () => {
             )}
 
             <img
-              src={`http://localhost:3001/uploads/${noticiaSeleccionada.Imagen}`}
+              src={`https://render-hhyo.onrender.com/uploads/${noticiaSeleccionada.Imagen}`}
               alt={noticiaSeleccionada.NombreActi}
               className="modal-img"
             />

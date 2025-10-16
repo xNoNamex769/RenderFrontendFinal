@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { jwtDecode } from "jwt-decode";
 import "./style/Aprendiz.css";
 
@@ -88,41 +89,84 @@ const solicitudDelUsuario = solicitudesActivas[0]; // solo la más reciente
     if (!solicitud) return;
 
     if (historial.length > 0) {
-      if (window.confirm("Tu solicitud ya tiene historial. ¿Deseas cancelarla?")) {
-        axios.put(`https://render-hhyo.onrender.com/api/solicitudapoyo/${solicitud.IdSolicitud}`, {
-          ...solicitud,
-          Estado: "cancelada"
-        }).then(() => {
-          alert("Solicitud cancelada.");
-          setSolicitud(null);
-          setHistorial([]);
-          setTipoAyuda('');
-          setDescripcion('');
-        }).catch((err) => console.error("Error al cancelar solicitud:", err));
-      }
-    } else {
-      if (window.confirm("¿Estás seguro de eliminar tu solicitud?")) {
-        axios.delete(`https://render-hhyo.onrender.com/api/solicitudapoyo/${solicitud.IdSolicitud}`)
-          .then(() => {
+      Swal.fire({
+        title: '¿Cancelar solicitud?',
+        text: "Tu solicitud ya tiene historial. ¿Deseas cancelarla?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#5eb319',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, cancelar',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.put(`https://render-hhyo.onrender.com/api/solicitudapoyo/${solicitud.IdSolicitud}`, {
+            ...solicitud,
+            Estado: "cancelada"
+          }).then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Solicitud cancelada",
+              confirmButtonColor: "#5eb319",
+              timer: 2000,
+            });
             setSolicitud(null);
             setHistorial([]);
             setTipoAyuda('');
             setDescripcion('');
-          })
-          .catch((err) => console.error("Error al eliminar solicitud:", err));
-      }
+          }).catch((err) => console.error("Error al cancelar solicitud:", err));
+        }
+      });
+    } else {
+      Swal.fire({
+        title: '¿Eliminar solicitud?',
+        text: "¿Estás seguro de eliminar tu solicitud?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#5eb319',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete(`https://render-hhyo.onrender.com/api/solicitudapoyo/${solicitud.IdSolicitud}`)
+            .then(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Solicitud eliminada",
+                confirmButtonColor: "#5eb319",
+                timer: 2000,
+              });
+              setSolicitud(null);
+              setHistorial([]);
+              setTipoAyuda('');
+              setDescripcion('');
+            })
+            .catch((err) => console.error("Error al eliminar solicitud:", err));
+        }
+      });
     }
   };
 
   const enviarFeedback = () => {
     if (!comentarioFeedback.trim()) {
-      alert("El comentario no puede estar vacío.");
+      Swal.fire({
+        icon: "warning",
+        title: "Comentario vacío",
+        text: "El comentario no puede estar vacío.",
+        confirmButtonColor: "#5eb319",
+      });
       return;
     }
     if (!solicitud?.IdSolicitud) {
-    alert("No se puede enviar feedback. La solicitud aún no está disponible.");
-    return;
-  }
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se puede enviar feedback. La solicitud aún no está disponible.",
+        confirmButtonColor: "#5eb319",
+      });
+      return;
+    }
 
     const datos = {
       IdSolicitud: solicitud?.IdSolicitud,
@@ -133,7 +177,13 @@ const solicitudDelUsuario = solicitudesActivas[0]; // solo la más reciente
 
     axios.post(`https://render-hhyo.onrender.com/api/feedback/solicitud`, datos)
       .then(() => {
-        alert("¡Gracias por tu opinión!");
+        Swal.fire({
+          icon: "success",
+          title: "¡Gracias!",
+          text: "¡Gracias por tu opinión!",
+          confirmButtonColor: "#5eb319",
+          timer: 2500,
+        });
         setMostrarFeedback(false);
         setComentarioFeedback('');
         setCalificacion(5);

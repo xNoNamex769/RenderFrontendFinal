@@ -25,6 +25,7 @@ import Constancia from "../src/pages/Constancia/components/ConstanciasList";
 import Aprendiz from "../src/pages/SolicitudApoyo/Aprendiz";
 import Noticias from "../src/pages/Noticias/Noticias";
 import ActivBotdf from "../src/pages/DialogFlow/Activbot";
+import MapaReferencia from "../src/pages/MapaReferencia/MapaReferencia";
 
 // Estilos
 import "../src/styles/BotHp.css";
@@ -134,6 +135,7 @@ export default function DashBoard() {
         {contenidoActual === "userviewap" && (
           <UserViewAp usuario={usuario} setContenidoActual={setContenidoActual} />
         )}
+        {contenidoActual === "mapareferencia" && <MapaReferencia />}
       </main>
 
       {<ActivBot irAChatai={() => setContenidoActual("chatai")} /> }

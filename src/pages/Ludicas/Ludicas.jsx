@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style/Ludicas.css';
+import { FaSearch, FaRunning, FaHeart, FaUsers, FaStar, FaMapMarkerAlt, FaClock, FaInfoCircle, FaTimes, FaMusic, FaDumbbell } from 'react-icons/fa';
 
 const ListaLudicas = () => {
   const [ludicas, setLudicas] = useState([]);
@@ -100,27 +101,70 @@ const ListaLudicas = () => {
   return (
     <div className="ludicas-container">
       <header className="ludicas-header">
-        <h1 className="ludicas-title">Actividades Lúdicas</h1>
-        <p className="ludicas-subtitle">¡Encuentra tu actividad favorita y únete a la diversión!</p>
+        {/* Título principal */}
+        <div className="ludicas-header-top">
+          <div className="ludicas-icon-wrapper">
+            <FaRunning />
+          </div>
+          <div>
+            <h1 className="ludicas-title">🏃 Actividades Lúdicas</h1>
+            <p className="ludicas-subtitle">¡Deporte, Música, Danza y más! Encuentra tu actividad favorita</p>
+          </div>
+        </div>
 
-        <div className="search-barr">
+        {/* Estadísticas */}
+        <div className="ludicas-stats-grid">
+          <div className="ludicas-stat-card">
+            <div className="ludicas-stat-icon ludicas-stat-icon-green">
+              <FaDumbbell />
+            </div>
+            <div className="ludicas-stat-info">
+              <span className="ludicas-stat-number">{ludicasFiltradas.length}</span>
+              <span className="ludicas-stat-label">Actividades Disponibles</span>
+            </div>
+          </div>
+          <div className="ludicas-stat-card">
+            <div className="ludicas-stat-icon ludicas-stat-icon-blue">
+              <FaUsers />
+            </div>
+            <div className="ludicas-stat-info">
+              <span className="ludicas-stat-number">{tipos.length - 1}</span>
+              <span className="ludicas-stat-label">Tipos de Actividades</span>
+            </div>
+          </div>
+          <div className="ludicas-stat-card">
+            <div className="ludicas-stat-icon ludicas-stat-icon-red">
+              <FaHeart />
+            </div>
+            <div className="ludicas-stat-info">
+              <span className="ludicas-stat-number">
+                {Object.values(reacciones).reduce((a, b) => a + b, 0)}
+              </span>
+              <span className="ludicas-stat-label">Personas Interesadas</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Buscador */}
+        <div className="ludicas-search-barr">
+          <FaSearch className="ludicas-search-icon" />
           <input
             type="text"
-            placeholder="Buscar Ludica..."
+            placeholder="🔍 Buscar lúdica por nombre..."
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
           />
-     
         </div>
 
-        <div className="categorias-filter">
+        {/* Filtros de categorías */}
+        <div className="ludicas-categorias-filter">
           {tipos.map((tipo) => (
             <button
               key={tipo}
-              className={`categoria-btn ${tipoSeleccionado === tipo ? 'active' : ''}`}
+              className={`ludicas-categoria-btn ${tipoSeleccionado === tipo ? 'ludicas-categoria-active' : ''}`}
               onClick={() => {
                 setTipoSeleccionado(tipo);
-                setPaginaActual(1); // reinicia a la página 1 al cambiar filtro
+                setPaginaActual(1);
               }}
             >
               {tipo}
@@ -132,41 +176,41 @@ const ListaLudicas = () => {
       <section className="ludicas-grid">
         {ludicasPaginadas.map((ludica) => (
           <div className="ludicas-card" key={ludica.IdActividad}>
-            <div className="card-image-container">
+            <div className="ludicas-card-image-container">
               <img
                 className="ludicas-card-image"
                 src={ludica.ImagenUrl || "https://via.placeholder.com/300x200?text=Sin+Imagen"}
                 alt={ludica.NombreActi}
               />
-              <div className="image-overlay"></div>
+              <div className="ludicas-image-overlay"></div>
             </div>
             <div className="ludicas-card-content">
-              <span className="categoria-badge">{ludica.TipoLudica}</span>
-              <h3 className="card-title">{ludica.NombreActi}</h3>
-              <div className="card-info">
-                <p className="info-item">
-                  <i className="fas fa-map-marker-alt"></i> {ludica.Ubicacion}
+              <span className="ludicas-categoria-badge">{ludica.TipoLudica}</span>
+              <h3 className="ludicas-card-title">{ludica.NombreActi}</h3>
+              <div className="ludicas-card-info">
+                <p className="ludicas-info-item">
+                  <FaMapMarkerAlt /> {ludica.Ubicacion}
                 </p>
-                <div className="schedule-section">
-                  <p className="schedule-title">
-                    <i className="far fa-clock"></i> Horario:
+                <div className="ludicas-schedule-section">
+                  <p className="ludicas-schedule-title">
+                    <FaClock /> Horario:
                   </p>
-                  <ul className="schedule-list">
+                  <ul className="ludicas-schedule-list">
                     <li>{ludica.HoraInicio} - {ludica.HoraFin}</li>
                   </ul>
                 </div>
               </div>
               <button className="ludicas-btn" onClick={() => setLudicaSeleccionada(ludica)}>
-                <i className="fas fa-info-circle"></i> Más Detalles
+                <FaInfoCircle /> Más Detalles
               </button>
               <button
-                className={`interesado-btn 
-                  ${miReaccion[ludica.IdActividad] === 'like' ? 'active' : ''} 
-                  ${animando[ludica.IdActividad] ? 'animating' : ''}`}
+                className={`ludicas-interesado-btn 
+                  ${miReaccion[ludica.IdActividad] === 'like' ? 'ludicas-interesado-active' : ''} 
+                  ${animando[ludica.IdActividad] ? 'ludicas-interesado-animating' : ''}`}
                 disabled={miReaccion[ludica.IdActividad] === 'like'}
                 onClick={() => marcarMeInteresa(ludica.IdActividad)}
               >
-                ❤️ Me interesa ({reacciones[ludica.IdActividad] || 0})
+                <FaHeart /> Me interesa ({reacciones[ludica.IdActividad] || 0})
               </button>
             </div>
           </div>
@@ -175,38 +219,48 @@ const ListaLudicas = () => {
 
       {/* PAGINACIÓN */}
       {totalPaginas > 1 && (
-        <div className="pagination">
+        <div className="ludicas-pagination">
           <button
+            className="ludicas-pag-btn"
             disabled={paginaActual === 1}
             onClick={() => setPaginaActual(prev => prev - 1)}
           >
-            ◀ Anterior
+            ← Anterior
           </button>
-          <span>Página {paginaActual} de {totalPaginas}</span>
+          <span className="ludicas-pag-info">Página {paginaActual} de {totalPaginas}</span>
           <button
+            className="ludicas-pag-btn"
             disabled={paginaActual === totalPaginas}
             onClick={() => setPaginaActual(prev => prev + 1)}
           >
-            Siguiente ▶
+            Siguiente →
           </button>
         </div>
       )}
 
       {/* MODAL */}
       {ludicaSeleccionada && (
-        <div className="modal-overlay" onClick={() => setLudicaSeleccionada(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setLudicaSeleccionada(null)}>×</button>
-            <h2>{ludicaSeleccionada.NombreActi}</h2>
-            <p><strong>Tipo:</strong> {ludicaSeleccionada.TipoLudica}</p>
-            <p><strong>Ubicación:</strong> {ludicaSeleccionada.Ubicacion}</p>
-            <p><strong>Horario:</strong> {ludicaSeleccionada.HoraInicio} - {ludicaSeleccionada.HoraFin}</p>
-            <p><strong>Descripción:</strong> {ludicaSeleccionada.Descripcion}</p>
-            <img
-              className="modal-img"
-              src={ludicaSeleccionada.ImagenUrl || "https://via.placeholder.com/300x200?text=Sin+Imagen"}
-              alt={`Imagen de ${ludicaSeleccionada.NombreActi}`}
-            />
+        <div className="ludicas-modal-overlay" onClick={() => setLudicaSeleccionada(null)}>
+          <div className="ludicas-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="ludicas-modal-close" onClick={() => setLudicaSeleccionada(null)}>
+              <FaTimes />
+            </button>
+            <div className="ludicas-modal-image-wrapper">
+              <img
+                className="ludicas-modal-img"
+                src={ludicaSeleccionada.ImagenUrl || "https://via.placeholder.com/300x200?text=Sin+Imagen"}
+                alt={`Imagen de ${ludicaSeleccionada.NombreActi}`}
+              />
+            </div>
+            <div className="ludicas-modal-body">
+              <h2 className="ludicas-modal-title">{ludicaSeleccionada.NombreActi}</h2>
+              <span className="ludicas-modal-badge">{ludicaSeleccionada.TipoLudica}</span>
+              <div className="ludicas-modal-details">
+                <p><FaMapMarkerAlt /> <strong>Ubicación:</strong> {ludicaSeleccionada.Ubicacion}</p>
+                <p><FaClock /> <strong>Horario:</strong> {ludicaSeleccionada.HoraInicio} - {ludicaSeleccionada.HoraFin}</p>
+                <p><FaInfoCircle /> <strong>Descripción:</strong> {ludicaSeleccionada.Descripcion}</p>
+              </div>
+            </div>
           </div>
         </div>
       )}

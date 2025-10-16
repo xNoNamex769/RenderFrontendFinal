@@ -1,7 +1,8 @@
 // src/pages/SubirAprendices.tsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import * as XLSX from "xlsx";
+import { FaFileAlt, FaClock, FaClipboardList, FaGraduationCap, FaCheckCircle, FaTimes, FaExclamationTriangle, FaChartBar, FaFolder, FaCheck, FaEdit, FaForward, FaSun, FaCloudSun, FaMoon, FaInfoCircle, FaUpload, FaEye } from "react-icons/fa";
 import "./styles/subirAprendices.css";
 import toast from "react-hot-toast";
 export default function SubirAprendices() {
@@ -14,11 +15,13 @@ export default function SubirAprendices() {
   const [progress, setProgress] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-
   // nuevos estados para preview / detecciones
   const [preview, setPreview] = useState<any[]>([]);
   const [fichaDetectada, setFichaDetectada] = useState<string>("");
   const [programaDetectado, setProgramaDetectado] = useState<string>("");
+  // Estados de paginación para preview
+  const [paginaPreview, setPaginaPreview] = useState<number>(1);
+  const itemsPorPaginaPreview = 10;
 
   // Cambia esto si en tu backend multer usa otro nombre, p.e. 'file' o 'excel'
   const FIELD_NAME = "archivo";
@@ -237,150 +240,249 @@ toast.success(data.mensaje || "Archivo subido con éxito");
     }
   };
 
- return (
-  <div className="subir-aprendices-contenedor">
-    <h2>Subir aprendices desde Excel</h2>
+return (
+  <div className="subir-apr-wrapper">
+    {/* Header */}
+    <div className="subir-apr-header">
+      <h1 className="subir-apr-title"><FaChartBar /> Subir Aprendices desde Excel</h1>
+      <p className="subir-apr-subtitle">Importa el reporte oficial de Sofía Plus con todos los aprendices</p>
+    </div>
 
-    <input
-      type="file"
-      accept=".xlsx,.xls,.csv"
-      onChange={handleArchivo}
-      className="subir-aprendices-input-file"
-    />
-
- <select
-  value={jornada}
-  onChange={(e) => setJornada(e.target.value)}
-  className="subir-aprendices-input-text"
->
-  <option value="">Selecciona la jornada</option>
-  <option value="Mañana">Mañana</option>
-  <option value="Tarde">Tarde</option>
-  <option value="Noche">Noche</option>
-</select>
-
-
-    <button
-      onClick={() => setShowModal(true)}
-      disabled={loading || !archivo}
-      className="subir-aprendices-btn"
-    >
-      {loading ? "Subiendo..." : "Subir archivo"}
-    </button>
-
-    {showModal && (
-      <div className="subir-aprendices-modal-overlay">
-        <div className="subir-aprendices-modal">
-          <div className="subir-aprendices-modal-header">
-            <h3>⚠️ Atención</h3>
-            <button
-              className="subir-aprendices-close-btn"
-              onClick={() => setShowModal(false)}
-            >
-              ×
-            </button>
-          </div>
-          <div className="subir-aprendices-modal-body">
-           
-            <p>
-              El archivo debe ser el reporte oficial de aprendices generado desde
-              <span className="subir-aprendices-text-success"> Sofía Plus</span>.
-              Asegúrate de no modificar los nombres de columnas ni el formato original del reporte.
-            </p>
-            <ul>
-              <li>
-                Archivo seleccionado: <strong>{archivo?.name || "—"}</strong>
-              </li>
-             
-              <li>
-                Ficha detectada: <strong>{fichaDetectada || "—"}</strong>
-              </li>
-              <li>
-                Programa detectado: <strong>{programaDetectado || "—"}</strong>
-              </li>
-            </ul>
-          </div>
-          <div className="subir-aprendices-modal-footer">
-            <button
-              className="subir-aprendices-btn-cancel"
-              onClick={() => setShowModal(false)}
-            >
-              Cancelar
-            </button>
-            <button
-              className="subir-aprendices-btn-confirm"
-              onClick={() => {
-                setShowModal(false);
-                subirArchivo();
-              }}
-            >
-              Confirmar y Subir
-            </button>
-          </div>
+    {/* Card Principal */}
+    <div className="subir-apr-card">
+      {/* Upload Area */}
+      <div className="subir-apr-upload-section">
+        <label className="subir-apr-label"><FaFolder /> Selecciona el archivo Excel</label>
+        <div className="subir-apr-upload-area">
+          <label className="subir-apr-upload-label">
+            {archivo ? (
+              <>
+                <span className="subir-apr-upload-icon success"><FaCheck /></span>
+                <span className="subir-apr-upload-text">{archivo.name}</span>
+                <span className="subir-apr-upload-hint">{(archivo.size / 1024).toFixed(2)} KB</span>
+              </>
+            ) : (
+              <>
+                <span className="subir-apr-upload-icon"><FaFileAlt /></span>
+                <span className="subir-apr-upload-text">Haz clic para seleccionar el archivo</span>
+                <span className="subir-apr-upload-hint">Formatos: .xlsx, .xls, .csv</span>
+              </>
+            )}
+            <input
+              type="file"
+              accept=".xlsx,.xls,.csv"
+              onChange={handleArchivo}
+              className="subir-apr-upload-input"
+            />
+          </label>
         </div>
       </div>
-    )}
 
-    {progress !== null && <p className="subir-aprendices-progreso">Progreso: {progress}%</p>}
+      {/* Jornada Select */}
+      <div className="subir-apr-field">
+        <label className="subir-apr-label"><FaClock /> Jornada</label>
+        <select
+          value={jornada}
+          onChange={(e) => setJornada(e.target.value)}
+          className="subir-apr-select"
+        >
+          <option value="">Selecciona la jornada</option>
+          <option value="Mañana">☀️ Mañana</option>
+          <option value="Tarde">🌤️ Tarde</option>
+          <option value="Noche">🌙 Noche</option>
+        </select>
+      </div>
 
-    {mensaje && (
-      <p
-        className={
-          tipoMensaje === "exito"
-            ? "subir-aprendices-mensaje-exito"
-            : "subir-aprendices-mensaje-error"
-        }
+      {/* Botón Subir */}
+      <button
+        onClick={() => setShowModal(true)}
+        disabled={loading || !archivo}
+        className="subir-apr-btn"
       >
-        {mensaje}
-      </p>
-    )}
+        {loading ? (
+          <>
+            <span className="subir-apr-spinner"></span>
+            <span>Subiendo...</span>
+          </>
+        ) : (
+          <>
+            <span className="subir-apr-btn-icon"><FaUpload /></span>
+            <span>Subir Archivo</span>
+          </>
+        )}
+      </button>
 
-    {(fichaDetectada || programaDetectado) && (
-      <div className="subir-aprendices-preview" style={{ marginTop: 12 }}>
-        <strong>Ficha detectada:</strong> {fichaDetectada || "—"}{" "}
-        <strong style={{ marginLeft: 12 }}>Programa:</strong> {programaDetectado || "—"}
-      </div>
-    )}
-
-    {preview && preview.length > 0 && (
-      <div className="subir-aprendices-reporte" style={{ marginTop: 12 }}>
-        <h3>Vista previa (primeras filas)</h3>
-        <div style={{ overflowX: "auto" }}>
-          <table className="subir-aprendices-tabla">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Documento</th>
-                <th>Correo</th>
-                <th>Estado</th>
-                <th>Ficha (C2)</th>
-                <th>Programa (C2)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {preview.slice(0, 50).map((r: any, i: number) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>{r.Nombre || "—"}</td>
-                  <td>{r.Apellidos || "—"}</td>
-                  <td>{r.Documento || "—"}</td>
-                  <td>{r.Correo || "—"}</td>
-                  <td>{r.Estado || "—"}</td>
-                  <td>{r.Ficha || fichaDetectada || "—"}</td>
-                  <td>{r.Programa || programaDetectado || "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {showModal && (
+        <div className="subir-apr-modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="subir-apr-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="subir-apr-modal-close" onClick={() => setShowModal(false)}>✖</button>
+            <div className="subir-apr-modal-header">
+              <span className="subir-apr-modal-icon">⚠️</span>
+              <h3 className="subir-apr-modal-title">Confirmar Importación</h3>
+            </div>
+            <div className="subir-apr-modal-body">
+              <div className="subir-apr-alert-info">
+                <span className="subir-apr-alert-icon">ℹ️</span>
+                <p>El archivo debe ser el reporte oficial de aprendices generado desde <strong>Sofía Plus</strong>. No modifiques los nombres de columnas ni el formato original.</p>
+              </div>
+              <div className="subir-apr-info-grid">
+                <div className="subir-apr-info-item">
+                  <span className="subir-apr-info-label"><FaFileAlt /> Archivo:</span>
+                  <span className="subir-apr-info-value">{archivo?.name || "—"}</span>
+                </div>
+                <div className="subir-apr-info-item">
+                  <span className="subir-apr-info-label"><FaClipboardList /> Ficha:</span>
+                  <span className="subir-apr-info-value">{fichaDetectada || "No detectada"}</span>
+                </div>
+                <div className="subir-apr-info-item">
+                  <span className="subir-apr-info-label"><FaGraduationCap /> Programa:</span>
+                  <span className="subir-apr-info-value">{programaDetectado || "No detectado"}</span>
+                </div>
+              </div>
+            </div>
+            <div className="subir-apr-modal-footer">
+              <button className="subir-apr-modal-btn subir-apr-modal-btn-cancel" onClick={() => setShowModal(false)}>
+                ✖ Cancelar
+              </button>
+              <button className="subir-apr-modal-btn subir-apr-modal-btn-confirm" onClick={() => { setShowModal(false); subirArchivo(); }}>
+                ✓ Confirmar y Subir
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    )}
+      )}
+
+      {/* Progress Bar */}
+      {progress !== null && (
+        <div className="subir-apr-progress-container">
+          <div className="subir-apr-progress-bar">
+            <div className="subir-apr-progress-fill" style={{ width: `${progress}%` }}></div>
+          </div>
+          <span className="subir-apr-progress-text">{progress}%</span>
+        </div>
+      )}
+
+      {/* Mensaje */}
+      {mensaje && (
+        <div className={`subir-apr-alert ${tipoMensaje === "exito" ? "success" : "error"}`}>
+          <span className="subir-apr-alert-icon">{tipoMensaje === "exito" ? <FaCheckCircle /> : <FaExclamationTriangle />}</span>
+          <span className="subir-apr-alert-text">{mensaje}</span>
+        </div>
+      )}
+
+      {/* Detección */}
+      {(fichaDetectada || programaDetectado) && (
+        <div className="subir-apr-detection">
+          <div className="subir-apr-detection-item">
+            <span className="subir-apr-detection-icon"><FaClipboardList /></span>
+            <span className="subir-apr-detection-label">Ficha:</span>
+            <span className="subir-apr-detection-value">{fichaDetectada || "—"}</span>
+          </div>
+          <div className="subir-apr-detection-item">
+            <span className="subir-apr-detection-icon"><FaGraduationCap /></span>
+            <span className="subir-apr-detection-label">Programa:</span>
+            <span className="subir-apr-detection-value">{programaDetectado || "—"}</span>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {preview && preview.length > 0 && (() => {
+      const totalPaginasPreview = Math.ceil(preview.length / itemsPorPaginaPreview);
+      const inicioPreview = (paginaPreview - 1) * itemsPorPaginaPreview;
+      const finPreview = inicioPreview + itemsPorPaginaPreview;
+      const previewPaginado = preview.slice(inicioPreview, finPreview);
+
+      return (
+        <div className="subir-apr-preview-section">
+          <h3 className="subir-apr-section-title"><FaEye /> Vista Previa ({preview.length} filas detectadas)</h3>
+          
+          <div className="subir-apr-info-pag">
+            Mostrando <strong>{inicioPreview + 1}</strong> a <strong>{Math.min(finPreview, preview.length)}</strong> de <strong>{preview.length}</strong>
+          </div>
+
+          <div className="subir-apr-table-container">
+            <table className="subir-apr-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Documento</th>
+                  <th>Correo</th>
+                  <th>Estado</th>
+                  <th>Ficha (C2)</th>
+                  <th>Programa (C2)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {previewPaginado.map((r: any, i: number) => (
+                  <tr key={i}>
+                    <td>{inicioPreview + i + 1}</td>
+                    <td>{r.Nombre || "—"}</td>
+                    <td>{r.Apellidos || "—"}</td>
+                    <td>{r.Documento || "—"}</td>
+                    <td>{r.Correo || "—"}</td>
+                    <td>{r.Estado || "—"}</td>
+                    <td>{r.Ficha || fichaDetectada || "—"}</td>
+                    <td>{r.Programa || programaDetectado || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {totalPaginasPreview > 1 && (
+            <div className="subir-apr-paginacion">
+              <button
+                className="subir-apr-btn-pag"
+                onClick={() => setPaginaPreview(Math.max(1, paginaPreview - 1))}
+                disabled={paginaPreview === 1}
+              >
+                ‹ Anterior
+              </button>
+              <span className="subir-apr-pag-info">
+                Página {paginaPreview} de {totalPaginasPreview}
+              </span>
+              <button
+                className="subir-apr-btn-pag"
+                onClick={() => setPaginaPreview(Math.min(totalPaginasPreview, paginaPreview + 1))}
+                disabled={paginaPreview === totalPaginasPreview}
+              >
+                Siguiente ›
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    })()}
 
     {reporte && (
-      <div className="subir-aprendices-reporte" style={{ marginTop: 20 }}>
-        <h3>Reporte de importación</h3>
+      <div className="subir-apr-report-section">
+        <h3 className="subir-apr-section-title">📊 Reporte de Importación</h3>
+        <div className="subir-apr-stats-grid">
+          <div className="subir-apr-stat-card">
+            <span className="subir-apr-stat-icon">📝</span>
+            <span className="subir-apr-stat-value">{reporte.total}</span>
+            <span className="subir-apr-stat-label">Total Filas</span>
+          </div>
+          <div className="subir-apr-stat-card success">
+            <span className="subir-apr-stat-icon"><FaCheckCircle /></span>
+            <span className="subir-apr-stat-value">{reporte.inserted}</span>
+            <span className="subir-apr-stat-label">Insertados</span>
+          </div>
+          <div className="subir-apr-stat-card warning">
+            <span className="subir-apr-stat-icon">⏭️</span>
+            <span className="subir-apr-stat-value">{reporte.skippedExisting}</span>
+            <span className="subir-apr-stat-label">Existentes</span>
+          </div>
+          <div className="subir-apr-stat-card error">
+            <span className="subir-apr-stat-icon"><FaTimes /></span>
+            <span className="subir-apr-stat-value">{reporte.errors?.length ?? 0}</span>
+            <span className="subir-apr-stat-label">Errores</span>
+          </div>
+        </div>
+        <h3 className="subir-apr-section-subtitle"><FaClipboardList /> Detalles</h3>
         <p>Total filas: {reporte.total}</p>
         <p>Insertados: {reporte.inserted}</p>
         <p>Saltados (existentes): {reporte.skippedExisting}</p>

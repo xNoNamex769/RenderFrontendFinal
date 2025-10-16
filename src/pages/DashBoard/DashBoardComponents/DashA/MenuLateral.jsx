@@ -63,155 +63,97 @@ export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActua
   };
 
   return (
-    <aside className={`barradash ${menuAbierto ? "mostrar" : "ocultar"}`}>
-      {document.body.classList.contains("theme-halloween") && (
-  <div className="animaciones-sidebar-halloween">
-    <div className="murcielago uno"></div>
-    <div className="murcielago dos"></div>
-    <div className="murcielago tres"></div>
-    <div className="nube-humo-sidebar"></div>
-  </div>
-)}
-
+    <aside className={`menulateralap-barradash ${menuAbierto ? "mostrar" : "ocultar"}`}>
       {/* Header usuario */}
-      <section className="Clogodash">
-        <div className="UserHeaderInfo" >
-          <img src={avatar} alt="Usuario" className="avatardash" />
-          <span className="nombredash">Administrador</span>
+      <section>
+        <div className="menulateralap-user-header" onClick={toggleDropdown}>
+          <img src={avatar} alt="Usuario" className="menulateralap-avatar" />
+          <span className="menulateralap-nombre">Administrador</span>
         </div>
-       
 
         {mostrarMenu && (
-          <div className="menudesplegabledash">
+          <div className="menulateralap-dropdown">
             <ul>
-              <li className="opcionesm" onClick={irAPerfil}>Perfil</li>
-              <li className="opcionesm" onClick={irConfig}>Configuración</li>
-              <li className="opcionesm">Cerrar sesión</li>
+              <li className="menulateralap-opcion-dropdown" onClick={irAPerfil}>👤 Perfil</li>
+              <li className="menulateralap-opcion-dropdown" onClick={irConfig}>⚙️ Configuración</li>
+              <li className="menulateralap-opcion-dropdown" onClick={() => { logout(); toast.success("¡Sesión cerrada!"); }}>🚪 Cerrar sesión</li>
             </ul>
           </div>
         )}
       </section>
 
-      {/* Menú colapsable */}
-      <nav className="menudash">
+      {/* Menú principal */}
+      <nav className="menulateralap-menu">
 
-        {/* Inicio */}
-        <button onClick={() => setContenidoActual("userview")} className="opciondash">
-          <FaHome className="iconodash" /> Inicio
+        <button onClick={() => setContenidoActual("userview")} className="menulateralap-opcion">
+          <FaHome className="menulateralap-icono" /> Inicio
         </button>
 
-        {/* Sección: Eventos */}
-        <div className="grupo-menu">
-          <button className="tituloseccion" onClick={() => toggleSection("eventos")}>
+        <div className="menulateralap-grupo">
+          <button className="menulateralap-titulo-seccion" onClick={() => toggleSection("eventos")}>
             {openSection.eventos ? <FaChevronDown /> : <FaChevronRight />} Eventos
           </button>
-          
           {openSection.eventos && (
             <>
-              <button onClick={() => setContenidoActual("actividad")} className="opciondash">
-                <PiPersonSimpleThrowLight className="iconodash" /> Actividades
+              <button onClick={() => setContenidoActual("actividad")} className="menulateralap-opcion">
+                <PiPersonSimpleThrowLight className="menulateralap-icono" /> Actividades
               </button>
-
-                <button onClick={() => setContenidoActual("calendarioactividades")} className="opciondash">
-                              <FaRegCalendarAlt className="iconodash" /> Calendario
-                            </button>
-              <button onClick={() => setContenidoActual("aplicacion")} className="opciondash">
-                <MdEventAvailable className="iconodash" /> Eventos
+              <button onClick={() => setContenidoActual("calendarioactividades")} className="menulateralap-opcion">
+                <FaRegCalendarAlt className="menulateralap-icono" /> Calendario
               </button>
-              {/* <button onClick={() => setContenidoActual("calendario")} className="opciondash">
-                <FaCalendarAlt className="iconodash" /> Calendario
-              </button> */}
+              <button onClick={() => setContenidoActual("aplicacion")} className="menulateralap-opcion">
+                <MdEventAvailable className="menulateralap-icono" /> Eventos
+              </button>
             </>
           )}
         </div>
 
-        {/* Sección: Alquiler */}
-        <div className="grupo-menu">
-          <button className="tituloseccion" onClick={() => toggleSection("alquiler")}>
+        <div className="menulateralap-grupo">
+          <button className="menulateralap-titulo-seccion" onClick={() => toggleSection("alquiler")}>
             {openSection.alquiler ? <FaChevronDown /> : <FaChevronRight />} Gestión de Alquiler
           </button>
           {openSection.alquiler && (
             <>
-              <button onClick={() => setContenidoActual("registroa")} className="opciondash">
-                <MdQrCode2  className="iconodash" /> Registro Prestamo
+              <button onClick={() => setContenidoActual("registroa")} className="menulateralap-opcion">
+                <MdQrCode2 className="menulateralap-icono" /> Registro Prestamo
               </button>
-              <button onClick={() => setContenidoActual("detallea")} className="opciondash">
-                <	PiCodeBlockFill className="iconodash" /> Detalles Prestamos
+              <button onClick={() => setContenidoActual("detallea")} className="menulateralap-opcion">
+                <PiCodeBlockFill className="menulateralap-icono" /> Detalles Prestamos
               </button>
-              <button onClick={() => setContenidoActual("gestioncatalogo")} className="opciondash">
-                <TfiDropbox className="iconodash" /> Elementos Subidos
+              <button onClick={() => setContenidoActual("gestioncatalogo")} className="menulateralap-opcion">
+                <TfiDropbox className="menulateralap-icono" /> Elementos Subidos
               </button>
-             
-
-               <button onClick={() => setContenidoActual("registrarelemento")} className="opciondash">
-                <PiBoxArrowUpThin className="iconodash" /> SubirElemento
+              <button onClick={() => setContenidoActual("registrarelemento")} className="menulateralap-opcion">
+                <PiBoxArrowUpThin className="menulateralap-icono" /> Subir Elemento
               </button>
-
-
-
             </>
           )}
         </div>
 
-        {/* Sección: Análisis */}
-        {/* <div className="grupo-menu">
-          <button className="tituloseccion" onClick={() => toggleSection("analisis")}>
-            {openSection.analisis ? <FaChevronDown /> : <FaChevronRight />} Análisis y Feedback
-          </button>
-          {openSection.analisis && (
-            <>
-              <button onClick={() => setContenidoActual("combinar")} className="opciondash">
-                <FaCommentDots className="iconodash" /> Feedback
-              </button>
-              <button onClick={() => setContenidoActual("solicitudes")} className="opciondash">
-                <FaClipboardList className="iconodash" /> Solicitudes
-              </button>
-              <button onClick={() => setContenidoActual("analisisia")} className="opciondash">
-                <FaChartBar className="iconodash" /> Análisis IA
-              </button>
-              <button onClick={() => setContenidoActual("solicitudapoyo")} className="opciondash">
-                <FaChartBar className="iconodash" /> Apoyos
-              </button>
-                <button onClick={() => setContenidoActual("resumenia")} className="opciondash">
-                <FaChartBar className="iconodash" /> resumen
-              </button>
-               <button onClick={() => setContenidoActual("listatrimestre")} className="opciondash">
-                <FaChartBar className="iconodash" /> Agenda Eventos
-              </button>
-             
-            </>
-          )}
-        </div> */}
-
-        {/* Sección: Documentos */}
-        <div className="grupo-menu">
-          <button className="tituloseccion" onClick={() => toggleSection("documentos")}>
+        <div className="menulateralap-grupo">
+          <button className="menulateralap-titulo-seccion" onClick={() => toggleSection("documentos")}>
             {openSection.documentos ? <FaChevronDown /> : <FaChevronRight />} Documentos
           </button>
           {openSection.documentos && (
             <>
-              <button onClick={() => setContenidoActual("adminconstancias")} className="opciondash">
-                <FaUserGraduate className="iconodash" /> ConstanciaAD
+              <button onClick={() => setContenidoActual("adminconstancias")} className="menulateralap-opcion">
+                <FaUserGraduate className="menulateralap-icono" /> ConstanciaAD
               </button>
-              
-               <button onClick={() => setContenidoActual("planificareventosadmin")} className="opciondash">
-                <MdAppRegistration className="iconodash" /> AprobarEventos
+              <button onClick={() => setContenidoActual("planificareventosadmin")} className="menulateralap-opcion">
+                <MdAppRegistration className="menulateralap-icono" /> Aprobar Eventos
               </button>
-               <button onClick={() => setContenidoActual("registro")} className="opciondash">
-                <MdAppRegistration className="iconodash" /> Registrar-Usuario
+              <button onClick={() => setContenidoActual("registro")} className="menulateralap-opcion">
+                <MdAppRegistration className="menulateralap-icono" /> Registrar Usuario
               </button>
-               <button onClick={() => setContenidoActual("subiraprendiz")} className="opciondash">
-                <AiOutlineUpload className="iconodash" /> Subir-Aprendiz
+              <button onClick={() => setContenidoActual("subiraprendiz")} className="menulateralap-opcion">
+                <AiOutlineUpload className="menulateralap-icono" /> Subir Aprendiz
               </button>
-              <button onClick={() => setContenidoActual("aprendices")} className="opciondash">
-                <FaUserGraduate className="iconodash" /> Aprendices-Registrados
+              <button onClick={() => setContenidoActual("aprendices")} className="menulateralap-opcion">
+                <FaUserGraduate className="menulateralap-icono" /> Aprendices Registrados
               </button>
-               <button onClick={() => setContenidoActual("usuarios-registrados")} className="opciondash">
-                <MdCheckCircle className="iconodash" /> Usuarios-Registrados
+              <button onClick={() => setContenidoActual("usuarios-registrados")} className="menulateralap-opcion">
+                <MdCheckCircle className="menulateralap-icono" /> Usuarios Registrados
               </button>
-                 {/* <button onClick={() => setContenidoActual("adminludicas")} className="opciondash">
-                <FaChartBar className="iconodash" /> Ludicas Aprendices
-              </button> */}
             </>
           )}
         </div>

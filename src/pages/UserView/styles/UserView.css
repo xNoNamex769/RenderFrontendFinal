@@ -79,10 +79,20 @@
 }
 
 .UserTitulo {
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.UserTitulo .titulo-icono {
+  color: #5eb319;
+  font-size: 1.1rem;
+  transition: none;
+  animation: none;
 }
 
 .UserTarjetas {
@@ -143,6 +153,30 @@
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
+}
+
+.UserModalContenido .modal-icono {
+  color: #5eb319;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.UserModalContenido p {
+  display: flex;
+  align-items: center;
+  margin: 0.75rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.UserModalContenido h3 {
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e5e7eb;
 }
 
 .UserModalCerrar {
@@ -265,12 +299,121 @@
   gap: 24px;
 }
 
+/* ========================================
+   MEJORAS USERVIEWAP - ESTADÍSTICAS ÚNICAS
+======================================== */
 
-
-.text-bienvenida{
-  color: rgb(25, 196, 10);
+.UserProfileCard .profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+  width: 100%;
 }
 
-.texto-dash-todos-rol{
-margin-left: 70px;
+.UserProfileCard .user-rol-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+  color: white;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Grid de estadísticas */
+.UserProfileCard .user-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.UserProfileCard .user-stat-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 10px;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.UserProfileCard .user-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #5eb319;
+}
+
+.UserProfileCard .stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.UserProfileCard .stat-icon-green {
+  background: linear-gradient(135deg, #5eb319, #3a7d13);
+}
+
+.UserProfileCard .stat-icon-blue {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.UserProfileCard .stat-icon-yellow {
+  background: linear-gradient(135deg, #facc15, #eab308);
+}
+
+.UserProfileCard .stat-icon-orange {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.UserProfileCard .stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  overflow: hidden;
+}
+
+.UserProfileCard .stat-number {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+}
+
+.UserProfileCard .stat-label {
+  font-size: 0.65rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* Responsive para estadísticas */
+@media (max-width: 768px) {
+  .UserProfileCard .user-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .UserProfileCard .stat-number {
+    font-size: 1.3rem;
+  }
+}
+.estilo-iconos-user{
+  width: 60px;
+  height: 50px;
 }

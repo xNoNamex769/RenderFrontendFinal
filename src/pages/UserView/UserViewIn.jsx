@@ -7,6 +7,11 @@ import {
   FaUserShield,
   FaPhone,
   FaEnvelope,
+  FaRunning,
+  FaCalendarCheck,
+  FaStar,
+  FaTrophy,
+  FaFire,
 } from "react-icons/fa";
 
 import "./styles/UserView.css";
@@ -43,6 +48,8 @@ export default function InstructorView({ setContenidoActual, actualizarPerfil })
 
   const [actividades, setActividades] = useState([]);
   const [eventos, setEventos] = useState([]);
+  const [totalFeedbacks, setTotalFeedbacks] = useState(0);
+  const [promedioCalificacion, setPromedioCalificacion] = useState(0);
 
   const abrirModal = (titulo, contenido) => {
     setModalContenido({ titulo, contenido });
@@ -111,12 +118,47 @@ export default function InstructorView({ setContenidoActual, actualizarPerfil })
     fetchEventos();
   }, []);
 
+  // Obtener estadísticas del instructor
+  useEffect(() => {
+    const fetchEstadisticas = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const idUsuario = payload.IdUsuario;
+
+        // Obtener feedbacks del instructor
+        const resFeedbacks = await axios.get(
+          "https://render-hhyo.onrender.com/api/feedback"
+        );
+        const feedbacksUsuario = resFeedbacks.data.filter(
+          (fb) => fb.IdUsuario === idUsuario
+        );
+        setTotalFeedbacks(feedbacksUsuario.length);
+
+        // Calcular promedio de calificaciones
+        if (feedbacksUsuario.length > 0) {
+          const suma = feedbacksUsuario.reduce(
+            (acc, fb) => acc + (fb.Calificacion || 0),
+            0
+          );
+          const promedio = suma / feedbacksUsuario.length;
+          setPromedioCalificacion(promedio.toFixed(1));
+        }
+      } catch (error) {
+        console.error("Error al obtener estadísticas:", error);
+      }
+    };
+    fetchEstadisticas();
+  }, []);
+
   // 👇 función para validar imagen o usar placeholder
   const getImagenValida = (img) => {
     if (!img || img.trim() === "") return defaultImg;
     return img.startsWith("http") || img.startsWith("data:image")
       ? img
-      : `http://localhost:3001${img}`;
+      : `https://render-hhyo.onrender.com${img}`;
   };
 
   return (
@@ -126,15 +168,61 @@ export default function InstructorView({ setContenidoActual, actualizarPerfil })
       ) : (
         <div className="UserCuadro UserInfo">
           <div className="UserProfileCard">
-            <img
-              src={getImagenValida(usuario.perfilInstructor?.imagen)}
-              alt="Foto del instructor"
-              className="UserProfileAvatar"
-              onError={(e) => (e.currentTarget.src = defaultImg)}
-            />
-            <div className="UserProfileName">
-              {usuario.Nombre} {usuario.Apellido}
+            <div className="profile-header">
+              <img
+                src={getImagenValida(usuario.perfilInstructor?.imagen)}
+                alt="Foto del instructor"
+                className="UserProfileAvatar"
+                onError={(e) => (e.currentTarget.src = defaultImg)}
+              />
+              <div className="UserProfileName">
+                {usuario.Nombre} {usuario.Apellido}
+              </div>
+              <div className="user-rol-badge">
+                <FaUserShield /> {usuario?.rol?.NombreRol || "Sin rol"}
+              </div>
             </div>
+
+            {/* Estadísticas del instructor */}
+            <div className="user-stats-grid">
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-green">
+                  <FaRunning />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{actividades.length}</div>
+                  <div className="stat-label">Actividades</div>
+                </div>
+              </div>
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-blue">
+                  <FaCalendarCheck />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{eventos.length}</div>
+                  <div className="stat-label">Eventos</div>
+                </div>
+              </div>
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-yellow">
+                  <FaStar />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{totalFeedbacks}</div>
+                  <div className="stat-label">Feedbacks</div>
+                </div>
+              </div>
+              <div className="user-stat-card">
+                <div className="stat-icon stat-icon-orange">
+                  <FaTrophy />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{promedioCalificacion || "0.0"}</div>
+                  <div className="stat-label">Promedio</div>
+                </div>
+              </div>
+            </div>
+
             <ul className="UserProfileList">
               <li>
                 <FaUserTie /> <b>Profesión:</b>{" "}
@@ -145,18 +233,16 @@ export default function InstructorView({ setContenidoActual, actualizarPerfil })
                 {usuario.perfilInstructor?.ubicacion || "No asignada"}
               </li>
               <li>
-                <FaUserShield /> <b>Rol:</b>{" "}
-                {usuario?.rol?.NombreRol || "Sin rol"}
-              </li>
-              <li>
                 <FaPhone /> <b>Teléfono:</b> {usuario.Telefono || "No aplica"}
               </li>
               <li>
                 <FaEnvelope /> <b>Correo:</b> {usuario.Correo}
               </li>
             </ul>
-            <img src={logo} className="UserProfileLogo" alt="Logo" />
-            <button className="UserProfileBtn">Gestiona, Diviértete en la plataforma más innovadora</button>
+            <img src={logo} className="UserProfileLogo" alt="Logo SENA" />
+            <button className="UserProfileBtn">
+              <FaFire /> Gestiona y Participa
+            </button>
           </div>
         </div>
       )}
@@ -164,7 +250,9 @@ export default function InstructorView({ setContenidoActual, actualizarPerfil })
       <div className="UserMainContent">
         {/* Lúdicas */}
         <div className="UserCuadro UserLudicas">
-          <h3 className="UserTitulo">Actividades</h3>
+          <h3 className="UserTitulo">
+                      <FaRunning className="titulo-icono estilo-iconos-user" /> Actividades Disponibles
+                    </h3>
           <div className="UserTarjetas">
             {actividades.length === 0 ? (
               <p>No hay actividades disponibles.</p>
@@ -204,7 +292,9 @@ export default function InstructorView({ setContenidoActual, actualizarPerfil })
 
         {/* Eventos */}
         <div className="UserCuadro UserEventos">
-          <h3 className="UserTitulo">Eventos Sena!</h3>
+          <h3 className="UserTitulo">
+                      <FaCalendarCheck className="titulo-icono estilo-iconos-user" /> Eventos SENA
+                    </h3>
           <div className="UserTarjetas">
             {eventos.length === 0 ? (
               <p>No hay eventos disponibles.</p>

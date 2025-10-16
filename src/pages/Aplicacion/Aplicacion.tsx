@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaEdit, FaStar, FaFire, FaCheckCircle, FaTimes, FaThumbsUp, FaThumbsDown, FaComments, FaHeart, FaHeartBroken, FaBullhorn } from "react-icons/fa";
 import "./styles/style.css";
 import Feedbacks from "../Feedback/FeedbacksEventos"; // o la ruta correcta
 
@@ -176,7 +177,10 @@ const Aplicacion = () => {
       <div className="evento-app-contenedor-principal">
         <main className="evento-app-contenido-principal">
           <header className="evento-app-cabecera">
-            <h2 className="evento-app-titulo-seccion">Novedades</h2>
+            <h2 className="evento-app-titulo-seccion"><FaBullhorn /> Descubre Eventos Increíbles</h2>
+            <p style={{ color: '#374151', fontSize: '1.1rem', marginTop: '0.5rem', fontWeight: '500' }}>
+              Explora, participa y comparte tus experiencias
+            </p>
             <div ref={feedbackRef} id="seccion-feedback" className="feedback-seccion-container">
               <h2 className="color-eventoa" style={{ textAlign: "center", marginBottom: "20px" }}>Eventos </h2>
               {eventoSeleccionado && (
@@ -187,6 +191,15 @@ const Aplicacion = () => {
 
           {/* Historias */}
           <section className="evento-app-seccion-historias">
+            <h3 style={{ 
+              fontSize: '1.5rem', 
+              fontWeight: '700', 
+              marginBottom: '1rem', 
+              color: 'var(--negro)',
+              textAlign: 'left'
+            }}>
+              <FaFire /> Eventos Destacados
+            </h3>
             <div className="evento-app-carrusel-historias">
               {eventosPublicos.map((evento, idx) => (
                 <div
@@ -211,93 +224,128 @@ const Aplicacion = () => {
           </section>
 
           {/* Eventos Semanales */}
-          <h2 className="evento-app-titulo-seccion">Eventos Semanales</h2>
+          <h2 className="evento-app-titulo-seccion" style={{ color: 'black', marginTop: '2rem' }}>
+            <FaCalendarAlt /> Eventos Semanales
+          </h2>
           <section className="evento-app-seccion-feed">
             <div className="evento-app-lista-eventos">
-              {eventosPublicos.map((evento, idx) => (
-                <div
-                  key={evento.IdEvento}
-                  className="evento-app-tarjeta-evento"
-                  onClick={() => {
-                    setModalEvento(evento);
-                    setEventoSeleccionado(evento.IdEvento);
-                    cargarFeedbacksEvento(evento.IdEvento);
-                    cargarDetallesReacciones(evento.IdEvento);
-                  }}
-                >
-                  <div className="evento-app-cabecera-evento">
-                    <img
-                      src={obtenerRutaImagenEvento(evento.PlanificacionEvento?.ImagenUrl, idx)}
-                      alt={evento.NombreEvento}
-                      className="evento-app-foto-usuario"
-                      style={{ width: "50px", height: "50px", borderRadius: "50%", objectFit: "cover" }}
-                    />
-                    <div className="evento-app-info-usuario">
-                      <p className="evento-app-nombre-usuario">{evento.NombreEvento}</p>
-                      <p className="evento-app-fecha-evento">
-                        {new Date(evento.FechaInicio).toLocaleDateString("es-CO")} - {evento.HoraInicio} a {evento.HoraFin}
-                      </p>
+              {eventosPublicos.map((evento, idx) => {
+                const totalReacciones = (reacciones[evento.IdEvento]?.like || 0) + (reacciones[evento.IdEvento]?.dislike || 0);
+                const esPopular = totalReacciones > 5;
+                const ahora = Date.now();
+                const fechaInicio = new Date(evento.FechaInicio).getTime();
+                const esProximo = fechaInicio > ahora && (fechaInicio - ahora) < 7 * 24 * 60 * 60 * 1000;
+                
+                return (
+                  <div
+                    key={evento.IdEvento}
+                    className="evento-app-tarjeta-evento"
+                    onClick={() => {
+                      setModalEvento(evento);
+                      setEventoSeleccionado(evento.IdEvento);
+                      cargarFeedbacksEvento(evento.IdEvento);
+                      cargarDetallesReacciones(evento.IdEvento);
+                    }}
+                  >
+                    <div className="evento-app-cabecera-evento">
+                      <img
+                        src={obtenerRutaImagenEvento(evento.PlanificacionEvento?.ImagenUrl, idx)}
+                        alt={evento.NombreEvento}
+                        className="evento-app-foto-usuario"
+                      />
+                      <div className="evento-app-info-usuario">
+                        <p className="evento-app-nombre-usuario">
+                          {evento.NombreEvento}
+                          {esPopular && <span className="evento-badge evento-badge-popular"><FaFire /> Popular</span>}
+                          {esProximo && <span className="evento-badge evento-badge-proximo"><FaClock /> Próximo</span>}
+                        </p>
+                        <p className="evento-app-fecha-evento">
+                          <FaCalendarAlt /> {new Date(evento.FechaInicio).toLocaleDateString("es-CO")}
+                        </p>
+                        <p className="evento-app-fecha-evento">
+                          <FaClock /> {evento.HoraInicio} - {evento.HoraFin}
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="evento-app-contenido-evento">
-                    <p>{evento.DescripcionEvento}</p>
-                    <p> {evento.UbicacionEvento}</p>
-                  </div>
+                    <div className="evento-app-contenido-evento">
+                      <p><strong><FaEdit /> Descripción:</strong> {evento.DescripcionEvento}</p>
+                      <p><strong><FaMapMarkerAlt /> Ubicación:</strong> {evento.UbicacionEvento}</p>
+                    </div>
 
-                  <div className="evento-app-acciones-evento">
-                    <button
-                      className={`evento-app-boton-me-gusta ${miReaccion[evento.IdEvento] === "like" ? "activo" : ""}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        manejarReaccion(evento.IdEvento, "like");
-                      }}
-                    >
-                       Me gusta ({reacciones[evento.IdEvento]?.like || 0})
-                    </button>
-                    <button
-                      className={`evento-app-boton-disgusto ${miReaccion[evento.IdEvento] === "dislike" ? "activo" : ""}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        manejarReaccion(evento.IdEvento, "dislike");
-                      }}
-                    >
-                       No me gusta ({reacciones[evento.IdEvento]?.dislike || 0})
-                    </button>
-                    <button
-                      className="evento-app-boton-comentar"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setEventoSeleccionado(evento.IdEvento);
-                        setTimeout(() => {
-                          irAFeedback();
-                        }, 100);
-                      }}
-                    >
-                       Feedback
-                    </button>
-                    {miReaccion[evento.IdEvento] && (
-                      <div className="estado-reaccion">
-                        {miReaccion[evento.IdEvento] === "like" && <span>💚 Te gustó</span>}
-                        {miReaccion[evento.IdEvento] === "dislike" && <span>💔 No te gustó</span>}
+                    {/* Estadísticas del evento */}
+                    <div className="evento-stats">
+                      <div className="evento-stat-item">
+                        <span><FaThumbsUp /></span>
+                        <strong>{reacciones[evento.IdEvento]?.like || 0}</strong>
+                        <span>Me gusta</span>
+                      </div>
+                      <div className="evento-stat-item">
+                        <span><FaThumbsDown /></span>
+                        <strong>{reacciones[evento.IdEvento]?.dislike || 0}</strong>
+                        <span>No me gusta</span>
+                      </div>
+                      <div className="evento-stat-item">
+                        <span><FaComments /></span>
+                        <strong>{feedbacksModal.filter(fb => fb.IdEvento === evento.IdEvento).length}</strong>
+                        <span>Comentarios</span>
+                      </div>
+                    </div>
+
+                    <div className="evento-app-acciones-evento">
+                      <button
+                        className={`evento-app-boton-me-gusta ${miReaccion[evento.IdEvento] === "like" ? "activo" : ""}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          manejarReaccion(evento.IdEvento, "like");
+                        }}
+                      >
+                        <FaThumbsUp /> Me gusta ({reacciones[evento.IdEvento]?.like || 0})
+                      </button>
+                      <button
+                        className={`evento-app-boton-disgusto ${miReaccion[evento.IdEvento] === "dislike" ? "activo" : ""}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          manejarReaccion(evento.IdEvento, "dislike");
+                        }}
+                      >
+                        <FaThumbsDown /> No me gusta ({reacciones[evento.IdEvento]?.dislike || 0})
+                      </button>
+                      <button
+                        className="evento-app-boton-comentar"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEventoSeleccionado(evento.IdEvento);
+                          setTimeout(() => {
+                            irAFeedback();
+                          }, 100);
+                        }}
+                      >
+                        <FaComments /> Feedback
+                      </button>
+                      {miReaccion[evento.IdEvento] && (
+                        <div className="estado-reaccion">
+                          {miReaccion[evento.IdEvento] === "like" && <span><FaHeart /> Te gustó</span>}
+                          {miReaccion[evento.IdEvento] === "dislike" && <span><FaHeartBroken /> No te gustó</span>}
+                        </div>
+                      )}
+                    </div>
+
+                    {feedbacksModal && evento.IdEvento === eventoSeleccionado && (
+                      <div className="estado-feedback">
+                        {feedbacksModal
+                          .filter((fb) => fb.usuario?.IdUsuario === idUsuario)
+                          .map((fb, i) => (
+                            <div key={i}>
+                              <p><FaEdit /> Ya comentaste: "{fb.ComentarioFeedback}"</p>
+                              <p>{Array(fb.Calificacion || 0).fill(<FaStar />)}</p>
+                            </div>
+                          ))}
                       </div>
                     )}
                   </div>
-
-                  {feedbacksModal && evento.IdEvento === eventoSeleccionado && (
-                    <div className="estado-feedback">
-                      {feedbacksModal
-                        .filter((fb) => fb.usuario?.IdUsuario === idUsuario)
-                        .map((fb, i) => (
-                          <div key={i}>
-                            <p>📝 Ya comentaste: "{fb.ComentarioFeedback}"</p>
-                            <p>{"⭐".repeat(fb.Calificacion || 0)}</p>
-                          </div>
-                        ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         </main>
@@ -307,7 +355,7 @@ const Aplicacion = () => {
       {modalEvento && (
         <div className="evento-app-modal">
           <div className="evento-app-modal-contenido">
-            <button className="evento-app-modal-cerrar" onClick={() => setModalEvento(null)}>❌</button>
+            <button className="evento-app-modal-cerrar" onClick={() => setModalEvento(null)}><FaTimes /></button>
 
             <div className="evento-app-modal-banner">
               <img
@@ -316,23 +364,50 @@ const Aplicacion = () => {
                   eventosPublicos.findIndex((e) => e.IdEvento === modalEvento.IdEvento)
                 )}
                 alt={modalEvento.NombreEvento}
-                style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px" }}
               />
             </div>
 
-            <h2 className="evento-app-modal-titulo">{modalEvento.NombreEvento}</h2>
+            <h2 className="evento-app-modal-titulo"><FaBullhorn /> {modalEvento.NombreEvento}</h2>
+            
             <div className="evento-app-modal-detalles">
-              <p><strong>📅 Fecha:</strong> {new Date(modalEvento.FechaInicio).toLocaleDateString()}</p>
-              <p><strong>🕒 Hora:</strong> {modalEvento.HoraInicio} a {modalEvento.HoraFin}</p>
-              <p><strong>📍 Lugar:</strong> {modalEvento.UbicacionEvento}</p>
+              <p><strong><FaCalendarAlt /> Fecha de Inicio:</strong> {new Date(modalEvento.FechaInicio).toLocaleDateString("es-CO", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <p><strong><FaCalendarAlt /> Fecha de Fin:</strong> {new Date(modalEvento.FechaFin).toLocaleDateString("es-CO", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <p><strong><FaClock /> Horario:</strong> {modalEvento.HoraInicio} - {modalEvento.HoraFin}</p>
+              <p><strong><FaMapMarkerAlt /> Ubicación:</strong> {modalEvento.UbicacionEvento}</p>
             </div>
 
             <div className="evento-app-modal-descripcion">
+              <h4 style={{ marginBottom: '1rem', fontSize: '1.2rem', fontWeight: '700' }}><FaEdit /> Descripción del Evento</h4>
               <p>{modalEvento.DescripcionEvento}</p>
             </div>
 
+            {/* Estadísticas del modal */}
+            <div className="evento-stats" style={{ marginTop: '1.5rem', padding: '1.5rem', background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', borderRadius: '1rem' }}>
+              <div className="evento-stat-item">
+                <span style={{ fontSize: '1.5rem' }}><FaThumbsUp /></span>
+                <div>
+                  <strong style={{ fontSize: '1.5rem', color: 'var(--sena-verde)' }}>{reacciones[modalEvento.IdEvento]?.like || 0}</strong>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: '#6b7280' }}>Me gusta</p>
+                </div>
+              </div>
+              <div className="evento-stat-item">
+                <span style={{ fontSize: '1.5rem' }}><FaThumbsDown /></span>
+                <div>
+                  <strong style={{ fontSize: '1.5rem', color: '#c9302c' }}>{reacciones[modalEvento.IdEvento]?.dislike || 0}</strong>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: '#6b7280' }}>No me gusta</p>
+                </div>
+              </div>
+              <div className="evento-stat-item">
+                <span style={{ fontSize: '1.5rem' }}><FaComments /></span>
+                <div>
+                  <strong style={{ fontSize: '1.5rem', color: 'var(--sena-azul)' }}>{feedbacksModal.length}</strong>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: '#6b7280' }}>Comentarios</p>
+                </div>
+              </div>
+            </div>
+
             <div className="evento-app-modal-organizador">
-              <h4>👤 Planificado por:</h4>
+              <h4><FaCheckCircle /> Planificado por:</h4>
               {modalEvento.PlanificacionEvento?.usuario ? (
                 <div className="evento-app-modal-perfil">
                   <img
@@ -352,34 +427,69 @@ const Aplicacion = () => {
 
             <div className="evento-app-modal-reacciones">
               <div className="evento-app-modal-feedbacks">
-                <h4> Comentarios de los asistentes:</h4>
+                <h4><FaComments /> Comentarios de los asistentes ({feedbacksModal.length})</h4>
                 {feedbacksModal.length === 0 ? (
-                  <p>No hay comentarios aún.</p>
+                  <p style={{ textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
+                    Aún no hay comentarios. ¡Sé el primero en compartir tu opinión!
+                  </p>
                 ) : (
                   <ul style={{ listStyle: "none", paddingLeft: 0 }}>
                     {feedbacksModal.map((fb, i) => (
-                      <li key={i} style={{ marginBottom: "1rem", borderBottom: "1px solid #ccc", paddingBottom: "0.5rem" }}>
-                        <p><strong>{fb.usuario?.Nombre || "Anónimo"} {fb.usuario?.Apellido || ""}</strong></p>
-                        <p>{fb.ComentarioFeedback}</p>
-                        <p>{"⭐".repeat(fb.Calificacion || 0)}</p>
+                      <li key={i}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                          <div style={{ 
+                            width: '40px', 
+                            height: '40px', 
+                            borderRadius: '50%', 
+                            background: 'linear-gradient(135deg, var(--sena-verde), var(--sena-azul))',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            fontSize: '1.1rem'
+                          }}>
+                            {(fb.usuario?.Nombre?.[0] || "A").toUpperCase()}
+                          </div>
+                          <div style={{ flex: 1 }}>
+                            <p style={{ margin: 0, fontWeight: '700', color: 'var(--negro)' }}>
+                              {fb.usuario?.Nombre || "Anónimo"} {fb.usuario?.Apellido || ""}
+                            </p>
+                            <p style={{ margin: 0, fontSize: '1.2rem' }}>{Array(fb.Calificacion || 0).fill(null).map((_, i) => <FaStar key={i} />)}</p>
+                          </div>
+                        </div>
+                        <p style={{ marginLeft: '3rem', color: '#4b5563', lineHeight: '1.6' }}>{fb.ComentarioFeedback}</p>
                       </li>
                     ))}
                   </ul>
                 )}
               </div>
 
-              <h4> Usuarios que dieron Me gusta:</h4>
-              <ul>
-                {detallesReacciones.filter((r) => r.Tipo === "like").map((u) => (
-                  <li key={u.IdUsuario}>{u.Nombre} {u.Apellido}</li>
-                ))}
-              </ul>
-              <h4> Usuarios que dieron No me gusta:</h4>
-              <ul>
-                {detallesReacciones.filter((r) => r.Tipo === "dislike").map((u) => (
-                  <li key={u.IdUsuario}>{u.Nombre} {u.Apellido}</li>
-                ))}
-              </ul>
+              <div style={{ marginTop: '2rem' }}>
+                <h4><FaThumbsUp /> Usuarios que les gustó ({detallesReacciones.filter((r) => r.Tipo === "like").length})</h4>
+                {detallesReacciones.filter((r) => r.Tipo === "like").length === 0 ? (
+                  <p style={{ color: '#6b7280', fontStyle: 'italic' }}>Nadie ha dado "Me gusta" aún</p>
+                ) : (
+                  <ul>
+                    {detallesReacciones.filter((r) => r.Tipo === "like").map((u) => (
+                      <li key={u.IdUsuario}><FaCheckCircle /> {u.Nombre} {u.Apellido}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <div style={{ marginTop: '1.5rem' }}>
+                <h4><FaThumbsDown /> Usuarios que no les gustó ({detallesReacciones.filter((r) => r.Tipo === "dislike").length})</h4>
+                {detallesReacciones.filter((r) => r.Tipo === "dislike").length === 0 ? (
+                  <p style={{ color: '#6b7280', fontStyle: 'italic' }}>Nadie ha dado "No me gusta"</p>
+                ) : (
+                  <ul>
+                    {detallesReacciones.filter((r) => r.Tipo === "dislike").map((u) => (
+                      <li key={u.IdUsuario}><FaTimes /> {u.Nombre} {u.Apellido}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
         </div>

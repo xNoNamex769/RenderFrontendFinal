@@ -49,3 +49,45 @@ margin-left: 450px;
   color: #007bff;
   text-decoration: none;
 }
+
+/* REGISTRAR ELEMENTO - ESTILOS ÚNICOS */
+.reg-elem-wrapper { padding: 2rem; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.reg-elem-header { margin-bottom: 2rem; text-align: center; width: 100%; max-width: 600px; }
+.reg-elem-title { font-size: 2rem; font-weight: 700; color: #2c3e50; margin: 0 0 0.5rem 0; }
+.reg-elem-subtitle { font-size: 1rem; color: #7f8c8d; margin: 0; }
+.reg-elem-alert { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 2rem; width: 100%; max-width: 600px; }
+.reg-elem-alert.success { background: #d4edda; color: #155724; border-left: 4px solid #5eb319; }
+.reg-elem-alert.error { background: #f8d7da; color: #721c24; border-left: 4px solid #e74c3c; }
+.reg-elem-alert-icon { font-size: 1.5rem; }
+.reg-elem-alert-text { flex: 1; font-weight: 500; }
+.reg-elem-alert-close { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: inherit; opacity: 0.7; transition: opacity 0.3s; }
+.reg-elem-alert-close:hover { opacity: 1; }
+.reg-elem-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 1500px; }
+.reg-elem-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.reg-elem-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.reg-elem-label { font-size: 0.9375rem; font-weight: 600; color: #2c3e50; }
+.reg-elem-input, .reg-elem-textarea { padding: 0.875rem 1rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+.reg-elem-input:focus, .reg-elem-textarea:focus { outline: none; border-color: #5eb319; box-shadow: 0 0 0 3px rgba(94,179,25,0.1); }
+.reg-elem-textarea { resize: vertical; }
+.reg-elem-upload-area { margin-top: 0.5rem; }
+.reg-elem-upload-label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; background: #f8f9fa; border: 2px dashed #dee2e6; border-radius: 8px; cursor: pointer; transition: all 0.3s; text-align: center; gap: 0.5rem; }
+.reg-elem-upload-label:hover { background: #f0f9e8; border-color: #5eb319; }
+.reg-elem-upload-icon { font-size: 2.5rem; }
+.reg-elem-upload-text { font-size: 1rem; color: #2c3e50; font-weight: 500; }
+.reg-elem-upload-hint { font-size: 0.8125rem; color: #7f8c8d; }
+.reg-elem-upload-input { display: none; }
+.reg-elem-preview { margin-top: 1rem; }
+.reg-elem-preview-label { font-size: 0.9375rem; font-weight: 600; color: #2c3e50; margin-bottom: 0.75rem; }
+.reg-elem-preview-wrapper { position: relative; display: inline-block; }
+.reg-elem-preview-img { max-width: 100%; max-height: 300px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.reg-elem-preview-remove { position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(231,76,60,0.9); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+.reg-elem-preview-remove:hover { background: #e74c3c; transform: scale(1.1); }
+.reg-elem-submit-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; background: #5eb319; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(94,179,25,0.3); }
+.reg-elem-submit-btn:hover { background: #4a9614; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(94,179,25,0.4); }
+.reg-elem-submit-icon { font-size: 1.2rem; }
+.reg-elem-submit-text { font-size: 1rem; }
+@media (max-width: 768px) {
+  .reg-elem-wrapper { padding: 1rem; }
+  .reg-elem-card { padding: 1.5rem; }
+  .reg-elem-title { font-size: 1.5rem; }
+}

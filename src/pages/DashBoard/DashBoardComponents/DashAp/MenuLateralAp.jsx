@@ -14,7 +14,7 @@ import {
   FaChevronDown,
   FaChevronRight,
   FaTimes,
-
+  FaMapMarkedAlt,
   FaRegCaretSquareRight ,
 
   FaRegComments,
@@ -63,107 +63,105 @@ export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActua
   };
 
   return (
-    <aside className={`barradash ${menuAbierto ? "mostrar" : "ocultar"}`}>
+    <aside className={`menulateralap-barradash ${menuAbierto ? "mostrar" : "ocultar"}`}>
       {/* Header usuario */}
-      <section className="Clogodash">
-        <div className="UserHeaderInfo" >
-          <img src={avatar} alt="Usuario" className="avatardash" />
-          <span className="nombredash">Aprendiz</span>
+      <section>
+        <div className="menulateralap-user-header" onClick={toggleDropdown}>
+          <img src={avatar} alt="Usuario" className="menulateralap-avatar" />
+          <span className="menulateralap-nombre">Aprendiz</span>
         </div>
         
 
         {mostrarMenu && (
-          <div className="menudesplegabledash">
+          <div className="menulateralap-dropdown">
             <ul>
-              <li className="opcionesm" onClick={irAPerfil}>Perfil</li>
-              <li className="opcionesm" onClick={irConfig}>Configuración</li>
-              <li className="opcionesm" onClick={logout}>Cerrar sesión</li> {/* ✅ funcional */}
+              <li className="menulateralap-opcion-dropdown" onClick={irAPerfil}>👤 Perfil</li>
+              <li className="menulateralap-opcion-dropdown" onClick={irConfig}>⚙️ Configuración</li>
+              <li className="menulateralap-opcion-dropdown" onClick={logout}>🚪 Cerrar sesión</li>
             </ul>
           </div>
         )}
       </section>
 
       {/* Menú principal */}
-      <nav className="menudash">
+      <nav className="menulateralap-menu">
 
-        <button onClick={() => setContenidoActual("userviewap")} className="opciondash">
-          <FaHome className="iconodash" /> Inicio
+        <button onClick={() => setContenidoActual("userviewap")} className="menulateralap-opcion">
+          <FaHome className="menulateralap-icono" /> Inicio
         </button>
 
-        <div className="grupo-menu">
-          <button className="tituloseccion" onClick={() => toggleSection("participacion")}>
+        <button onClick={() => setContenidoActual("mapareferencia")} className="menulateralap-opcion">
+          <FaMapMarkedAlt className="menulateralap-icono" /> Mapa de Referencia
+        </button>
+
+        <div className="menulateralap-grupo">
+          <button className="menulateralap-titulo-seccion" onClick={() => toggleSection("participacion")}>
             {openSection.participacion ? <FaChevronDown /> : <FaChevronRight />} Participación
           </button>
           {openSection.participacion && (
             <>
-              <button onClick={() => setContenidoActual("actividades")} className="opciondash">
-                <PiPersonSimpleThrowLight className="iconodash" /> Actividades
+              <button onClick={() => setContenidoActual("actividades")} className="menulateralap-opcion">
+                <PiPersonSimpleThrowLight className="menulateralap-icono" /> Actividades
               </button>
-              <button onClick={() => setContenidoActual("aplicacion")} className="opciondash">
-                <MdEventAvailable className="iconodash" /> Eventos
+              <button onClick={() => setContenidoActual("aplicacion")} className="menulateralap-opcion">
+                <MdEventAvailable className="menulateralap-icono" /> Eventos
               </button>
-              <button onClick={() => setContenidoActual("ludicas")} className="opciondash">
-                <FaRunning className="iconodash" /> Lúdicas
+              <button onClick={() => setContenidoActual("ludicas")} className="menulateralap-opcion">
+                <FaRunning className="menulateralap-icono" /> Lúdicas
               </button>
-              <button onClick={() => setContenidoActual("calendarioactividades")} className="opciondash">
-                <FaRegCalendarAlt className="iconodash" /> Calendario
+              <button onClick={() => setContenidoActual("calendarioactividades")} className="menulateralap-opcion">
+                <FaRegCalendarAlt className="menulateralap-icono" /> Calendario
               </button>
-              <button onClick={() => setContenidoActual("horasl")} className="opciondash">
-                <FaStopwatch className="iconodash" /> Horas Lúdicas
+              <button onClick={() => setContenidoActual("horasl")} className="menulateralap-opcion">
+                <FaStopwatch className="menulateralap-icono" /> Horas Lúdicas
               </button>
             </>
           )}
         </div>
 
-        <div className="grupo-menu">
-          <button className="tituloseccion" onClick={() => toggleSection("gestion")}>
+        <div className="menulateralap-grupo">
+          <button className="menulateralap-titulo-seccion" onClick={() => toggleSection("gestion")}>
             {openSection.gestion ? <FaChevronDown /> : <FaChevronRight />} Gestión
           </button>
           {openSection.gestion && (
             <>
-              <button onClick={() => setContenidoActual("alquilerap")} className="opciondash">
-                <LiaPersonBoothSolid className="iconodash" /> Préstamos
+              <button onClick={() => setContenidoActual("alquilerap")} className="menulateralap-opcion">
+                <LiaPersonBoothSolid className="menulateralap-icono" /> Préstamos
               </button>
-              <button onClick={() => setContenidoActual("escanerqr")} className="opciondash">
-                <MdQrCode2 className="iconodash" /> Escanear QR
+              <button onClick={() => setContenidoActual("escanerqr")} className="menulateralap-opcion">
+                <MdQrCode2 className="menulateralap-icono" /> Escanear QR
               </button>
-              <button onClick={() => setContenidoActual("constanciacr")} className="opciondash">
-                <FaUserGraduate className="iconodash" /> Constancia
+              <button onClick={() => setContenidoActual("constanciacr")} className="menulateralap-opcion">
+                <FaUserGraduate className="menulateralap-icono" /> Constancia
               </button>
-              {/* <button onClick={() => setContenidoActual("solicitudapoyoaprendiz")} className="opciondash">
-                <FaUserGraduate className="iconodash" /> Apoyos
-              </button> */}
             </>
           )}
         </div>
 
-        <div className="grupo-menu">
-          <button className="tituloseccion" onClick={() => toggleSection("otros")}>
+        <div className="menulateralap-grupo">
+          <button className="menulateralap-titulo-seccion" onClick={() => toggleSection("otros")}>
             {openSection.otros ? <FaChevronDown /> : <FaChevronRight />} Otros
           </button>
           {openSection.otros && (
             <>
-              <button onClick={() => setContenidoActual("combinar")} className="opciondash">
-                <FaRegComments className="iconodash" /> Feedback
+              <button onClick={() => setContenidoActual("combinar")} className="menulateralap-opcion">
+                <FaRegComments className="menulateralap-icono" /> Feedback
               </button>
-              <button onClick={() => setContenidoActual("cartacontacto")} className="opciondash">
-                <FaRegUserCircle className="iconodash" /> Contactos
+              <button onClick={() => setContenidoActual("cartacontacto")} className="menulateralap-opcion">
+                <FaRegUserCircle className="menulateralap-icono" /> Contactos
               </button>
-              {/* <button onClick={() => setContenidoActual("noticias")} className="opciondash">
-                <FaAddressBook className="iconodash" /> Noticias
-              </button> */}
             </>
           )}
         </div>
       </nav>
       <button
-  className="btn-cerrar-sesion"
+  className="menulateralap-btn-cerrar"
   onClick={() => {
     logout(); 
     toast.success("¡Sesión cerrada correctamente!");
   }}
 >
-  <FaRegCaretSquareRight className="icono-cerrar" /> 
+  <FaRegCaretSquareRight className="menulateralap-icono-cerrar" /> 
   Cerrar Sesión
 </button>
 

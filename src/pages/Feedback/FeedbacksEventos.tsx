@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaClock, FaUser, FaStar, FaComments } from "react-icons/fa";
+import Swal from "sweetalert2";
 import "./styles/FeedbackStyle.css";
-
 import axios from "axios";
 
 interface Usuario {
@@ -15,7 +16,7 @@ interface Usuario {
 interface PlanificacionEvento {
   IdPlanificarE: number;
   usuario?: Usuario;
-  ImagenEvento?: string;
+  ImagenUrl?: string;
 }
 
 interface EventoConDatos {
@@ -41,12 +42,22 @@ export default function FeedbackEventos({ idEventoSeleccionado }: { idEventoSele
       if (!idEventoSeleccionado) return;
 
       try {
-        const eventoRes = await axios.get(`https://render-hhyo.onrender.com/api/evento/${idEventoSeleccionado}`);
-        setEvento(eventoRes.data);
-        console.log(" Planificador completo:", eventoRes.data.PlanificacionEvento?.usuario);
-console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perfilInstructor?.imagen);
-
-   console.log("🖼 Imagen recibida:", eventoRes.data.PlanificacionEvento?.ImagenEvento);
+        // Primero intentamos obtener desde eventos públicos (que incluye PlanificacionEvento)
+        const eventosPublicosRes = await axios.get("https://render-hhyo.onrender.com/api/evento/publicos");
+        const eventoEncontrado = eventosPublicosRes.data.find((e: any) => e.IdEvento === idEventoSeleccionado);
+        
+        if (eventoEncontrado) {
+          setEvento(eventoEncontrado);
+          console.log("✅ Evento encontrado con planificación:", eventoEncontrado);
+          console.log("👤 Usuario instructor:", eventoEncontrado.PlanificacionEvento?.usuario);
+          console.log("🖼️ Imagen instructor:", eventoEncontrado.PlanificacionEvento?.usuario?.perfilInstructor?.imagen);
+        } else {
+          // Fallback: obtener evento individual (sin planificación)
+          const eventoRes = await axios.get(`https://render-hhyo.onrender.com/api/evento/${idEventoSeleccionado}`);
+          setEvento(eventoRes.data);
+          console.log("⚠️ Evento sin planificación:", eventoRes.data);
+        }
+        
         const feedbackRes = await axios.get(`https://render-hhyo.onrender.com/api/feedback/evento/${idEventoSeleccionado}`);
         setFeedbacks(feedbackRes.data);
       } catch (err) {
@@ -59,13 +70,23 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
 
   const enviarFeedback = async () => {
     if (!feedback.trim() || calificacion === 0 || !evento) {
-      alert("Completa el feedback y selecciona una calificación.");
+      Swal.fire({
+        icon: "warning",
+        title: "Campos incompletos",
+        text: "Completa el feedback y selecciona una calificación.",
+        confirmButtonColor: "#5eb319",
+      });
       return;
     }
 
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Debes iniciar sesión para enviar feedback.");
+      Swal.fire({
+        icon: "warning",
+        title: "Sesión requerida",
+        text: "Debes iniciar sesión para enviar feedback.",
+        confirmButtonColor: "#5eb319",
+      });
       return;
     }
 
@@ -83,7 +104,13 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
         }
       );
 
-      alert("✅Feedback enviado");
+      Swal.fire({
+        icon: "success",
+        title: "¡Éxito!",
+        text: "Feedback enviado",
+        confirmButtonColor: "#5eb319",
+        timer: 2500,
+      });
       setFeedback("");
       setCalificacion(0);
 
@@ -91,7 +118,12 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
       setFeedbacks(updatedFeedbacks.data);
     } catch (err) {
       console.error("Error al enviar feedback:", err);
-      alert(" No se pudo enviar el feedback.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo enviar el feedback.",
+        confirmButtonColor: "#5eb319",
+      });
     }
   };
 
@@ -109,11 +141,7 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
         {evento.PlanificacionEvento?.usuario && (
   <div className="creador-header">
   <img
-  src={
-    evento.PlanificacionEvento.usuario?.perfilInstructor?.imagen?.startsWith("data:")
-      ? evento.PlanificacionEvento.usuario.perfilInstructor.imagen
-      : `http://localhost:3001${evento.PlanificacionEvento.usuario?.perfilInstructor?.imagen || "/default.jpg"}`
-  }
+  src={evento.PlanificacionEvento.usuario?.perfilInstructor?.imagen || "/default.jpg"}
   alt="Foto del planificador"
   className="creador-imagen"
 />
@@ -125,18 +153,18 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
 )}
 
     <h2 style={{ textAlign: "center", fontSize: "24px", fontWeight: "700", marginBottom: "20px", color: "#333" }}>
-  📝 Feedback de: {evento.NombreEvento} ⭐ {promedio()}/5
+  <FaEdit /> Feedback de: {evento.NombreEvento} <FaStar /> {promedio()}/5
 </h2>
 
 <div style={{ textAlign: "center", marginBottom: "20px" }}>
   {evento.PlanificacionEvento?.usuario && (
     <p style={{ fontSize: "16px", fontWeight: "500", margin: "5px 0" }}>
          {/*coloquenlen una imagen insana aqui */}  
-   🧑‍💼 <strong>Planificado por:</strong> {evento.PlanificacionEvento.usuario.Nombre} {evento.PlanificacionEvento.usuario.Apellido}
+   <FaUser /> <strong>Planificado por:</strong> {evento.PlanificacionEvento.usuario.Nombre} {evento.PlanificacionEvento.usuario.Apellido}
     </p>
   )}
   <p style={{ fontSize: "16px", margin: "5px 0" }}>
-    📅 <strong>Fecha de inicio:</strong> {new Date(evento.FechaInicio).toLocaleDateString("es-CO")}
+    <FaCalendarAlt /> <strong>Fecha de inicio:</strong> {new Date(evento.FechaInicio).toLocaleDateString("es-CO")}
   </p>
 </div>
 
@@ -144,31 +172,25 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
 
       <div className="carousel">
         <img
-          src={
-            evento.PlanificacionEvento?.ImagenEvento
-              ? `http://localhost:3001/uploads/${evento.PlanificacionEvento.ImagenEvento}`
-              : "/default.jpg"
-          }
+          src={evento.PlanificacionEvento?.ImagenUrl || "/default.jpg"}
           alt={evento.NombreEvento}
           className="carousel-image"
-          
         />
         
 
       <div className="actividad-info">
  <h3 style={{ fontWeight: 700, fontSize: "20px", marginBottom: "5px" }}>
-  {evento.NombreEvento.includes("Taller") ? "🛠️ Taller: " : "📢 Evento: "}
   {evento.NombreEvento}
 </h3>
 <p style={{ fontStyle: "italic", marginBottom: "10px" }}>
       {/*coloquenlen una imagen insana aqui */}  
-  📝 Descripción: {evento.DescripcionEvento}
+  <FaEdit /> Descripción: {evento.DescripcionEvento}
 </p>
 
 
-  <p>📍 <strong>Ubicación:</strong> {evento.UbicacionEvento}</p>
-  <p>📅 <strong>Fecha:</strong> {new Date(evento.FechaInicio).toLocaleDateString("es-CO")} — {new Date(evento.FechaFin).toLocaleDateString("es-CO")}</p>
-  <p>🕒 <strong>Horario:</strong> {evento.HoraInicio} - {evento.HoraFin}</p>
+  <p><FaMapMarkerAlt /> <strong>Ubicación:</strong> {evento.UbicacionEvento}</p>
+  <p><FaCalendarAlt /> <strong>Fecha:</strong> {new Date(evento.FechaInicio).toLocaleDateString("es-CO")} — {new Date(evento.FechaFin).toLocaleDateString("es-CO")}</p>
+  <p><FaClock /> <strong>Horario:</strong> {evento.HoraInicio} - {evento.HoraFin}</p>
 
  
      
@@ -181,14 +203,14 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
 
       <div className="feedback-lista">
           {/*coloquenlen una imagen insana aqui */}  
-        <h4>🗣️ Comentarios:</h4>
+        <h4><FaComments /> Comentarios:</h4>
         {feedbacks.length === 0 ? (
           <p className="text-muted">Aún no hay comentarios.</p>
         ) : (
           feedbacks.map((fb, i) => (
             <div key={i} className="feedback-item">
               <p><strong>{fb.usuario?.Nombre || "Anónimo"}:</strong> {fb.ComentarioFeedback}</p>
-              <p>{"⭐".repeat(fb.Calificacion || 0)}</p>
+              <p>{Array(fb.Calificacion || 0).fill(null).map((_, i) => <FaStar key={i} />)}</p>
             </div>
           ))
         )}
@@ -196,7 +218,7 @@ console.log(" Imagen perfil:", eventoRes.data.PlanificacionEvento?.usuario?.perf
 
       <div className="feedback-form">
           {/*coloquenlen una imagen insana aqui */}  
-        <h4>📝 Deja tu feedback:</h4>
+        <h4><FaEdit /> Deja tu feedback:</h4>
         <div className="estrellas-selector">
           {[1, 2, 3, 4, 5].map((n) => (
             <span

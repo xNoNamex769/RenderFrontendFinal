@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import './style/Calendario.css';
 import fondo3 from './img/fondo3.jpg';
 import fondo4 from './img/fondo4.jpg';
 import perfil from "./img/perfil.png"
-
 
 const AdministracionEventosSENA = () => {
   // Estados
@@ -84,13 +84,24 @@ const AdministracionEventosSENA = () => {
 
   const handleModalAction = () => {
     if (modalTitle === 'Evento Rechazado' && rejectionReason.trim() === '') {
-      alert('Por favor, especifica el motivo del rechazo.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Motivo requerido',
+        text: 'Por favor, especifica el motivo del rechazo.',
+        confirmButtonColor: '#5eb319',
+      });
       return;
     }
     
-    alert(modalTitle === 'Evento Aprobado' 
-      ? 'Evento aprobado exitosamente.' 
-      : `Evento rechazado. Motivo: ${rejectionReason}`);
+    Swal.fire({
+      icon: modalTitle === 'Evento Aprobado' ? 'success' : 'info',
+      title: modalTitle,
+      text: modalTitle === 'Evento Aprobado' 
+        ? 'Evento aprobado exitosamente.' 
+        : `Evento rechazado. Motivo: ${rejectionReason}`,
+      confirmButtonColor: '#5eb319',
+      timer: 3000,
+    });
     
     setShowModal(false);
     setRejectionReason('');

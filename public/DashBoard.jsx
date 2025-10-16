@@ -22,7 +22,7 @@ import Administrador from "../src/pages/SolicitudApoyo/Administrador";
 import CambiarRol from "../src/pages/CambiarRol/CambiarRol";
 import DashThemed from "../src/pages/Dashtheme/DashThemed";
 import AdminConstancias from "../src/pages/ConstanciaCertificado/Admin/AdminConstancias";
-import PlanificarEventosAdmin from "../src/pages/PlanificarEv/Admin/PlanificarEventosAdmin"
+import PlanificarEventosAdmin from "../src/pages/PlanificarEv/Admin/PlanificarEventosAdmin";
 import ResumenIA from "../src/Components/ResumenIA/ResumenIA";
 import AdminLudicas from "../src/pages/Ludicas/Admin/AdminLudicas";
 // Estilos globales
@@ -37,11 +37,12 @@ import SubirAprendices from "../src/pages/SubirAprendices/SubirAprendices";
 import AprendicesCargados from "../src/pages/SubirAprendices/AprendicesCargados";
 import CalendarioActividades from "../src/pages/CalendarioAdmin/CalendarioActividades";
 import UsuariosCargados from "../public/UsuariosCargados";
+
 export default function DashBoard() {
   const [menuAbierto, setMenuAbierto] = useState(true);
   const [contenidoActual, setContenidoActual] = useState("userview");
   const [esTemaHalloween, setEsTemaHalloween] = useState(false);
-  const [resumenIAData, setResumenIAData] = useState(null); //  Nuevo
+  const [resumenIAData, setResumenIAData] = useState(null);
 
   useEffect(() => {
     const temaGuardado = localStorage.getItem("tema-halloween") === "true";
@@ -56,13 +57,12 @@ export default function DashBoard() {
     }
   }, [esTemaHalloween]);
 
-  //  Fetch resumen IA cuando se selecciona el contenido
   useEffect(() => {
     if (contenidoActual === "resumenia") {
       fetch("https://render-hhyo.onrender.com/api/resumenia/resumen", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ IdActividad: 5, IdEvento: 3 }), // ajusta según tu caso
+        body: JSON.stringify({ IdActividad: 5, IdEvento: 3 }),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -78,7 +78,7 @@ export default function DashBoard() {
   };
 
   return (
-    <section className="contenedordash">
+    <section className={`contenedordash ${menuAbierto ? "" : "menu-cerrado"}`}>
       {esTemaHalloween && (
         <div className="efectos-halloween">
           <div className="murcielago uno"></div>
@@ -94,11 +94,12 @@ export default function DashBoard() {
         setContenidoActual={setContenidoActual}
       />
 
-      <main className="contenidodash">
-        <Navbar
-          toggleMenu={toggleMenu}
-          setContenidoActual={setContenidoActual}
-        />
+      <main
+        className={`contenidodash ${
+          menuAbierto ? "con-menu" : "expandido"
+        }`}
+      >
+        <Navbar toggleMenu={toggleMenu} setContenidoActual={setContenidoActual} />
 
         {contenidoActual === "perfil" && (
           <DashThemed
@@ -119,23 +120,24 @@ export default function DashBoard() {
         {contenidoActual === "constancia" && <ConstanciaCertificado />}
         {contenidoActual === "constancia2" && <ConstanciasList />}
         {contenidoActual === "cartacontacto" && <CartaContacto />}
-         {contenidoActual === "calendarioactividades" && <CalendarioActividades />}
+        {contenidoActual === "calendarioactividades" && <CalendarioActividades />}
         {contenidoActual === "chatai" && <ChatAI />}
         {contenidoActual === "config" && <ConfigView />}
         {contenidoActual === "analisisia" && <AnalisisIA />}
         {contenidoActual === "cambiarrol" && <CambiarRol />}
-         {contenidoActual === "registrarelemento" && <RegistrarElemento />}
+        {contenidoActual === "registrarelemento" && <RegistrarElemento />}
         {contenidoActual === "solicitudapoyo" && <Administrador />}
         {contenidoActual === "gestioncatalogo" && <GestionCatalogo />}
         {contenidoActual === "formulariocatalogo" && <FormularioCatalogo />}
-        {contenidoActual === "planificareventosadmin" && <PlanificarEventosAdmin/>}
-         {contenidoActual === "adminconstancias" && <AdminConstancias />}
-           {contenidoActual === "adminludicas" && <AdminLudicas />}
-            {contenidoActual === "listatrimestre" && <ListaTrimestre />}
-            {contenidoActual === "subiraprendiz" && <SubirAprendices />}
-            {contenidoActual === "registro" && <Registro />}
-             {contenidoActual === "aprendices" && <AprendicesCargados />}
-             {contenidoActual === "usuarios-registrados" && <UsuariosCargados />}
+        {contenidoActual === "planificareventosadmin" && <PlanificarEventosAdmin />}
+        {contenidoActual === "adminconstancias" && <AdminConstancias />}
+        {contenidoActual === "adminludicas" && <AdminLudicas />}
+        {contenidoActual === "listatrimestre" && <ListaTrimestre />}
+        {contenidoActual === "subiraprendiz" && <SubirAprendices />}
+        {contenidoActual === "registro" && <Registro />}
+        {contenidoActual === "aprendices" && <AprendicesCargados />}
+        {contenidoActual === "usuarios-registrados" && <UsuariosCargados />}
+
         {contenidoActual === "temas" && (
           <DashThemed
             esTemaHalloween={esTemaHalloween}
@@ -144,13 +146,10 @@ export default function DashBoard() {
         )}
         {contenidoActual === "perfil" && <HomeDash />}
 
-        {/*  NUEVO */}
         {contenidoActual === "resumenia" && resumenIAData && (
           <ResumenIA resumen={resumenIAData} />
         )}
       </main>
-
-      {/* <ActivBot irAChatai={() => setContenidoActual("chatai")} /> */}
     </section>
   );
 }

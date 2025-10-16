@@ -482,3 +482,45 @@ input[type="text"]::placeholder {
     width: 260px;
   }
 }
+/* Botón flotante para abrir/cerrar el menú lateral */
+.menulateralap-boton-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2000;
+  background: #5eb319;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.menulateralap-boton-toggle:hover {
+  background: #3a7d13;
+  transform: scale(1.05);
+}
+
+/* Mostrar el botón solo en pantallas pequeñas */
+@media (max-width: 768px) {
+  .menulateralap-boton-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menulateralap-barradash.ocultar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .menulateralap-barradash.mostrar {
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+  }
+}

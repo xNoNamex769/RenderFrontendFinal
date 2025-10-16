@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-// Componentes
 import MenuLateralAp from "../src/pages/DashBoard/DashBoardComponents/DashAp/MenuLateralAp";
 import NavbarAp from '../src/pages/DashBoard/DashBoardComponents/DashAp/NavbarAp';
 import ActivBot from "../src/pages/DashBoard/DashBoardComponents/DashA/ActivBot";
-
-// Páginas
 import Feedbacks from "../src/pages/Feedback/Feedbacks";
 import Ludicas from "../src/pages/Ludicas/Ludicas";
 import HorasLudicas from "../src/pages/HorasLudicas/HorasLudicas";
@@ -27,7 +23,6 @@ import Noticias from "../src/pages/Noticias/Noticias";
 import ActivBotdf from "../src/pages/DialogFlow/Activbot";
 import MapaReferencia from "../src/pages/MapaReferencia/MapaReferencia";
 
-// Estilos
 import "../src/styles/BotHp.css";
 import "../src/styles/ColaViento.css";
 import "../src/styles/Resposive.css";
@@ -39,20 +34,17 @@ export default function DashBoard() {
   const [contenidoActual, setContenidoActual] = useState("userviewap");
   const [validando, setValidando] = useState(true);
   const [usuario, setUsuario] = useState(null);
-
   const navigate = useNavigate();
 
   const cerrarSesion = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("IdUsuario");
-    
     navigate("/");
   };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const IdUsuario = localStorage.getItem("IdUsuario");
-    
 
     if (!token || !IdUsuario) {
       toast("⚠️ Debes iniciar sesión primero");
@@ -64,7 +56,6 @@ export default function DashBoard() {
         localStorage.removeItem("rutaDesdeNotificacion");
       }
 
-      // ✅ Solo carga si no hay datos aún
       if (usuario) {
         const fetchUsuario = async () => {
           try {
@@ -94,7 +85,7 @@ export default function DashBoard() {
   }
 
   return (
-    <section className="contenedordash">
+    <section className={`contenedordash ${menuAbierto ? "menu-abierto" : "menu-cerrado"}`}>
       <MenuLateralAp
         menuAbierto={menuAbierto}
         toggleMenu={() => setMenuAbierto(!menuAbierto)}
@@ -105,25 +96,21 @@ export default function DashBoard() {
         <NavbarAp
           toggleMenu={() => setMenuAbierto(!menuAbierto)}
           setContenidoActual={setContenidoActual}
-          
           cerrarSesion={cerrarSesion}
-          
         />
-        
 
         {contenidoActual === "actividades" && <Actividades />}
         {contenidoActual === "aplicacion" && <Aplicacion />}
         {contenidoActual === "ludicas" && <Ludicas />}
         {contenidoActual === "horasl" && <HorasLudicas />}
         {contenidoActual.startsWith("feedback-") && (
-  <Feedbacks idActividad={contenidoActual.split("-")[1]} />
-)}
+          <Feedbacks idActividad={contenidoActual.split("-")[1]} />
+        )}
         {contenidoActual === "constancia" && <Constancia />}
         {contenidoActual === "alquilerap" && <AlquilerAP />}
         {contenidoActual === "combinar" && <Combinar />}
         {contenidoActual === "chatai" && <ActivBotdf />}
         {contenidoActual === "feedback" && <Feedbacks />}
-
         {contenidoActual === "cartacontacto" && <CartaContacto />}
         {contenidoActual === "constanciacr" && <Constanciacr />}
         {contenidoActual === "perfil" && <HomeDash />}
@@ -138,7 +125,7 @@ export default function DashBoard() {
         {contenidoActual === "mapareferencia" && <MapaReferencia />}
       </main>
 
-      {<ActivBot irAChatai={() => setContenidoActual("chatai")} /> }
+      <ActivBot irAChatai={() => setContenidoActual("chatai")} />
     </section>
   );
 }

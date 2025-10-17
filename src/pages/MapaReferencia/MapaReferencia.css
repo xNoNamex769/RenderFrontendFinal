@@ -12,7 +12,7 @@
   text-align: center;
   margin-bottom: 15px;
   color: #333;
-  background: linear-gradient(135deg, #39A900 0%, #2d7f00 100%);
+  background: linear-gradient(135deg, #39a900 0%, #2d7f00 100%);
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(57, 169, 0, 0.2);
@@ -62,7 +62,7 @@
 }
 
 .mapa-info-banner {
-  background: linear-gradient(135deg, #39A900 0%, #2d7f00 100%);
+  background: linear-gradient(135deg, #39a900 0%, #2d7f00 100%);
   color: white;
   padding: 10px 15px;
   border-radius: 12px;
@@ -132,7 +132,7 @@
 }
 
 .mapa-busqueda svg {
-  color: #39A900;
+  color: #39a900;
   font-size: 1.2rem;
 }
 
@@ -165,7 +165,7 @@
 }
 
 .btn-mi-ubicacion {
-  background: linear-gradient(135deg, #39A900 0%, #2d7f00 100%);
+  background: linear-gradient(135deg, #39a900 0%, #2d7f00 100%);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -220,7 +220,7 @@
   top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
   color: white;
   padding: 12px 20px;
   border-radius: 25px;
@@ -254,13 +254,13 @@
 }
 
 .filtro-btn:hover {
-  border-color: #39A900;
+  border-color: #39a900;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(57, 169, 0, 0.2);
 }
 
 .filtro-btn.activo {
-  background: linear-gradient(135deg, #39A900 0%, #2d7f00 100%);
+  background: linear-gradient(135deg, #39a900 0%, #2d7f00 100%);
   color: white;
   border-color: transparent;
   box-shadow: 0 4px 15px rgba(57, 169, 0, 0.4);
@@ -272,7 +272,7 @@
 
 .mapa-contenido {
   display: grid;
-  grid-template-columns: 2.5fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: 15px;
   flex: 1;
   min-height: 0;
@@ -285,6 +285,7 @@
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   height: 100%;
+  min-height: 600px;
   position: relative;
 }
 
@@ -300,7 +301,7 @@
   font-size: 1.1rem;
   margin-bottom: 12px;
   color: #333;
-  border-bottom: 2px solid #39A900;
+  border-bottom: 2px solid #39a900;
   padding-bottom: 8px;
 }
 
@@ -322,14 +323,18 @@
 }
 
 .sitio-card:hover {
-  border-color: #39A900;
+  border-color: #39a900;
   transform: translateX(5px);
   box-shadow: 0 4px 12px rgba(57, 169, 0, 0.2);
 }
 
 .sitio-card.seleccionado {
-  border-color: #39A900;
-  background: linear-gradient(135deg, rgba(57, 169, 0, 0.1) 0%, rgba(45, 127, 0, 0.1) 100%);
+  border-color: #39a900;
+  background: linear-gradient(
+    135deg,
+    rgba(57, 169, 0, 0.1) 0%,
+    rgba(45, 127, 0, 0.1) 100%
+  );
   box-shadow: 0 4px 15px rgba(57, 169, 0, 0.3);
 }
 
@@ -372,7 +377,7 @@
 .sitio-distancia {
   display: inline-block;
   font-size: 0.8rem;
-  color: #39A900;
+  color: #39a900;
   font-weight: 600;
   background: rgba(57, 169, 0, 0.1);
   padding: 3px 10px;
@@ -416,25 +421,26 @@
 }
 
 .badge-api.evento {
-  background: linear-gradient(135deg, #E91E63 0%, #F06292 100%);
+  background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
   color: white;
   box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
 }
 
 .badge-api.actividad {
-  background: linear-gradient(135deg, #2196F3 0%, #64B5F6 100%);
+  background: linear-gradient(135deg, #2196f3 0%, #64b5f6 100%);
   color: white;
   box-shadow: 0 2px 10px rgba(33, 150, 243, 0.3);
 }
 
 .badge-api.ludica {
-  background: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
   color: white;
   box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
@@ -468,7 +474,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #39A900;
+  color: #39a900;
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 0.9rem;
@@ -502,7 +508,7 @@
 .btn-como-llegar {
   width: 100%;
   padding: 10px;
-  background: linear-gradient(135deg, #39A900 0%, #2d7f00 100%);
+  background: linear-gradient(135deg, #39a900 0%, #2d7f00 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -614,4 +620,75 @@
 
 .leaflet-popup-tip {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Mejorar renderizado del mapa */
+.leaflet-container {
+  background: #f8f9fa !important;
+  font-family: inherit !important;
+}
+
+.leaflet-tile {
+  image-rendering: auto !important;
+}
+
+.leaflet-control-zoom {
+  border-radius: 8px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+.leaflet-control-zoom a {
+  background: white !important;
+  color: #39a900 !important;
+  border-radius: 4px !important;
+  font-weight: bold !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #39a900 !important;
+  color: white !important;
+}
+
+/* Botón centro SENA */
+.btn-centro-mapa {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.btn-centro-mapa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+}
+
+/* Botón reset mapa */
+.btn-reset-mapa {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+.btn-reset-mapa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
 }

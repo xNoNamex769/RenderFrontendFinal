@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuLateralAp from "../src/pages/DashBoard/DashBoardComponents/DashAp/MenuLateralAp";
-import NavbarAp from '../src/pages/DashBoard/DashBoardComponents/DashAp/NavbarAp';
+import NavbarAp from "../src/pages/DashBoard/DashBoardComponents/DashAp/NavbarAp";
 import ActivBot from "../src/pages/DashBoard/DashBoardComponents/DashA/ActivBot";
 import Feedbacks from "../src/pages/Feedback/Feedbacks";
 import Ludicas from "../src/pages/Ludicas/Ludicas";
@@ -39,6 +39,9 @@ export default function DashBoard() {
   const cerrarSesion = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("IdUsuario");
+
+
+
     navigate("/");
   };
 
@@ -59,9 +62,12 @@ export default function DashBoard() {
       if (usuario) {
         const fetchUsuario = async () => {
           try {
-            const res = await fetch(`https://render-hhyo.onrender.com/api/usuario/${IdUsuario}`, {
-              headers: { Authorization: `Bearer ${token}` },
-            });
+            const res = await fetch(
+              `https://render-hhyo.onrender.com/api/usuario/${IdUsuario}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
             const data = await res.json();
             setUsuario(data);
           } catch (err) {
@@ -78,7 +84,9 @@ export default function DashBoard() {
 
   if (validando) {
     return (
-      <div style={{ textAlign: "center", paddingTop: "5rem", fontSize: "1.5rem" }}>
+      <div
+        style={{ textAlign: "center", paddingTop: "5rem", fontSize: "1.5rem" }}
+      >
         Validando sesión...
       </div>
     );
@@ -99,7 +107,9 @@ export default function DashBoard() {
           cerrarSesion={cerrarSesion}
         />
 
-        {contenidoActual === "actividades" && <Actividades />}
+        {contenidoActual === "actividades" && (
+          <Actividades setContenidoActual={setContenidoActual} />
+        )}
         {contenidoActual === "aplicacion" && <Aplicacion />}
         {contenidoActual === "ludicas" && <Ludicas />}
         {contenidoActual === "horasl" && <HorasLudicas />}
@@ -117,15 +127,23 @@ export default function DashBoard() {
         {contenidoActual === "config" && <ConfigViewAp />}
         {contenidoActual === "escanerqr" && <EscanerQR />}
         {contenidoActual === "solicitudapoyoaprendiz" && <Aprendiz />}
-        {contenidoActual === "calendarioactividades" && <CalendarioActividades />}
+        {contenidoActual === "calendarioactividades" && (
+          <CalendarioActividades />
+        )}
         {contenidoActual === "noticias" && <Noticias />}
         {contenidoActual === "userviewap" && (
-          <UserViewAp usuario={usuario} setContenidoActual={setContenidoActual} />
+          <UserViewAp
+            usuario={usuario}
+            setContenidoActual={setContenidoActual}
+          />
         )}
         {contenidoActual === "mapareferencia" && <MapaReferencia />}
       </main>
 
-      <ActivBot irAChatai={() => setContenidoActual("chatai")} />
+
+
+      {<ActivBot irAChatai={() => setContenidoActual("chatai")} />}
+
     </section>
   );
 }

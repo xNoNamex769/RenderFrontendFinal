@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Html5Qrcode } from 'html5-qrcode';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import { Html5Qrcode } from "html5-qrcode";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import {
   FaQrcode,
   FaLightbulb,
@@ -18,13 +18,13 @@ import {
   FaUsers,
   FaCalendarCheck,
   FaInfoCircle,
-} from 'react-icons/fa';
-import './style/Escaner.css';
+} from "react-icons/fa";
+import "./style/Escaner.css";
 
 const QRScannerHtml5 = () => {
-  const qrCodeRegionId = 'reader';
-  const [mensaje, setMensaje] = useState('');
-  const [color, setColor] = useState('text-black');
+  const qrCodeRegionId = "reader";
+  const [mensaje, setMensaje] = useState("");
+  const [color, setColor] = useState("text-black");
   const [exito, setExito] = useState(false);
   const [escaneando, setEscaneando] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
@@ -34,35 +34,66 @@ const QRScannerHtml5 = () => {
     console.log("📦 Contenido decodificado:", textoQR);
 
     try {
-      const payload = JSON.parse(textoQR);
+      // Intentar parsear como JSON
+      let payload;
+      try {
+        payload = JSON.parse(textoQR);
+      } catch (parseError) {
+        // Si no es JSON válido, podría ser un formato antiguo
+        console.log("⚠️ No es JSON válido, intentando otros formatos...");
+
+        // Verificar si es formato activsenaqr://
+        if (textoQR.startsWith("activsenaqr://")) {
+          const base64Data = textoQR.replace("activsenaqr://", "");
+          try {
+            const decodedData = atob(base64Data);
+            payload = JSON.parse(decodedData);
+          } catch (decodeError) {
+            throw new Error("Formato QR no reconocido");
+          }
+        } else {
+          throw new Error("Formato QR no válido");
+        }
+      }
+
       const tipo = (payload.tipo || "").toLowerCase();
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       console.log("📌 Objeto decodificado:", payload);
 
       if (tipo === "alquiler") {
+        // Validar que tenga los campos necesarios
+        if (!payload.IdElemento) {
+          throw new Error("QR de alquiler inválido: falta IdElemento");
+        }
+
         const response = await axios.post(
           "https://render-hhyo.onrender.com/api/alquilerelementos/desde-qr",
           {
             IdElemento: payload.IdElemento,
-            nombreElemento: payload.nombreElemento,
+            nombreElemento: payload.nombreElemento || "Elemento desconocido",
             nombreAprendiz: payload.nombreAprendiz || "Aprendiz desconocido",
-            fechaDevolucion: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
+            fechaDevolucion: new Date(
+              Date.now() + 2 * 24 * 60 * 60 * 1000
+            ).toISOString(),
             observaciones: "Desde escáner QR",
-            codigo: payload.codigo || `ALQ-${Date.now()}`
+            codigo: payload.codigo || `ALQ-${Date.now()}`,
           },
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        localStorage.setItem("nuevoAlquiler", JSON.stringify({
-          nombre: payload.nombreElemento || "Elemento desconocido",
-          nombreAprendiz: payload.nombreAprendiz || "Aprendiz",
-          fechaEntrega: new Date().toISOString().split('T')[0],
-          fechaDevolucion: "",
-          observaciones: "Desde escáner QR",
-          cumplioConEntrega: false,
-          codigo: payload.codigo || `ALQ-${Date.now()}`,
-          estado: "En uso"
-        }));
+        localStorage.setItem(
+          "nuevoAlquiler",
+          JSON.stringify({
+            nombre: payload.nombreElemento || "Elemento desconocido",
+            nombreAprendiz: payload.nombreAprendiz || "Aprendiz",
+            fechaEntrega: new Date().toISOString().split("T")[0],
+            fechaDevolucion: "",
+            observaciones: "Desde escáner QR",
+            cumplioConEntrega: false,
+            codigo: payload.codigo || `ALQ-${Date.now()}`,
+            estado: "En uso",
+          })
+        );
 
         setMensaje("Alquiler registrado correctamente");
         setColor("text-green-600");
@@ -78,7 +109,6 @@ const QRScannerHtml5 = () => {
         });
 
         setTimeout(() => navigate("/detalles-alquiler"), 2500);
-
       } else if (tipo === "evento") {
         const response = await axios.post(
           "https://render-hhyo.onrender.com/api/asistencia/evento/qr",
@@ -104,7 +134,6 @@ const QRScannerHtml5 = () => {
         });
 
         setTimeout(() => navigate("/historial"), 2500);
-
       } else {
         const response = await axios.post(
           "https://render-hhyo.onrender.com/api/asistencia/qr",
@@ -131,9 +160,36 @@ const QRScannerHtml5 = () => {
 
         setTimeout(() => navigate("/historial"), 2500);
       }
-
     } catch (error: any) {
       console.error("❌ Error procesando QR:", error);
+
+      // Manejar errores específicos de formato QR
+      if (
+        error.message === "Formato QR no válido" ||
+        error.message === "Formato QR no reconocido"
+      ) {
+        setMensaje("QR no válido: formato incorrecto");
+        setColor("text-red-600");
+        Swal.fire({
+          icon: "error",
+          title: "QR Inválido",
+          text: "El código QR escaneado no tiene un formato válido",
+          confirmButtonColor: "#5eb319",
+        });
+        return;
+      }
+
+      if (error.message.includes("QR de alquiler inválido")) {
+        setMensaje("QR de alquiler incompleto");
+        setColor("text-red-600");
+        Swal.fire({
+          icon: "error",
+          title: "QR Incompleto",
+          text: "El QR de alquiler no contiene toda la información necesaria",
+          confirmButtonColor: "#5eb319",
+        });
+        return;
+      }
 
       if (error.response) {
         const data = error.response.data;
@@ -141,7 +197,9 @@ const QRScannerHtml5 = () => {
           data?.error ||
           data?.message ||
           (Array.isArray(data?.errors) && data.errors.length > 0
-            ? data.errors.map((e: any) => e.msg || JSON.stringify(e)).join(" | ")
+            ? data.errors
+                .map((e: any) => e.msg || JSON.stringify(e))
+                .join(" | ")
             : "Error desconocido del servidor");
 
         console.log(" Detalles del error:", backendError);
@@ -211,7 +269,10 @@ const QRScannerHtml5 = () => {
     return () => {
       const scanner = scannerRef.current;
       if (scanner && scanner.getState() === 2) {
-        scanner.stop().then(() => scanner.clear()).catch(console.error);
+        scanner
+          .stop()
+          .then(() => scanner.clear())
+          .catch(console.error);
       }
     };
   }, []);
@@ -224,10 +285,13 @@ const QRScannerHtml5 = () => {
           <FaQrcode className="text-blue-600" /> Escanea tu Código QR
         </h2>
         <p className="qr-description">
-          Usa tu cámara para registrar <strong>asistencia</strong> a eventos o realizar <strong>alquileres</strong> de elementos de forma rápida y segura.
+          Usa tu cámara para registrar <strong>asistencia</strong> a eventos o
+          realizar <strong>alquileres</strong> de elementos de forma rápida y
+          segura.
         </p>
         <p className="qr-note flex items-center gap-2">
-          <FaLightbulb className="text-yellow-500" /> Asegúrate de que el QR esté enfocado y con buena iluminación.
+          <FaLightbulb className="text-yellow-500" /> Asegúrate de que el QR
+          esté enfocado y con buena iluminación.
         </p>
       </div>
 
@@ -329,65 +393,76 @@ const QRScannerHtml5 = () => {
 
         {/* Columna Derecha - Escáner */}
         <div className="qr-content">
-        {!escaneando && !exito && (
-          <div className="qr-features">
-            <div className="qr-feature-item">
-              <FaCheckCircle className="qr-feature-icon text-green-500" />
-              <p className="qr-feature-text">Asistencia a Eventos</p>
+          {!escaneando && !exito && (
+            <div className="qr-features">
+              <div className="qr-feature-item">
+                <FaCheckCircle className="qr-feature-icon text-green-500" />
+                <p className="qr-feature-text">Asistencia a Eventos</p>
+              </div>
+              <div className="qr-feature-item">
+                <FaBoxOpen className="qr-feature-icon text-blue-500" />
+                <p className="qr-feature-text">Alquiler de Elementos</p>
+              </div>
+              <div className="qr-feature-item">
+                <FaBolt className="qr-feature-icon text-yellow-500" />
+                <p className="qr-feature-text">Registro Rápido</p>
+              </div>
             </div>
-            <div className="qr-feature-item">
-              <FaBoxOpen className="qr-feature-icon text-blue-500" />
-              <p className="qr-feature-text">Alquiler de Elementos</p>
+          )}
+
+          {!escaneando && !exito && (
+            <button
+              onClick={iniciarEscaneo}
+              className="qr-btn flex items-center gap-2 justify-center"
+            >
+              <FaCamera className="text-white text-lg" /> Abrir Cámara
+            </button>
+          )}
+
+          {escaneando && !exito && (
+            <div className="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-4 mb-4 animate-fadeIn">
+              <p className="font-semibold text-yellow-800 flex items-center gap-2 text-lg">
+                <FaSearch /> Escaneando... Enfoca el código QR
+              </p>
             </div>
-            <div className="qr-feature-item">
-              <FaBolt className="qr-feature-icon text-yellow-500" />
-              <p className="qr-feature-text">Registro Rápido</p>
+          )}
+
+          {!exito && <div id={qrCodeRegionId} className="qr-reader" />}
+
+          {exito && (
+            <div className="qr-success">
+              <FaCheckCircle className="text-green-600 text-5xl mb-2" />
+              <p className="qr-success-text">¡Registro Completado!</p>
+              <p className="text-green-700 font-medium mt-2">Redirigiendo...</p>
             </div>
-          </div>
-        )}
+          )}
 
-        {!escaneando && !exito && (
-          <button onClick={iniciarEscaneo} className="qr-btn flex items-center gap-2 justify-center">
-            <FaCamera className="text-white text-lg" /> Abrir Cámara
-          </button>
-        )}
+          {mensaje && <p className={`qr-message ${color}`}>{mensaje}</p>}
 
-        {escaneando && !exito && (
-          <div className="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-4 mb-4 animate-fadeIn">
-            <p className="font-semibold text-yellow-800 flex items-center gap-2 text-lg">
-              <FaSearch /> Escaneando... Enfoca el código QR
-            </p>
-          </div>
-        )}
-
-        {!exito && <div id={qrCodeRegionId} className="qr-reader" />}
-
-        {exito && (
-          <div className="qr-success">
-            <FaCheckCircle className="text-green-600 text-5xl mb-2" />
-            <p className="qr-success-text">¡Registro Completado!</p>
-            <p className="text-green-700 font-medium mt-2">Redirigiendo...</p>
-          </div>
-        )}
-
-        {mensaje && <p className={`qr-message ${color}`}>{mensaje}</p>}
-
-      {/* Instrucciones adicionales */}
-{!escaneando && !exito && (
-  <div className="qr-instructions-container">
-    <h3 className="qr-instructions-title">
-      <FaClipboardList className="qr-instructions-icon" />
-      Instrucciones de Uso
-    </h3>
-    <ul className="qr-instructions-list">
-      <li><strong>Paso 1:</strong> Haz clic en "Abrir Cámara"</li>
-      <li><strong>Paso 2:</strong> Permite el acceso a la cámara</li>
-      <li><strong>Paso 3:</strong> Enfoca el código QR en el área marcada</li>
-      <li><strong>Paso 4:</strong> Espera la confirmación del registro</li>
-    </ul>
-  </div>
-)}
-
+          {/* Instrucciones adicionales */}
+          {!escaneando && !exito && (
+            <div className="qr-instructions-container">
+              <h3 className="qr-instructions-title">
+                <FaClipboardList className="qr-instructions-icon" />
+                Instrucciones de Uso
+              </h3>
+              <ul className="qr-instructions-list">
+                <li>
+                  <strong>Paso 1:</strong> Haz clic en "Abrir Cámara"
+                </li>
+                <li>
+                  <strong>Paso 2:</strong> Permite el acceso a la cámara
+                </li>
+                <li>
+                  <strong>Paso 3:</strong> Enfoca el código QR en el área
+                  marcada
+                </li>
+                <li>
+                  <strong>Paso 4:</strong> Espera la confirmación del registro
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

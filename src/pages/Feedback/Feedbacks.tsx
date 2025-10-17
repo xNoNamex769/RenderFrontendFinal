@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { FaStar, FaComments, FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaStar,
+  FaComments,
+  FaCalendarAlt,
+  FaClock,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 import "./styles/FeedbackStyle.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaPaperPlane, FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -37,7 +43,9 @@ export default function Feedbacks() {
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
 
   const { idActividad } = useParams();
-  const actividadIdFromUrl = isNaN(Number(idActividad)) ? null : parseInt(idActividad!, 10);
+  const actividadIdFromUrl = isNaN(Number(idActividad))
+    ? null
+    : parseInt(idActividad!, 10);
   const navigate = useNavigate();
 
   // Obtener IdUsuario desde token JWT
@@ -45,7 +53,7 @@ export default function Feedbacks() {
     const token = localStorage.getItem("token");
     if (!token) return null;
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = JSON.parse(atob(token.split(".")[1]));
       return payload.IdUsuario || null;
     } catch (error) {
       console.error("Error al decodificar token:", error);
@@ -58,7 +66,9 @@ export default function Feedbacks() {
   useEffect(() => {
     const fetchActividades = async () => {
       try {
-        const res = await axios.get<Actividad[]>("https://render-hhyo.onrender.com/api/actividad");
+        const res = await axios.get<Actividad[]>(
+          "https://render-hhyo.onrender.com/api/actividad"
+        );
         const filtradas = res.data.filter((a) => a.Imagen); // solo con imagen
         setActividades(filtradas);
 
@@ -67,9 +77,10 @@ export default function Feedbacks() {
             (a) => a.IdActividad === actividadIdFromUrl
           );
           setIndex(indexActividad >= 0 ? indexActividad : 0);
-          const idBuscar = indexActividad >= 0
-            ? filtradas[indexActividad].IdActividad
-            : filtradas[0].IdActividad;
+          const idBuscar =
+            indexActividad >= 0
+              ? filtradas[indexActividad].IdActividad
+              : filtradas[0].IdActividad;
           obtenerFeedbacks(idBuscar);
         }
       } catch (err) {
@@ -82,11 +93,45 @@ export default function Feedbacks() {
   // Traer feedbacks de una actividad
   const obtenerFeedbacks = async (idActividad: number) => {
     try {
-      const res = await axios.get(`https://render-hhyo.onrender.com/api/feedback/actividad/${idActividad}`);
-      setFeedbacks(res.data);
+      const res = await axios.get(
+        `https://render-hhyo.onrender.com/api/feedback/actividad/${idActividad}`
+      );
+      setFeedbacks(res.data || []);
     } catch (err) {
       console.error("Error al obtener feedbacks:", err);
+      setFeedbacks([]);
     }
+  };
+
+  // Verificar si es una actividad lúdica
+  const esActividadLudica = (actividad: Actividad) => {
+    const nombre = actividad.NombreActi.toLowerCase();
+    const descripcion = actividad.Descripcion.toLowerCase();
+    return (
+      nombre.includes("lúdica") ||
+      nombre.includes("ludica") ||
+      descripcion.includes("lúdica") ||
+      descripcion.includes("ludica") ||
+      nombre.includes("deporte") ||
+      nombre.includes("juego") ||
+      nombre.includes("recreación") ||
+      nombre.includes("recreacion")
+    );
+  };
+
+  // Verificar si la actividad ya inició
+  const actividadYaInicio = (actividad: Actividad) => {
+    const ahora = new Date();
+    const [año, mes, dia] = actividad.FechaInicio.split("-");
+    const [hora, minuto] = actividad.HoraInicio.split(":");
+    const fechaInicio = new Date(
+      parseInt(año),
+      parseInt(mes) - 1,
+      parseInt(dia),
+      parseInt(hora),
+      parseInt(minuto)
+    );
+    return ahora >= fechaInicio;
   };
 
   // Cambiar slide
@@ -110,8 +155,20 @@ export default function Feedbacks() {
     const [hI, miI] = actividadActual.HoraInicio.split(":");
     const [hF, miF] = actividadActual.HoraFin.split(":");
 
-    const inicio = new Date(Number(aI), Number(mI) - 1, Number(dI), Number(hI), Number(miI));
-    const fin = new Date(Number(aF), Number(mF) - 1, Number(dF), Number(hF), Number(miF));
+    const inicio = new Date(
+      Number(aI),
+      Number(mI) - 1,
+      Number(dI),
+      Number(hI),
+      Number(miI)
+    );
+    const fin = new Date(
+      Number(aF),
+      Number(mF) - 1,
+      Number(dF),
+      Number(hF),
+      Number(miF)
+    );
     return ahora >= inicio && ahora <= fin;
   };
 
@@ -132,7 +189,7 @@ export default function Feedbacks() {
         IdUsuario: usuario,
         ComentarioFeedback: feedback,
         Calificacion: calificacion,
-        FechaEnvio: new Date()
+        FechaEnvio: new Date(),
       });
       Swal.fire({
         icon: "success",
@@ -168,7 +225,10 @@ export default function Feedbacks() {
   // Promedio de calificación
   const promedio = (): string => {
     if (feedbacks.length === 0) return "0.0";
-    const total = feedbacks.reduce((sum, fb) => sum + (fb.Calificacion || 0), 0);
+    const total = feedbacks.reduce(
+      (sum, fb) => sum + (fb.Calificacion || 0),
+      0
+    );
     return (total / feedbacks.length).toFixed(1);
   };
 
@@ -176,9 +236,10 @@ export default function Feedbacks() {
     <div className="fb-feedback-container">
       {/* Header mejorado */}
       <header className="fb-feedback-header">
-       
         <div className="fb-header-content">
-          <h1 className="fb-feedback-titulo"><FaComments /> Feedback de Actividades</h1>
+          <h1 className="fb-feedback-titulo">
+            <FaComments /> Feedback de Actividades
+          </h1>
           <p className="fb-feedback-subtitulo">
             Comparte tu experiencia y ayuda a mejorar nuestras actividades
           </p>
@@ -188,16 +249,20 @@ export default function Feedbacks() {
       {actividadActual && (
         <div className="fb-actividad-card">
           {/* Navegación */}
-          <button 
-            className="fb-nav-btn fb-nav-prev" 
-            onClick={() => cambiarSlide(index > 0 ? index - 1 : actividades.length - 1)}
+          <button
+            className="fb-nav-btn fb-nav-prev"
+            onClick={() =>
+              cambiarSlide(index > 0 ? index - 1 : actividades.length - 1)
+            }
             disabled={actividades.length <= 1}
           >
             <FaChevronLeft />
           </button>
-          <button 
-            className="fb-nav-btn fb-nav-next" 
-            onClick={() => cambiarSlide(index < actividades.length - 1 ? index + 1 : 0)}
+          <button
+            className="fb-nav-btn fb-nav-next"
+            onClick={() =>
+              cambiarSlide(index < actividades.length - 1 ? index + 1 : 0)
+            }
             disabled={actividades.length <= 1}
           >
             <FaChevronRight />
@@ -206,7 +271,9 @@ export default function Feedbacks() {
           {/* Imagen de la actividad */}
           <div className="fb-actividad-imagen-wrapper">
             <img
-              src={actividadActual.Imagen || "https://via.placeholder.com/300x200"}
+              src={
+                actividadActual.Imagen || "https://via.placeholder.com/300x200"
+              }
               alt={actividadActual.NombreActi}
               className="fb-actividad-imagen"
             />
@@ -228,7 +295,9 @@ export default function Feedbacks() {
               )}
             </div>
 
-            <p className="actividad-descripcion">{actividadActual.Descripcion}</p>
+            <p className="actividad-descripcion">
+              {actividadActual.Descripcion}
+            </p>
 
             <div className="actividad-detalles">
               <div className="detalle-item">
@@ -237,11 +306,17 @@ export default function Feedbacks() {
               </div>
               <div className="detalle-item">
                 <FaCalendarAlt />
-                <span>{formatearFecha(actividadActual.FechaInicio)} - {formatearFecha(actividadActual.FechaFin)}</span>
+                <span>
+                  {formatearFecha(actividadActual.FechaInicio)} -{" "}
+                  {formatearFecha(actividadActual.FechaFin)}
+                </span>
               </div>
               <div className="detalle-item">
                 <FaClock />
-                <span>{formatearHora(actividadActual.HoraInicio)} - {formatearHora(actividadActual.HoraFin)}</span>
+                <span>
+                  {formatearHora(actividadActual.HoraInicio)} -{" "}
+                  {formatearHora(actividadActual.HoraFin)}
+                </span>
               </div>
             </div>
 
@@ -250,12 +325,28 @@ export default function Feedbacks() {
               <div className="comentarios-header">
                 <h3>💬 Comentarios ({feedbacks.length})</h3>
               </div>
-              
+
               {feedbacks.length === 0 ? (
                 <div className="no-comentarios">
                   <FaComments size={50} />
-                  <p>Aún no hay comentarios</p>
-                  <span>Sé el primero en compartir tu experiencia</span>
+                  {esActividadLudica(actividadActual) ? (
+                    <>
+                      <p>🎮 Esta es una actividad lúdica</p>
+                      <span>Las actividades lúdicas no requieren feedback</span>
+                    </>
+                  ) : !actividadYaInicio(actividadActual) ? (
+                    <>
+                      <p>⏰ La actividad aún no ha iniciado</p>
+                      <span>
+                        Los comentarios estarán disponibles después del inicio
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <p>Aún no hay comentarios</p>
+                      <span>Sé el primero en compartir tu experiencia</span>
+                    </>
+                  )}
                 </div>
               ) : (
                 <div className="comentarios-lista">
@@ -263,23 +354,34 @@ export default function Feedbacks() {
                     <div key={i} className="comentario-card">
                       <div className="comentario-header">
                         <img
-                          src={fb.usuario?.Imagen || "https://via.placeholder.com/50"}
+                          src={
+                            fb.usuario?.Imagen ||
+                            "https://via.placeholder.com/50"
+                          }
                           alt={fb.usuario?.Nombre || "Anónimo"}
                           className="comentario-avatar"
                         />
                         <div className="comentario-info">
-                          <strong className="comentario-nombre">{fb.usuario?.Nombre || "Anónimo"}</strong>
+                          <strong className="comentario-nombre">
+                            {fb.usuario?.Nombre || "Anónimo"}
+                          </strong>
                           <div className="comentario-rating">
                             {[...Array(5)].map((_, idx) => (
-                              <FaStar 
-                                key={idx} 
-                                className={idx < (fb.Calificacion || 0) ? "star-filled" : "star-empty"}
+                              <FaStar
+                                key={idx}
+                                className={
+                                  idx < (fb.Calificacion || 0)
+                                    ? "star-filled"
+                                    : "star-empty"
+                                }
                               />
                             ))}
                           </div>
                         </div>
                       </div>
-                      <p className="comentario-texto">{fb.ComentarioFeedback}</p>
+                      <p className="comentario-texto">
+                        {fb.ComentarioFeedback}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -287,7 +389,9 @@ export default function Feedbacks() {
             </div>
 
             {/* Formulario para dejar feedback mejorado */}
-            {actividadActiva() ? (
+            {actividadActiva() &&
+            !esActividadLudica(actividadActual) &&
+            actividadYaInicio(actividadActual) ? (
               <div className="form-section">
                 <h3 className="form-titulo">📝 Deja tu Feedback</h3>
                 <div className="form-content">
@@ -297,7 +401,11 @@ export default function Feedbacks() {
                       {[1, 2, 3, 4, 5].map((n) => (
                         <FaStar
                           key={n}
-                          className={n <= calificacion ? "star-selected" : "star-unselected"}
+                          className={
+                            n <= calificacion
+                              ? "star-selected"
+                              : "star-unselected"
+                          }
                           onClick={() => setCalificacion(n)}
                         />
                       ))}
@@ -317,9 +425,23 @@ export default function Feedbacks() {
                   </button>
                 </div>
               </div>
+            ) : esActividadLudica(actividadActual) ? (
+              <div className="actividad-cerrada">
+                <p>🎮 Esta es una actividad lúdica - No requiere feedback</p>
+              </div>
+            ) : !actividadYaInicio(actividadActual) ? (
+              <div className="actividad-cerrada">
+                <p>
+                  ⏰ La actividad aún no ha iniciado - Los comentarios estarán
+                  disponibles después del inicio
+                </p>
+              </div>
             ) : (
               <div className="actividad-cerrada">
-                <p>🔒 Esta actividad ha finalizado y los comentarios están cerrados</p>
+                <p>
+                  🔒 Esta actividad ha finalizado y los comentarios están
+                  cerrados
+                </p>
               </div>
             )}
           </div>
@@ -336,24 +458,28 @@ export default function Feedbacks() {
           </div>
           <div className="carousel-dots">
             {actividades.map((_, i) => (
-              <button 
-                key={i} 
-                className={`dot ${i === index ? "dot-active" : ""}`} 
+              <button
+                key={i}
+                className={`dot ${i === index ? "dot-active" : ""}`}
                 onClick={() => cambiarSlide(i)}
                 aria-label={`Ir a actividad ${i + 1}`}
               />
             ))}
           </div>
           <div className="paginacion-botones">
-            <button 
+            <button
               className="btn-pag btn-anterior"
-              onClick={() => cambiarSlide(index > 0 ? index - 1 : actividades.length - 1)}
+              onClick={() =>
+                cambiarSlide(index > 0 ? index - 1 : actividades.length - 1)
+              }
             >
               ← Anterior
             </button>
-            <button 
+            <button
               className="btn-pag btn-siguiente"
-              onClick={() => cambiarSlide(index < actividades.length - 1 ? index + 1 : 0)}
+              onClick={() =>
+                cambiarSlide(index < actividades.length - 1 ? index + 1 : 0)
+              }
             >
               Siguiente →
             </button>

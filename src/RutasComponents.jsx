@@ -34,6 +34,7 @@ import UsuariosCargados from "../public/UsuariosCargados";
 import Aplicacion from "../src/pages/Aplicacion/Aplicacion"
 import HorasLudicas from "./pages/HorasLudicas/HorasLudicas";
 import EventoAnalisisIA from "./pages/EventoAnalisis/EventoAnalisisIA";
+import MapaReferencia from "./pages/MapaReferencia/MapaReferencia";
 export default function RutasComponents() {
   return (
     <BrowserRouter>
@@ -65,6 +66,7 @@ export default function RutasComponents() {
                <Route path="/usuarios-registrados" element={<UsuariosCargados />} />
             <Route path="/historial" element={<HistorialAsistencia IdUsuario={1} />} />
             <Route path="/apoyo-sostenimiento" element={<ApoyoSostenimiento />} />
+               <Route path="/mapareferencia" element={<MapaReferencia />} />
                <Route path="/aplicacion" element={<Aplicacion />} />
              <Route path="/planevento" element={<PlanificarEvento />} />
                <Route path="/feedback" element={<Feedbacks />} />

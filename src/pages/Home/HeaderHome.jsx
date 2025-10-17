@@ -3,6 +3,8 @@ import React, {useState} from "react";
 import "./styles/HeaderHome.css"
 import TrueFocus from "../../TextAnimations/TrueFocus/TrueFocus";
 import  imagenlogo from "../../../public/img/logodef.png"
+import { Link } from 'react-router-dom';
+
 
 export default function HeaderHome () {
 
@@ -39,7 +41,8 @@ export default function HeaderHome () {
                             <li className="li-home"><a href="/#about" onClick={cambiarEstadoMenu} className="a-home">NOSOTROS</a></li>
                             <li className="li-home"><a href="/#anuncios" onClick={cambiarEstadoMenu} className="active a-home">ANUNCIOS</a></li>
                             <li className="li-home"><a href="/#projects" onClick={cambiarEstadoMenu} className="a-home">PROYECTOS</a></li>
-                            <li className="li-home"><a href="/apoyo-sostenimiento" onClick={cambiarEstadoMenu} className="active a-home">APOYOS DE SOSTENIMIENTO</a></li>
+                            <li className="li-home"><Link to="/apoyo-sostenimiento" onClick={cambiarEstadoMenu} className="active a-home">APOYOS DE SOSTENIMIENTO</Link></li>
+                            
                             <li className="li-home"><a href="/#contact" onClick={cambiarEstadoMenu} className="a-home">CONTACTO</a></li>
                         </ul>
                     </nav>

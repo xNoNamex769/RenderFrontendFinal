@@ -65,12 +65,12 @@ export default function RutasComponents() {
                <Route path="/aprendices" element={<AprendicesCargados />} />
                <Route path="/usuarios-registrados" element={<UsuariosCargados />} />
             <Route path="/historial" element={<HistorialAsistencia IdUsuario={1} />} />
-            <Route path="/apoyo-sostenimiento" element={<ApoyoSostenimiento />} />
                <Route path="/mapareferencia" element={<MapaReferencia />} />
                <Route path="/aplicacion" element={<Aplicacion />} />
              <Route path="/planevento" element={<PlanificarEvento />} />
                <Route path="/feedback" element={<Feedbacks />} />
             <Route path="/analisis-eventos" element={<EventoAnalisisIA />} />
+            <Route path="/apoyo-sostenimiento" element={<ApoyoSostenimiento />} />
           </Routes>
         </IAProvider>
       </AuthProvider>
